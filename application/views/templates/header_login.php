@@ -17,6 +17,13 @@
             margin: 0;
             padding: 0;
             overscroll-behavior: none;
+            position: relative;
+            min-height: 100vh;
+            background-image: linear-gradient(169deg, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0.3225665266106442) 50%,
+                    rgba(0, 0, 0, 1) 100%), url('https://source.unsplash.com/NFs6dRTBgaM/1920x1080');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
         }
     </style>
 </head>
