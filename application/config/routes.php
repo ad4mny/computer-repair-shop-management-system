@@ -6,5 +6,6 @@ $route['login'] = 'loginController/index';
 $route['login_auth'] = 'loginController/login_auth';
 $route['logout'] = 'loginController/logout';
 $route['dashboard'] = 'dashboardController/index';
+$route['request'] = 'requestController/index';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
