@@ -13,12 +13,14 @@ class LoginController extends CI_Controller
         $usr = $this->input->post('usr');
         $pwd = md5($this->input->post('pwd'));
         $this->load->model('loginModel');
-        $returned = $this->loginModel->login_auth_model($usr, $pwd);
+        $return = $this->loginModel->login_auth_model($usr, $pwd);
 
-        if ($returned !== false) {
+        if ($return !== false) {
             $session_data = array(
-                'username' => $returned->ud_usr,
-                'userid' => $returned->ud_id
+                'userid' => $return->ud_id,
+                'username' => $return->ud_usr,
+                'customerid' => $return->cd_id,
+                'fullname' => $return->cd_full_name,
             );
             $this->session->set_userdata($session_data);
             redirect(base_url() . 'dashboard');

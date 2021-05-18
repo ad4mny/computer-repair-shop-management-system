@@ -6,65 +6,70 @@
                 <button class="btn btn-primary">REQUEST NEW</button>
             </div>
         </div>
-        <div class="row pt-5 ">
-            <div class="col">
-                <div class="card text-white bg-dark " >
-                    <div class="card-body">
-                        <span><i class="fas fa-clock fa-lg"></i></span>
-                        <h1 class="card-title p-3 display-4">Acer Aspire 5</h1>
-                        <div class="py-5 px-3">
-                            <div class="card-text ">Battery damaged</div>
-                            <div class="card-text">Technician Aiman</div>
-                            <div class="card-text ">Severity fair</div>
+        <div class="d-flex flex-row flex-nowrap overflow-auto py-5">
+            <?php
+            if (is_array($request)) {
+                foreach ($request as $row) {
+            ?>
+                    <div class="col-xs-6 col-sm-4 me-4 ">
+                        <div class="card text-white bg-secondary shadow rounded-lg border">
+                            <div class="card-body">
+                                <span><i class="fas fa-clock fa-lg"></i></span>
+                                <h1 class="card-title p-3 display-4 text-capitalize"><?php echo $row['rsd_device_brand'] . ' ' .  $row['rsd_device_model']; ?></h1>
+                                <div class="py-5 px-3">
+                                    <div class="card-text text-capitalize"><?php echo $row['rsd_damage_info']; ?></div>
+                                    <div class="card-text text-capitalize">
+                                        <?php
+                                        if ($row['rsd_sd_id'] === null) {
+                                            echo 'No technician assigned yet.';
+                                        } else {
+                                            echo $row['rsd_sd_id'];
+                                        }
+                                        ?>
+                                    </div>
+                                    <div class="card-text text-capitalize">
+                                        <?php
+                                        switch ($row['rsd_damage_severity']) {
+                                            case 2:
+                                                echo 'Severity Worst';
+                                                break;
+                                            case 1:
+                                                echo 'Severity Average';
+                                                break;
+                                            default:
+                                                echo 'Severity Fair';
+                                                break;
+                                        }
+                                        ?>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-footer text-center">
+                                <div class="card-text px-3">
+                                    <?php
+                                    switch ($row['rsd_progress']) {
+                                        case 2:
+                                            echo 'COMPLETED';
+                                            break;
+                                        case 1:
+                                            echo 'ONGOING';
+                                            break;
+                                        default:
+                                            echo 'PENDING';
+                                            break;
+                                    }
+                                    ?>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-center pt-3">
+                            <button class="btn rounded-circle bg-danger shadow-sm"><i class="fas fa-times fa-2x text-white p-1 "></i></button>
                         </div>
                     </div>
-                    <div class="card-footer text-center">
-                        <div class="card-text px-3">PENDING</div>
-                    </div>
-                </div>
-            </div>
-            <div class="col me-1 border-end">
-                <div class="card text-white bg-dark " >
-                    <div class="card-body">
-                        <span><i class="fas fa-clock fa-lg"></i></span>
-                        <h1 class="card-title p-3 display-4">Lenovo Ideapad 3</h1>
-                        <div class="py-5 px-3">
-                            <div class="card-text ">Battery damaged</div>
-                            <div class="card-text">Technician Aiman</div>
-                            <div class="card-text ">Severity fair</div>
-                        </div>
-                    </div>
-                    <div class="card-footer text-center">
-                        <div class="card-text px-3">PENDING</div>
-                    </div>
-                </div>
-            </div>
-            <div class="col">
-                <div class="card text-white bg-secondary">
-                    <div class="card-body">
-                        <span><i class="fas fa-clock fa-lg"></i></span>
-                        <h1 class="card-title p-3 display-4">Apple Macbook Pro (2017)</h1>
-                        <div class="py-5 px-3">
-                            <div class="card-text ">Battery damaged</div>
-                            <div class="card-text">Technician Aiman</div>
-                            <div class="card-text ">Severity fair</div>
-                        </div>
-                    </div>
-                    <div class="card-footer text-center">
-                        <div class="card-text px-3">COMPLETED</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="row pt-3 text-center">
-            <div class="col">
-            <button class="btn"><i class="fas fa-times fa-3x text-danger"></i></button>
-            </div>
-            <div class="col">
-            <button class="btn"><i class="fas fa-times fa-3x text-danger"></i></button>
-            </div>
-            <div class="col">
-            </div>
+            <?php
+                }
+            }
+            ?>
         </div>
     </div>
 </div>
