@@ -68,6 +68,8 @@
                     </div>
             <?php
                 }
+            } else {
+                echo 'No upcoming and past request.';
             }
             ?>
         </div>
