@@ -2,7 +2,7 @@
     <div class="container p-5" id="content">
         <div class="row">
             <div class="col">
-                <h3 class="display-4 mb-0">Add New Request</h3><br>
+                <h3 class="display-4 mb-0 text-secondary">Add New Request</h3><br>
             </div>
         </div>
         <form method="post" action="<?php echo base_url(); ?>requestController/add_new_request">

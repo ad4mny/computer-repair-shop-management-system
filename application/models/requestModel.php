@@ -14,8 +14,6 @@ class RequestModel extends CI_Model
             'rsd_damage_info' => $information,
         );
 
-        $this->db->insert('repair_service_data', $data);
-
-        return ($this->db->affected_rows() > 0) ? true : false;
+        return $this->db->insert('repair_service_data', $data);
     }
 }

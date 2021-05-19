@@ -2,7 +2,7 @@
     <div class="container p-5" id="content">
         <div class="row">
             <div class="col">
-                <h3 class="display-4 mb-0">Dashboard</h3><br>
+                <h3 class="display-4 mb-0 text-secondary">Dashboard</h3><br>
                 <button class="btn btn-primary">REQUEST NEW</button>
             </div>
         </div>
@@ -11,12 +11,12 @@
             if (is_array($request)) {
                 foreach ($request as $row) {
             ?>
-                    <div class="col-xs-6 col-sm-4 me-4 ">
+                    <div class="col-sm-12 col-md-3  me-4 ">
                         <div class="card text-white bg-secondary shadow rounded-lg border">
                             <div class="card-body">
                                 <span><i class="fas fa-clock fa-lg"></i></span>
-                                <h1 class="card-title p-3 display-4 text-capitalize"><?php echo $row['rsd_device_brand'] . ' ' .  $row['rsd_device_model']; ?></h1>
-                                <div class="py-5 px-3">
+                                <h1 class="card-title p-3 fw-light text-capitalize"><?php echo $row['rsd_device_brand'] . ' ' .  $row['rsd_device_model']; ?></h1>
+                                <div class="p-3">
                                     <div class="card-text text-capitalize"><?php echo $row['rsd_damage_info']; ?></div>
                                     <div class="card-text text-capitalize">
                                         <?php

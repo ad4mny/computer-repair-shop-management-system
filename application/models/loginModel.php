@@ -3,16 +3,23 @@ class LoginModel extends CI_Model
 {
     public function login_auth_model($username, $password)
     {
-        $sql = "SELECT * FROM user_data JOIN customer_data ON cd_ud_id = ud_id WHERE ud_usr = ? AND ud_pwd = ?";
-        $query = $this->db->query($sql, array($username, $password));
+        $this->db->select('*');
+        $this->db->from('user_data');
+        $this->db->join('customer_data', 'cd_ud_id = ud_id');
+        $this->db->where('ud_usr', $username);
+        $this->db->where('ud_pwd', $password);
+        $query = $this->db->get();
+        $result = $query->row();
 
-        if ($query->num_rows() > 0) {
+        if ($result > 0) {
             $data = array(
-                'ud_log' => date('h:m:s d/m/y'),
+                'ud_log' => date('h:m:s d/m/y')
             );
-            $this->db->insert('user_data', $data);
 
-            return $query->row();
+            $this->db->where('ud_id', $result->ud_id);
+            $this->db->update('user_data', $data);
+
+            return $result;
         } else {
             return false;
         }
