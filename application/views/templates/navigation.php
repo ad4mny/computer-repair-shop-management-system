@@ -12,10 +12,10 @@
           </a>
       </div>
       <ul class="list-unstyled components">
-          <li class="<?php if($this->uri->uri_string() == 'dashboard') echo 'active'; ?>"><a href="<?php echo base_url(); ?>dashboard"><i class="fas fa-desktop"></i> Dashboard</a></li>
-          <li class="<?php if($this->uri->uri_string() == 'request') echo 'active'; ?>"><a href="<?php echo base_url(); ?>request"><i class="fas fa-copy"></i> Request</a></li>
-          <li class="<?php if($this->uri->uri_string() == 'status') echo 'active'; ?>"><a href="<?php echo base_url(); ?>status"><i class="fas fa-stream"></i> Status</a></li>
-          <li class="<?php if($this->uri->uri_string() == 'manage') echo 'active'; ?>"><a href="<?php echo base_url(); ?>manage"><i class="fas fa-cog"></i> Manage</a></li>
-          <li class=" pb-3" style="position: absolute;bottom: 0px;"><a href="<?php echo base_url(); ?>logout"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+          <li class="<?php if($this->uri->uri_string() == 'dashboard') echo 'active'; ?>"><a href="<?php echo base_url(); ?>dashboard"><i class="fas fa-columns fa-sm fa-fw me-2"></i> Dashboard</a></li>
+          <li class="<?php if($this->uri->uri_string() == 'request') echo 'active'; ?>"><a href="<?php echo base_url(); ?>request"><i class="fas fa-clipboard-list fa-sm fa-fw me-2"></i> Request</a></li>
+          <li class="<?php if($this->uri->uri_string() == 'status') echo 'active'; ?>"><a href="<?php echo base_url(); ?>status"><i class="fas fa-tasks fa-sm fa-fw me-2"></i> Status</a></li>
+          <li class="<?php if($this->uri->uri_string() == 'track') echo 'active'; ?>"><a href="<?php echo base_url(); ?>track"><i class="fas fa-map-marker-alt fa-sm fa-fw me-2"></i> Track</a></li>
+          <li class=" pb-3" style="position: absolute;bottom: 0px;"><a href="<?php echo base_url(); ?>logout"><i class="fas fa-sign-out-alt fa-sm fa-fw me-2"></i> Logout</a></li>
       </ul>
   </nav>
