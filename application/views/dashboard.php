@@ -8,7 +8,8 @@
         </div>
         <div class="d-flex flex-row flex-nowrap overflow-auto py-5">
             <?php
-            if (is_array($request)) {
+
+            if (is_array($request) && !empty($request)) {
                 foreach ($request as $row) {
             ?>
                     <div class="col-sm-12 col-md-3  me-4 ">
@@ -21,9 +22,11 @@
                                     <div class="card-text text-capitalize">
                                         <?php
                                         if ($row['rsd_sd_id'] === null) {
-                                            echo 'No technician assigned yet.';
+                                            echo 'No technician assigned';
                                         } else {
-                                            echo $row['rsd_sd_id'];
+                                            $technician = $controller->get_technician_info($row['rsd_sd_id']);
+                                            $technician_name = explode(' ', $technician[0]['sd_full_name']);
+                                            echo 'Technician ' . $technician_name[0];
                                         }
                                         ?>
                                     </div>
@@ -63,7 +66,7 @@
                             </div>
                         </div>
                         <div class="d-flex justify-content-center pt-3">
-                            <button class="btn rounded-circle bg-danger shadow-sm"><i class="fas fa-times fa-2x text-white p-1 "></i></button>
+                            <a href="<?php echo base_url() . 'dashboard/delete/' . $this->encryption->encrypt($row['rsd_id']); ?>" class="btn rounded-circle bg-danger shadow-sm" onclick="return confirm('Are you sure you want to cancel your request?');"><i class="fas fa-times fa-2x text-white p-1 "></i></a>
                         </div>
                     </div>
             <?php

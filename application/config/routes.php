@@ -6,6 +6,7 @@ $route['login'] = 'loginController';
 $route['login_auth'] = 'loginController/login_auth';
 $route['logout'] = 'loginController/logout';
 $route['dashboard'] = 'dashboardController';
+$route['dashboard/delete/(:any)'] = 'dashboardController/delete_request/$1';
 $route['request'] = 'requestController';
 $route['track'] = 'trackController';
 $route['status'] = 'statusController';
