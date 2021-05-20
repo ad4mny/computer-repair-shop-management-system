@@ -3,6 +3,7 @@ class ProfileController extends CI_Controller
 {
     public function index($page = 'profile')
     {
+        auth_session();
         $data['profile'] = $this->get_profile_info();
         $this->load->view('templates/header');
         $this->load->view('templates/navigation');

@@ -3,6 +3,7 @@ class DashboardController extends CI_Controller
 {
     public function index()
     {
+        auth_session();
         $data['request'] = $this->get_booking_request();
         $this->load->view('templates/header');
         $this->load->view('templates/navigation');
