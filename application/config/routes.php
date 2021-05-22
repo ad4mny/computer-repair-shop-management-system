@@ -18,7 +18,7 @@ $route['request'] = 'requestController/index';
 $route['track'] = 'trackController/index';
 
 $route['status'] = 'statusController';
-$route['status/view/(:any)'] = 'statusController/index/view/$1';
+$route['status/(:any)'] = 'statusController/index/view/$1';
 
 $route['profile'] = 'profileController/index';
 $route['profile/update'] = 'profileController/index/update';

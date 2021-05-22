@@ -53,7 +53,7 @@
                     echo '</div>';
                     echo '</div>';
 
-                    echo '<a href="' . base_url() . 'status/view/' . $this->encryption->encrypt($row['rsd_id']) . '" class="position-absolute top-0 end-0 m-2"><span class="fa-stack fa-lg "><i class="fa fa-circle fa-stack-2x text-info" ></i><i class="fa fa-eye fa-stack-1x text-white"></i></span></a>';
+                    echo '<a href="' . base_url() . 'status/' . encrypt_it($row['rsd_id']) . '" class="position-absolute top-0 end-0 m-2"><span class="fa-stack fa-lg "><i class="fa fa-circle fa-stack-2x text-info" ></i><i class="fa fa-eye fa-stack-1x text-white"></i></span></a>';
                     echo '</div>';
 
                     echo '<div class="d-flex justify-content-center pt-3">';

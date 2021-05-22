@@ -55,7 +55,7 @@
                         echo 'PENDING';
                         echo '</div>';
                         echo '</div>';
-                        echo '<a href="' . base_url() . 'dashboard/delete/' . $this->encryption->encrypt($row['rsd_id']) . '" class="position-absolute top-0 end-0 m-2" onclick="return confirm("Are you sure you want to cancel your request");"><span class="fa-stack fa-lg "><i class="fa fa-circle fa-stack-2x text-danger" ></i><i class="fa fa-times fa-stack-1x text-white"></i></span></a>';
+                        echo '<a href="' . base_url() . 'dashboard/delete/' . encrypt_it($row['rsd_id']) . '" class="position-absolute top-0 end-0 m-2" onclick="return confirm("Are you sure you want to cancel your request");"><span class="fa-stack fa-lg "><i class="fa fa-circle fa-stack-2x text-danger" ></i><i class="fa fa-times fa-stack-1x text-white"></i></span></a>';
                         echo '</div>';
 
                         echo '<div class="d-flex justify-content-center pt-3">';

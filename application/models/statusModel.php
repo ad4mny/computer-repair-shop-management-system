@@ -15,10 +15,9 @@ class StatusModel extends CI_Model
 
     public function view_request_model($repair_id)
     {
-        $dec_repair_id = $this->encryption->decrypt($repair_id);
         $this->db->select('*');
         $this->db->from('repair_service_data');
-        $this->db->where('rsd_id', $dec_repair_id);
+        $this->db->where('rsd_id', decrypt_it($repair_id));
         $query = $this->db->get();
         return $query->result_array();
     }

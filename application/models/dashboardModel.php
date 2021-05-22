@@ -23,8 +23,7 @@ class DashboardModel extends CI_Model
 
     public function delete_request_model($request_id)
     {
-        $dec_request_id = $this->encryption->decrypt($request_id);
-        $this->db->where('rsd_id', $dec_request_id);
+        $this->db->where('rsd_id', decrypt_it($request_id));
         return $this->db->delete('repair_service_data');
     }
 }
