@@ -1,10 +1,10 @@
 <?php
 class RequestModel extends CI_Model
 {
-    public function add_new_request_model($customerid, $brand, $model, $color, $severity, $information)
+    public function add_new_request_model($customer_id, $brand, $model, $color, $severity, $information)
     {
         $data = array(
-            'rsd_cd_id' =>  $customerid,
+            'rsd_cd_id' =>  decrypt_it($customer_id),
             'rsd_status' =>  0,
             'rsd_progress' =>  0,
             'rsd_device_brand' => $brand,

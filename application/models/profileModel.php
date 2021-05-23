@@ -6,7 +6,7 @@ class ProfileModel extends CI_Model
         $this->db->select('*');
         $this->db->from('user_data');
         $this->db->join('customer_data', 'cd_ud_id = ud_id');
-        $this->db->where('ud_id', $user_id);
+        $this->db->where('ud_id', decrypt_it($user_id));
         $query = $this->db->get();
         return $query->result_array();
     }
@@ -24,7 +24,7 @@ class ProfileModel extends CI_Model
             'cd_log' => date('h:m:s d/m/y')
         );
 
-        $this->db->where('cd_ud_id', $user_id);
+        $this->db->where('cd_ud_id', decrypt_it($user_id));
         return $this->db->update('customer_data', $data);
     }
 }
