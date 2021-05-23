@@ -10,7 +10,7 @@
               </div>
               <div class="d-inline-flex flex-column align-middle">
                   <h5 class="mb-0  fw-bold">
-                      <?php echo $this->session->userdata('username'); ?>
+                      <?php echo decrypt_it($this->session->userdata('username')); ?>
                   </h5><br>
                   <small class=" mb-0 fw-light ">User</small>
               </div>

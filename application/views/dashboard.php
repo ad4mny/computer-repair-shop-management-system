@@ -5,7 +5,7 @@
                 <h3 class="display-4 mb-0 text-secondary ">Dashboard</h3>
             </div>
         </div>
-        <div class="row row-cols-1 row-cols-md-3 g-3 m-3 border-start border-2">
+        <div class="row row-cols-1 row-cols-md-3  m-3 border-start border-2">
             <?php
             if (is_array($request) && !empty($request)) {
                 foreach ($request as $row) {
@@ -116,7 +116,7 @@
                     }
                 }
             } else {
-                echo 'No upcoming and past request.';
+                echo '<div class="col">No upcoming and past request.</div>';
             }
             ?>
         </div>
