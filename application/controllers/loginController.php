@@ -23,10 +23,9 @@ class LoginController extends CI_Controller
         if ($return !== false) {
 
             $session_data = array(
-                'userid' => $return->ud_id,
-                'username' => $return->ud_usr,
-                'customerid' => $return->cd_id,
-                'fullname' => $return->cd_full_name,
+                'userid' => encrypt_it($return->ud_id),
+                'username' => encrypt_it($return->ud_usr),
+                'customerid' => encrypt_it($return->cd_id)
             );
 
             $this->session->set_userdata($session_data);
@@ -55,10 +54,9 @@ class LoginController extends CI_Controller
         if ($return !== false) {
 
             $session_data = array(
-                'userid' => $return->ud_id,
-                'username' => $return->ud_usr,
-                'customerid' => $return->cd_id,
-                'fullname' => $return->cd_full_name,
+                'userid' => encrypt_it($return->ud_id),
+                'username' => encrypt_it($return->ud_usr),
+                'customerid' => encrypt_it($return->cd_id)
             );
 
             $this->session->set_userdata($session_data);

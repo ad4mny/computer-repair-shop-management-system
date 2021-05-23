@@ -19,7 +19,7 @@ class ProfileController extends CI_Controller
     {
         $user_id = $this->session->userdata('userid');
         $this->load->model('profileModel');
-        return $this->profileModel->get_profile_info_model($user_id );
+        return $this->profileModel->get_profile_info_model($user_id);
     }
 
     public function set_profile_update()

@@ -12,7 +12,7 @@ class RequestController extends CI_Controller
 
     public function add_new_request()
     {
-        $customerid = $this->session->userdata('customerid');
+        $customer_id = $this->session->userdata('customerid');
         $brand = $this->input->post('brand');
         $model = $this->input->post('model');
         $color = $this->input->post('color');
@@ -21,7 +21,7 @@ class RequestController extends CI_Controller
 
         $this->load->model('requestModel');
 
-        if ($this->requestModel->add_new_request_model($customerid, $brand, $model, $color, $severity, $information) !== false) {
+        if ($this->requestModel->add_new_request_model($customer_id, $brand, $model, $color, $severity, $information) !== false) {
             redirect(base_url() . 'dashboard');
         } else {
             $this->session->set_flashdata('error', 'unable to complete request');
