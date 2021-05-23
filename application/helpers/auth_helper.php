@@ -14,18 +14,17 @@ if (!function_exists('auth_session')) {
 }
 
 if (!function_exists('encrypt_it')) {
-    function encrypt_it($q)
+    function encrypt_it($key)
     {
-        $key = 'HqE0luoquf';
-        return base64_encode(base64_encode($key . $q));
+         $data = base64_encode(base64_encode($key));
+         return str_replace(['+','/','='],['-','_',''],$data);
     }
 }
 
 if (!function_exists('decrypt_it')) {
-    function decrypt_it($q)
+    function decrypt_it($key)
     {
-        $key = 'HqE0luoquf';
-        $decoded_key =  base64_decode(base64_decode($q));
-        return str_replace($key, "", $decoded_key);
+        $data = str_replace(['+','/','='],['-','_',''],$key);
+        return base64_decode(base64_decode($data));
     }
 }
