@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="<?php echo base_url() ?>assets/css/bootstrap.css">
     <link rel="stylesheet" href="<?php echo base_url() ?>assets/css/all.min.css">
     <link rel="stylesheet" href="<?php echo base_url() ?>assets/css/style.css">
+    <?php if (!empty($css)) echo $css; ?>
     <script type="text/javascript" src="<?php echo base_url() ?>assets/jquery/jquery-3.6.0.js"></script>
     <script type="text/javascript" src="<?php echo base_url() ?>assets/js/bootstrap.js"></script>
     <style type="text/css">
@@ -22,5 +23,3 @@
 </head>
 
 <body class="bg-light">
-
-       
