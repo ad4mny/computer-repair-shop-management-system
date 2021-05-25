@@ -17,6 +17,8 @@
                     <a href="<?php echo base_url(); ?>/dashboard" class="text-primary mt-5"><i class="fas fa-chevron-left"></i> Back to dashboard</a>
                 </div>
             </div>
-        <?php } ?>
+        <?php } else {
+            header("Location: " . base_url() . 'dashboard');
+        } ?>
     </div>
 </div>

@@ -15,32 +15,32 @@
                         </div>
                         <a href="<?php echo base_url(); ?>profile/update" class="btn btn-primary btn-sm">UPDATE PROFILE</a>
                     </div>
-                    <div class="col">
-                        <div class="row pt-1">
+                    <div class="col border-start ps-5">
+                        <div class="row border-bottom pt-2">
                             <div class="col">
                                 <small>Full Name</small>
                                 <p class="text-capitalize"><?php echo $row['cd_full_name']; ?></p>
                             </div>
                         </div>
-                        <div class="row pt-1">
+                        <div class="row border-bottom pt-2">
                             <div class="col">
                                 <small>Contact Number</small>
                                 <p class="text-capitalize"><?php echo $row['cd_phone']; ?></p>
                             </div>
                         </div>
-                        <div class="row pt-1">
+                        <div class="row border-bottom pt-2">
                             <div class="col">
                                 <small>Street Address 1</small>
                                 <p class="text-capitalize"><?php echo $row['cd_street_1']; ?></p>
                             </div>
                         </div>
-                        <div class="row pt-1">
+                        <div class="row border-bottom pt-2">
                             <div class="col">
                                 <small>Street Address 2</small>
                                 <p class="text-capitalize"><?php echo $row['cd_street_2']; ?></p>
                             </div>
                         </div>
-                        <div class="row pt-1">
+                        <div class="row border-bottom pt-2">
                             <div class="col">
                                 <small>Postcode</small>
                                 <p class="text-capitalize"><?php echo $row['cd_postcode']; ?></p>

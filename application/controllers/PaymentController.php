@@ -51,32 +51,6 @@ class PaymentController extends CI_Controller
         $this->paypal->paypal_auto_form();
     }
 
-    public function get_pay_success()
-    {
-        // Get the transaction data 
-        $paypal_return = $this->input->get();
-
-        if (!empty($paypal_return['item_number']) && !empty($paypal_return['tx']) && !empty($paypal_return['amt']) && !empty($paypal_return['cc']) && !empty($paypal_return['st'])) {
-            $item_name = $paypal_return['item_name'];
-            $item_number = $paypal_return['item_number'];
-            $txn_id = $paypal_return["tx"];
-            $payment_amt = $paypal_return["amt"];
-            $currency_code = $paypal_return["cc"];
-            $status = $paypal_return["st"];
-
-            // Get product info from the database 
-            $request = $this->statusModel->get_ongoing_request_by_id_model($item_number);
-
-            // Check if transaction data exists with the same TXN ID 
-            $txn_result = $this->paymentModel->get_existing_txn_model(array('txn_id' => $txn_id));
-        }
-
-        // Pass the transaction data to view 
-        $data['request'] = $request;
-        $data['payment'] = $txn_result;
-        $this->index('return',$data);
-    }
-
     public function get_pay_cancel()
     {
         $this->index('cancel');
