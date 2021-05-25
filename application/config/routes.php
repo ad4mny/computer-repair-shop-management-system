@@ -24,5 +24,8 @@ $route['profile'] = 'profileController/index';
 $route['profile/update'] = 'profileController/index/update';
 $route['profile/set_profile_update'] = 'profileController/set_profile_update';
 
+$route['payment'] = 'paymentController';
+$route['payment/pay/(:any)'] = 'paymentController/pay/$1';
+
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;

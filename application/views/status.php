@@ -96,6 +96,15 @@
                             </div>
                             <div class="col border-start">
                                 <div class="py-3">
+                                    <small>Payment Status</small>
+                                    <h4 class="text-capitalize mb-0 ">
+                                        <?php
+                                        if ($request[0]['rsd_progress'] != '1') {
+                                            echo '<span class="text-warning">Pending</span>';
+                                        } else {
+                                            echo '<span class="text-success">Paid</span>';
+                                        } ?>
+                                    </h4>
                                     <small>Insepction Charge </small>
                                     <p class="text-capitalize mb-0">RM 50.00</p>
                                     <small>Repair Cost</small>
@@ -142,99 +151,105 @@
                         </select>
                     </div>
                     <div class="col text-end">
-                        <a href="<?php echo base_url(); ?>/dashboard" class="btn btn-secondary">CANCEL REQUEST</a>
-                        <button class="btn btn-primary" id="continue_btn">CONTINUE</button>
+                        <?php
+                        if ($request[0]['rsd_progress'] != '1') {
+                            echo '<a href="' . base_url() . '/dashboard" class="btn btn-secondary me-2">CANCEL REQUEST</a>';
+                            echo '<button class="btn btn-primary" id="continue_btn">CONTINUE</button>';
+                        }
+                        ?>
                     </div>
                 </div>
             <?php } else {
                 echo 'No upcoming and past request.';
             } ?>
         </div>
-        <div class="my-5" id="delivery_info" style="display:none;">
-            <div class="row pt-5">
-                <div class="col">
-                    <h3 class="display-4 mb-0 text-secondary ">Delivery & Pickup Information</h3>
-                </div>
-            </div>
-            <div class="row  p-3">
-                <div class="col">
-                    <div class="py-2">
-                        <small>Service ID</small>
-                        <p class="text-capitalize mb-0"><i class="fas fa-circle-notch fa-xs fa-fw"></i> <?php echo 'DCRS-' . encrypt_it($request[0]['rsd_id']); ?></p>
-                    </div>
-                    <div class="py-2 ">
-                        <small>Customer Name</small>
-                        <p class="text-capitalize mb-0"><i class="fas fa-circle-notch fa-xs fa-fw"></i> <?php echo $profile[0]['cd_full_name']; ?></p>
-                    </div>
-                    <div class="py-2">
-                        <small>Contact Number</small>
-                        <p class="text-capitalize mb-0"><i class="fas fa-circle-notch fa-xs fa-fw"></i> <?php echo $profile[0]['cd_phone']; ?></p>
-                    </div>
-                    <div class="py-2 ">
-                        <small>Device Detail</small>
-                        <p class="text-capitalize mb-0"><i class="fas fa-circle-notch fa-xs fa-fw"></i> <?php echo $request[0]['rsd_device_brand'] . ' ' . $request[0]['rsd_device_model']; ?></p>
-                        <p class="text-capitalize mb-0"><i class="fas fa-circle-notch fa-xs fa-fw"></i> <?php echo $request[0]['rsd_device_color']; ?></p>
+        <?php if ($request[0]['rsd_progress'] != '1') { ?>
+            <div class="my-5" id="delivery_info" style="display:none;">
+                <div class="row pt-5">
+                    <div class="col">
+                        <h3 class="display-4 mb-0 text-secondary ">Delivery & Pickup Information</h3>
                     </div>
                 </div>
-                <div class="col border-start border-2 ps-5">
-                    <div class="py-2 ">
-                        <small>Street Address 1</small>
-                        <p class="text-capitalize mb-0"><i class="fas fa-circle-notch fa-xs fa-fw"></i> <?php echo $profile[0]['cd_street_1']; ?></p>
-                    </div>
-                    <div class="py-2 ">
-                        <small>Street Address 2</small>
-                        <p class="text-capitalize mb-0"><i class="fas fa-circle-notch fa-xs fa-fw"></i> <?php echo $profile[0]['cd_street_2']; ?></p>
-                    </div>
-                    <div class="py-2 ">
-                        <small>City</small>
-                        <p class="text-capitalize mb-0"><i class="fas fa-circle-notch fa-xs fa-fw"></i> <?php echo $profile[0]['cd_city']; ?></p>
-                    </div>
-                    <div class="py-2 ">
-                        <small>Postcode</small>
-                        <p class="text-capitalize mb-0"><i class="fas fa-circle-notch fa-xs fa-fw"></i> <?php echo $profile[0]['cd_postcode']; ?></p>
-                    </div>
-                    <div class="py-2 ">
-                        <small>State</small>
-                        <p class="text-capitalize mb-0"><i class="fas fa-circle-notch fa-xs fa-fw"></i> <?php echo $profile[0]['cd_state']; ?></p>
-                    </div>
-                    <div class="py-2 ">
-                        <a href="<?php echo base_url(); ?>profile/update" class="text-primary">Update Address Information</a>
-                    </div>
-                </div>
-            </div>
-            <div class="row p-3 ">
-                <div class="col">
-                    <small>Total Price</small>
-                    <h2 class="text-capitalize mb-0">
-                        <?php
-                        echo 'RM ' . number_format((int)$repair_cost + (int)$service_tax + 50, 2);
-                        ?>
-                    </h2>
-                    <small class="text-muted ">Note: Please present Service ID during device collection.</small><br>
-                </div>
-                <div class="col ps-3 ">
-                    <form method="post" action="<?php echo base_url(); ?>payment/pay">
-                        <small>Pickup Date & Time</small>
-                        <div class="row row-cols-auto g-1">
-                            <div class="col-auto">
-                                <input type="date" class="form-control" name="pickup_date" required>
-                            </div>
-                            <div class="col-auto">
-                                <select class="form-select" name="pickup_time" required>
-                                    <option value="10">10.00 AM</option>
-                                    <option value="2">2.00 PM</option>
-                                    <option value="6">6.00 PM</option>
-                                    <option value="8">8.00 PM</option>
-                                </select>
-                            </div>
-                            <div class="col-auto">
-                                <button type="submit" class="btn btn-primary" name="submit">PROCEED PAYMENT</button>
-                            </div>
+                <div class="row  p-3">
+                    <div class="col">
+                        <div class="py-2">
+                            <small>Service ID</small>
+                            <p class="text-capitalize mb-0"><i class="fas fa-circle-notch fa-xs fa-fw"></i> <?php echo 'DCRS-' . encrypt_it($request[0]['rsd_id']); ?></p>
                         </div>
-                    </form>
+                        <div class="py-2 ">
+                            <small>Customer Name</small>
+                            <p class="text-capitalize mb-0"><i class="fas fa-circle-notch fa-xs fa-fw"></i> <?php echo $profile[0]['cd_full_name']; ?></p>
+                        </div>
+                        <div class="py-2">
+                            <small>Contact Number</small>
+                            <p class="text-capitalize mb-0"><i class="fas fa-circle-notch fa-xs fa-fw"></i> <?php echo $profile[0]['cd_phone']; ?></p>
+                        </div>
+                        <div class="py-2 ">
+                            <small>Device Detail</small>
+                            <p class="text-capitalize mb-0"><i class="fas fa-circle-notch fa-xs fa-fw"></i> <?php echo $request[0]['rsd_device_brand'] . ' ' . $request[0]['rsd_device_model']; ?></p>
+                            <p class="text-capitalize mb-0"><i class="fas fa-circle-notch fa-xs fa-fw"></i> <?php echo $request[0]['rsd_device_color']; ?></p>
+                        </div>
+                    </div>
+                    <div class="col border-start border-2 ps-5">
+                        <div class="py-2 ">
+                            <small>Street Address 1</small>
+                            <p class="text-capitalize mb-0"><i class="fas fa-circle-notch fa-xs fa-fw"></i> <?php echo $profile[0]['cd_street_1']; ?></p>
+                        </div>
+                        <div class="py-2 ">
+                            <small>Street Address 2</small>
+                            <p class="text-capitalize mb-0"><i class="fas fa-circle-notch fa-xs fa-fw"></i> <?php echo $profile[0]['cd_street_2']; ?></p>
+                        </div>
+                        <div class="py-2 ">
+                            <small>City</small>
+                            <p class="text-capitalize mb-0"><i class="fas fa-circle-notch fa-xs fa-fw"></i> <?php echo $profile[0]['cd_city']; ?></p>
+                        </div>
+                        <div class="py-2 ">
+                            <small>Postcode</small>
+                            <p class="text-capitalize mb-0"><i class="fas fa-circle-notch fa-xs fa-fw"></i> <?php echo $profile[0]['cd_postcode']; ?></p>
+                        </div>
+                        <div class="py-2 ">
+                            <small>State</small>
+                            <p class="text-capitalize mb-0"><i class="fas fa-circle-notch fa-xs fa-fw"></i> <?php echo $profile[0]['cd_state']; ?></p>
+                        </div>
+                        <div class="py-2 ">
+                            <a href="<?php echo base_url(); ?>profile/update" class="text-primary">Update Address Information</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="row p-3 ">
+                    <div class="col">
+                        <small>Total Price</small>
+                        <h2 class="text-capitalize mb-0">
+                            <?php
+                            echo 'RM ' . number_format((int)$repair_cost + (int)$service_tax + 50, 2);
+                            ?>
+                        </h2>
+                        <small class="text-muted ">Note: Please present Service ID during device collection.</small><br>
+                    </div>
+                    <div class="col ps-3 ">
+                        <form method="post" action="<?php echo base_url(); ?>payment/pay/<?php echo encrypt_it($request[0]['rsd_id']); ?>">
+                            <small>Pickup Date & Time</small>
+                            <div class="row row-cols-auto g-1">
+                                <div class="col-auto">
+                                    <input type="date" class="form-control" name="pickup_date" required>
+                                </div>
+                                <div class="col-auto">
+                                    <select class="form-select" name="pickup_time" required>
+                                        <option value="10">10.00 AM</option>
+                                        <option value="2">2.00 PM</option>
+                                        <option value="6">6.00 PM</option>
+                                        <option value="8">8.00 PM</option>
+                                    </select>
+                                </div>
+                                <div class="col-auto">
+                                    <button type="submit" class="btn btn-primary" name="submit">PROCEED PAYMENT</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
-        </div>
+        <?php } ?>
     </div>
 </div>
 <script>
