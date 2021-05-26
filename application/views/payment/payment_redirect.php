@@ -14,7 +14,7 @@
                             echo '<input type="hidden" name="' . $name . '" value="' . $value . '">';
                         }
                         ?>
-                        <button type="submit" class="btn btn-primary"><i class="fab fa-paypal"></i> Pay Now!</button>
+                        <small class="text-muted">Click <button type="submit" class="btn text-primary p-0 m-0">here</button> if the browser does not refresh.</small>
                     </form>
                 </div>
             </div>

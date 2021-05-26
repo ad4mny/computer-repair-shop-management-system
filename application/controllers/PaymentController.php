@@ -54,7 +54,6 @@ class PaymentController extends CI_Controller
         $this->session->set_userdata('pickup_date', $this->input->post('pickup_date'));
         $this->session->set_userdata('pickup_time', $this->input->post('pickup_time'));
 
-
         // Get customer detail
         $customer = $this->ProfileModel->get_profile_info_model($user_id);
         $customer_id = encrypt_it($customer[0]['cd_id']);
@@ -101,15 +100,13 @@ class PaymentController extends CI_Controller
 
             // Check whether the transaction is valid 
             if ($ipn_check) {
-
                 // Check whether the transaction data is exists 
-                if ($this->PaymentModel->get_existing_txn_model($paypal["txn_id"]) !== false) {
+                if ($this->PaymentModel->get_existing_payment_model($paypal["item_number"]) === 0) {
 
                     // Insert the transaction data in the database 
                     $this->PaymentModel->add_transaction_model($paypal);
-                    $this->PaymentModel->add_tracking_model($this->session->set_userdata('pickup_time'), $this->session->set_userdata('pickup_date'), $paypal["item_number"]);
+                    $this->PaymentModel->add_tracking_model($this->session->userdata('pickup_time'), $this->session->userdata('pickup_date'), $paypal["item_number"]);
                     $this->PaymentModel->set_request_ongoing_model($paypal["item_number"]);
-
                     $data['paypal'] = $paypal;
                     $this->index('success', $data);
                 } else {

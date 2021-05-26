@@ -1,9 +1,7 @@
 
 .box{
-    margin:0 10%;
-    height: 630px;
     overflow: hidden;
-    padding: 10px 0 40px 60px
+    padding: 0px 0 40px 60px
 }
 
 .box ul{
@@ -33,10 +31,9 @@
     position: relative;
     padding: 10px 20px;
     background:rgba(255, 255, 255, 0.3);
-    color:#c1c1c1;
+    color:#6c757d;
     border-radius: 10px;
     line-height: 20px;
-    width: 35%
 }
 
 
@@ -58,7 +55,7 @@
     height: 20px;
     border-radius: 50%;
     background:#007EF2;
-    border:2px solid #fff;
+    border:2px solid #f8f9fa;
     position: absolute;
     left:-10.5px
 }
@@ -86,34 +83,9 @@
 .box .time span{
     position: absolute;
     left: -100px;
-    color:#fff;
+    color:#6c757d;
     font-size:80%;
     font-weight: bold;
 }
 .box .time span:first-child{top:-16px}
 .box .time span:last-child{top:94%}
-
-
-.arrow{
-    position: absolute;
-    top: 105%;
-    left: 22%;
-    cursor: pointer;
-  height:20px;
-  width:20px
-}
-
-.arrow:hover{
-    -webkit-animation: arrow 1s linear infinite;
-       -moz-animation: arrow 1s linear infinite;
-         -o-animation: arrow 1s linear infinite;
-            animation: arrow 1s linear infinite;
-}
-
-.box ul:last-of-type .arrow{
-    position: absolute;
-    top: 105%;
-    left: 22%;
-    transform: rotateX(180deg);
-    cursor: pointer;
-}

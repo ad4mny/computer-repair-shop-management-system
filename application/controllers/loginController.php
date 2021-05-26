@@ -1,6 +1,12 @@
 <?php
 class LoginController extends CI_Controller
 {
+    public function __construct()
+    {
+        parent::__construct();
+        $this->load->model('LoginModel');
+    }
+
     public function index($page = 'login')
     {
         $this->load->view('templates/header');
@@ -17,8 +23,7 @@ class LoginController extends CI_Controller
         $usr = $this->input->post('usr');
         $pwd = md5($this->input->post('pwd'));
 
-        $this->load->model('loginModel');
-        $return = $this->loginModel->login_auth_model($usr, $pwd);
+        $return = $this->LoginModel->login_auth_model($usr, $pwd);
 
         if ($return !== false) {
 
@@ -48,8 +53,7 @@ class LoginController extends CI_Controller
         $city = $this->input->post('city');
         $state = $this->input->post('state');
 
-        $this->load->model('loginModel');
-        $return = $this->loginModel->create_user_account_model($username, $password, $full_name, $contact_number, $street_1, $street_2, $postcode, $city, $state);
+        $return = $this->LoginModel->create_user_account_model($username, $password, $full_name, $contact_number, $street_1, $street_2, $postcode, $city, $state);
 
         if ($return !== false) {
 
@@ -69,13 +73,12 @@ class LoginController extends CI_Controller
     public function check_username()
     {
         $username = $this->input->post('username');
-        $this->load->model('loginModel');
-        echo $this->loginModel->check_username_model($username);
+        echo $this->LoginModel->check_username_model($username);
     }
 
     public function logout()
     {
         $this->session->unset_userdata('username');
-        redirect(base_url() . 'login');
+        redirect(base_url());
     }
 }

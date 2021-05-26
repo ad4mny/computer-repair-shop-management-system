@@ -1,6 +1,12 @@
 <?php
 class ProfileController extends CI_Controller
 {
+    public function __construct()
+    {
+        parent::__construct();
+        $this->load->model('ProfileModel');
+    }
+
     public function index($page = 'profile')
     {
         auth_session();
@@ -18,8 +24,7 @@ class ProfileController extends CI_Controller
     public function get_profile_info()
     {
         $user_id = $this->session->userdata('userid');
-        $this->load->model('profileModel');
-        return $this->profileModel->get_profile_info_model($user_id);
+        return $this->ProfileModel->get_profile_info_model($user_id);
     }
 
     public function set_profile_update()
@@ -33,9 +38,7 @@ class ProfileController extends CI_Controller
         $city = $this->input->post('city');
         $state = $this->input->post('state');
 
-        $this->load->model('profileModel');
-
-        if ($this->profileModel->set_profile_update_model($user_id, $full_name, $contact_number, $street_1, $street_2, $postcode, $city, $state) !== false) {
+        if ($this->ProfileModel->set_profile_update_model($user_id, $full_name, $contact_number, $street_1, $street_2, $postcode, $city, $state) !== false) {
             redirect(base_url() . 'profile');
         } else {
             $this->session->set_flashdata('error', 'unable to update profile');

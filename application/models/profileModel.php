@@ -21,7 +21,7 @@ class ProfileModel extends CI_Model
             'cd_postcode' => $postcode,
             'cd_city' => $city,
             'cd_state' => $state,
-            'cd_log' => date('h:m:s d/m/y')
+            'cd_log' => date('h:m:s Y-m-d')
         );
 
         $this->db->where('cd_ud_id', decrypt_it($user_id));

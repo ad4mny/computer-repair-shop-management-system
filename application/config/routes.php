@@ -16,6 +16,7 @@ $route['dashboard/delete/(:any)'] = 'dashboardController/delete_request/$1';
 $route['request'] = 'requestController/index';
 
 $route['track'] = 'trackController/index';
+$route['track/(:any)'] = 'trackController/index/$1';
 
 $route['status'] = 'statusController';
 $route['status/(:any)'] = 'statusController/index/$1';

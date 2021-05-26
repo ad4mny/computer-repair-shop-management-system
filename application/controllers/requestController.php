@@ -1,6 +1,12 @@
 <?php
 class RequestController extends CI_Controller
 {
+    public function __construct()
+    {
+        parent::__construct();
+        $this->load->model('RequestModel');
+    }
+
     public function index()
     {
         auth_session();
@@ -19,9 +25,7 @@ class RequestController extends CI_Controller
         $severity = $this->input->post('severity');
         $information = $this->input->post('information');
 
-        $this->load->model('requestModel');
-
-        if ($this->requestModel->add_new_request_model($customer_id, $brand, $model, $color, $severity, $information) !== false) {
+        if ($this->RequestModel->add_new_request_model($customer_id, $brand, $model, $color, $severity, $information) !== false) {
             redirect(base_url() . 'dashboard');
         } else {
             $this->session->set_flashdata('error', 'unable to complete request');
