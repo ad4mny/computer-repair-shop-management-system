@@ -27,28 +27,31 @@ class LoginController extends CI_Controller
 
         if ($return !== false) {
 
-            $session_data = array(
-                'userid' => encrypt_it($return->ud_id),
-                'username' => encrypt_it($return->ud_usr),
-                'customerid' => encrypt_it($return->cd_id),
-                'role' => encrypt_it($return->ud_role)
-            );
-
-            $this->session->set_userdata($session_data);
-
-            switch ($this->session->set_userdata('role')) {
-                case 2:
-                    redirect(base_url() . 'staff/dashboard');
-                    break;
-                case 1:
-                    redirect(base_url() . 'runner/dashboard');
-                    break;
-                default:
-                    redirect(base_url() . 'dashboard');
-                    break;
+            $this->session->set_userdata('userid', $return->ud_id);
+            $this->session->set_userdata('username', $return->ud_usr);
+            $this->session->set_userdata('role', $return->ud_role);
+            $return = $this->LoginModel->login_role_model($this->session->userdata('userid'), $this->session->userdata('role'));
+            if ($return !== false) {
+                switch ($this->session->userdata('role')) {
+                    case 2:
+                        $this->session->set_userdata('staffid', $return->sd_id);
+                        redirect(base_url() . 'staff/dashboard');
+                        break;
+                    case 1:
+                        $this->session->set_userdata('runnerid', $return->rd_id);
+                        redirect(base_url() . 'runner/dashboard');
+                        break;
+                    default:
+                        $this->session->set_userdata('customerid', $return->cd_id);
+                        redirect(base_url() . 'dashboard');
+                        break;
+                }
+            } else {
+                $this->session->set_flashdata('error', 'Invalid user account, register again!');
+                redirect(base_url());
             }
         } else {
-            $this->session->set_flashdata('error', 'Invalid username or password');
+            $this->session->set_flashdata('error', 'Invalid login credentials.');
             redirect(base_url());
         }
     }

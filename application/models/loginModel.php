@@ -5,7 +5,6 @@ class LoginModel extends CI_Model
     {
         $this->db->select('*');
         $this->db->from('user_data');
-        $this->db->join('customer_data', 'cd_ud_id = ud_id');
         $this->db->where('ud_usr', $username);
         $this->db->where('ud_pwd', $password);
         $result = $this->db->get()->row();
@@ -22,6 +21,26 @@ class LoginModel extends CI_Model
         } else {
             return false;
         }
+    }
+
+    public function login_role_model($user_id, $role)
+    {
+        $this->db->select('*');
+        switch ($role) {
+            case 2:
+                $this->db->from('staff_data');
+                $this->db->where('sd_ud_id', $user_id);
+                break;
+            case 1:
+                $this->db->from('runner_data');
+                $this->db->where('rd_ud_id', $user_id);
+                break;
+            default:
+                $this->db->from('customer_data');
+                $this->db->where('cd_ud_id', $user_id);
+                break;
+        }
+        return $this->db->get()->row();
     }
 
     public function check_username_model($username)
