@@ -12,7 +12,7 @@
 
                     if ($row['rsd_progress'] == 0) {
 
-                        echo '<div class="col mb-4">';
+                        echo '<div class="col mb-3">';
                         echo '<div class="card text-white bg-secondary shadow rounded-lg border position-relative h-100">';
                         echo '<div class="card-body">';
                         echo '<span><i class="fas fa-clock fa-lg"></i></span>';
@@ -64,7 +64,7 @@
                         echo '</div>';
                     } else {
 
-                        echo '<div class="col">';
+                        echo '<div class="col mb-3">';
                         echo '<div class="card bg-white rounded-lg position-relative h-100">';
                         echo '<div class="card-body">';
                         echo '<span><i class="fas fa-check fa-lg"></i></span>';
@@ -116,7 +116,7 @@
                     }
                 }
             } else {
-                echo '<div class="col">No upcoming and past request.</div>';
+                echo '<div class="col"><p>No upcoming and past request.</p></div>';
             }
             ?>
         </div>

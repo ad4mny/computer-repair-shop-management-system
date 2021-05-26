@@ -16,38 +16,38 @@
                             </div>
                             <button type="submit" class="btn btn-primary btn-sm" name="submit">UPDATE PROFILE</button>
                         </div>
-                        <div class="col-5">
-                            <div class="row pt-3">
+                        <div class="col-5 border-start ps-5">
+                            <div class="row  border-bottom pt-2">
                                 <div class="col">
                                     <small>Full Name</small>
                                     <input type="text" class="form-control" name="full_name" value="<?php echo $row['cd_full_name']; ?>" required>
                                 </div>
                             </div>
-                            <div class="row pt-3">
+                            <div class="row  border-bottom pt-2">
                                 <div class="col">
                                     <small>Contact Number</small>
                                     <input type="number" class="form-control" name="contact_number" value="<?php echo $row['cd_phone']; ?>" required>
                                 </div>
                             </div>
-                            <div class="row pt-3">
+                            <div class="row  border-bottom pt-2">
                                 <div class="col">
                                     <small>Street Address 1</small>
                                     <input type="text" class="form-control" name="street_1" value="<?php echo $row['cd_street_1']; ?>" required>
                                 </div>
                             </div>
-                            <div class="row pt-3">
+                            <div class="row  border-bottom pt-2">
                                 <div class="col">
                                     <small>Street Address 2</small>
                                     <input type="text" class="form-control" name="street_2" value="<?php echo $row['cd_street_2']; ?>" required>
                                 </div>
                             </div>
-                            <div class="row pt-3">
+                            <div class="row  border-bottom pt-2">
                                 <div class="col">
                                     <small>Postcode</small>
                                     <input type="number" class="form-control" name="postcode" value="<?php echo $row['cd_postcode']; ?>" required>
                                 </div>
                             </div>
-                            <div class="row pt-3">
+                            <div class="row  border-bottom pt-2">
                                 <div class="col">
                                     <small>City</small>
                                     <input type="text" class="form-control" name="city" value="<?php echo $row['cd_city']; ?>" required>

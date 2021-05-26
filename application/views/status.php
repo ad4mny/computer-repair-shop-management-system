@@ -160,10 +160,10 @@
                     </div>
                 </div>
             <?php } else {
-                echo 'No upcoming and past request.';
+                echo '<div class="row m-3 border-start border-2 "><p class="col">No ongoing repair request.</p></div>';
             } ?>
         </div>
-        <?php if ($request[0]['rsd_progress'] != '1') { ?>
+        <?php if (isset($request[0]['rsd_progress']) && $request[0]['rsd_progress'] != '1') { ?>
             <div class="my-5" id="delivery_info" style="display:none;">
                 <div class="row pt-5">
                     <div class="col">

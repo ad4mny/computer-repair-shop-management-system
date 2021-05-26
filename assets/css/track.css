@@ -63,23 +63,6 @@
 .box ul li > span:before{top:-10px}
 .box ul li > span:after{top:95%}
 
-.box .title{
-    text-transform: uppercase;
-    font-weight: 700;
-    margin-bottom: 5px
-}
-
-.box .info:first-letter{text-transform: capitalize;line-height: 1.7}
-
-.box .name{
-    margin-top: 10px;
-    text-transform: capitalize;
-    font-style: italic;
-    text-align: right;
-    margin-right: 20px
-}
-
-
 .box .time span{
     position: absolute;
     left: -100px;
