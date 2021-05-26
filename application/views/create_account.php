@@ -146,9 +146,18 @@
                     contentType: false,
                     processData: false,
                     success: function(data) {
-                        console.log(data);
-                        if (data == 'true') {
-                            window.location.replace('<?php base_url(); ?>dashboard');
+                        if (data.userid != '') {
+                            switch (data.role) {
+                                case 2:
+                                    window.location.replace('<?php base_url(); ?>staff/dashboard');
+                                    break;
+                                case 1:
+                                    window.location.replace('<?php base_url(); ?>runner/dashboard');
+                                    break;
+                                default:
+                                    window.location.replace('<?php base_url(); ?>dashboard');
+                                    break;
+                            }
                         } else {
                             $('#alert').replaceWith('<div class="alert alert-warning alert-dismissible fade show" role="alert">' +
                                 '<i class="fas fa-exclamation-circle fa-fw"></i> Error creating your account.' +

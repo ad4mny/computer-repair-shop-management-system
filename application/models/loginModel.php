@@ -30,7 +30,7 @@ class LoginModel extends CI_Model
         $this->db->from('user_data');
         $this->db->where('ud_usr', $username);
         $query = $this->db->get();
-        return json_encode($query->num_rows());
+        return $query->num_rows();
     }
 
     public function create_user_account_model($username, $password, $full_name, $contact_number, $street_1, $street_2, $postcode, $city, $state)

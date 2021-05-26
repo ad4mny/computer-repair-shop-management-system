@@ -18,9 +18,6 @@ class PaymentModel extends CI_Model
             'pd_rsd_id' => decrypt_it($paypal_return["item_number"]),
             'pd_txn_id' => $paypal_return["txn_id"],
             'pd_payment_gross' => $paypal_return["mc_gross"],
-            'pd_currency_code' => $paypal_return["mc_currency"],
-            'pd_payer_name' => trim($paypal_return["first_name"] . ' ' . $paypal_return["last_name"]),
-            'pd_payer_email' => $paypal_return["payer_email"],
             'pd_status' => $paypal_return["payment_status"],
             'pd_log' => date('h:m:s Y-m-d')
         );

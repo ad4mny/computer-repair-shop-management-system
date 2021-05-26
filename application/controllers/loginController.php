@@ -30,14 +30,27 @@ class LoginController extends CI_Controller
             $session_data = array(
                 'userid' => encrypt_it($return->ud_id),
                 'username' => encrypt_it($return->ud_usr),
-                'customerid' => encrypt_it($return->cd_id)
+                'customerid' => encrypt_it($return->cd_id),
+                'role' => encrypt_it($return->ud_role)
             );
 
             $this->session->set_userdata($session_data);
-            redirect(base_url() . 'dashboard');
+
+            switch ($this->session->set_userdata('role')) {
+                case 2:
+                    redirect(base_url() . 'staff/dashboard');
+                    break;
+                case 1:
+                    redirect(base_url() . 'runner/dashboard');
+                    break;
+                default:
+                    redirect(base_url() . 'dashboard');
+                    break;
+            }
+            
         } else {
             $this->session->set_flashdata('error', 'Invalid username or password');
-            redirect(base_url() . 'login');
+            redirect(base_url());
         }
     }
 
@@ -60,11 +73,12 @@ class LoginController extends CI_Controller
             $session_data = array(
                 'userid' => encrypt_it($return->ud_id),
                 'username' => encrypt_it($return->ud_usr),
-                'customerid' => encrypt_it($return->cd_id)
+                'customerid' => encrypt_it($return->cd_id),
+                'role' => encrypt_it($return->ud_role)
             );
 
             $this->session->set_userdata($session_data);
-            echo json_encode(true);
+            echo json_encode($this->session->userdata());
         } else {
             echo json_encode(false);
         }
@@ -73,12 +87,12 @@ class LoginController extends CI_Controller
     public function check_username()
     {
         $username = $this->input->post('username');
-        echo $this->LoginModel->check_username_model($username);
+        echo json_encode($this->LoginModel->check_username_model($username));
     }
 
     public function logout()
     {
-        $this->session->unset_userdata('username');
+        $this->session->unset_userdata();
         redirect(base_url());
     }
 }
