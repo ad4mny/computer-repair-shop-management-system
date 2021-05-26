@@ -47,7 +47,6 @@ class LoginController extends CI_Controller
                     redirect(base_url() . 'dashboard');
                     break;
             }
-            
         } else {
             $this->session->set_flashdata('error', 'Invalid username or password');
             redirect(base_url());
@@ -92,7 +91,14 @@ class LoginController extends CI_Controller
 
     public function logout()
     {
-        $this->session->unset_userdata();
+        $session_data = array(
+            'userid',
+            'username',
+            'customerid',
+            'role'
+        );
+
+        $this->session->unset_userdata($session_data);
         redirect(base_url());
     }
 }

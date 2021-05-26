@@ -7,7 +7,7 @@ if (!function_exists('auth_session')) {
         $CI->load->library('session');
 
         if (!$CI->session->has_userdata('userid')) {
-            redirect(base_url() . 'login');
+            redirect(base_url());
             exit();
         }
     }
