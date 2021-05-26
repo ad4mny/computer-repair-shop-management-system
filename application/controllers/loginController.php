@@ -27,22 +27,24 @@ class LoginController extends CI_Controller
 
         if ($return !== false) {
 
-            $this->session->set_userdata('userid', $return->ud_id);
-            $this->session->set_userdata('username', $return->ud_usr);
-            $this->session->set_userdata('role', $return->ud_role);
+            $this->session->set_userdata('userid', encrypt_it($return->ud_id));
+            $this->session->set_userdata('username', encrypt_it($return->ud_usr));
+            $this->session->set_userdata('role', encrypt_it($return->ud_role));
+
             $return = $this->LoginModel->login_role_model($this->session->userdata('userid'), $this->session->userdata('role'));
+
             if ($return !== false) {
-                switch ($this->session->userdata('role')) {
+                switch (decrypt_it($this->session->userdata('role'))) {
                     case 2:
-                        $this->session->set_userdata('staffid', $return->sd_id);
+                        $this->session->set_userdata('staffid', encrypt_it($return->sd_id));
                         redirect(base_url() . 'staff/dashboard');
                         break;
                     case 1:
-                        $this->session->set_userdata('runnerid', $return->rd_id);
+                        $this->session->set_userdata('runnerid', encrypt_it($return->rd_id));
                         redirect(base_url() . 'runner/dashboard');
                         break;
                     default:
-                        $this->session->set_userdata('customerid', $return->cd_id);
+                        $this->session->set_userdata('customerid', encrypt_it($return->cd_id));
                         redirect(base_url() . 'dashboard');
                         break;
                 }

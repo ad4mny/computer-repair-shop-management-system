@@ -26,18 +26,18 @@ class LoginModel extends CI_Model
     public function login_role_model($user_id, $role)
     {
         $this->db->select('*');
-        switch ($role) {
+        switch (decrypt_it($role)) {
             case 2:
                 $this->db->from('staff_data');
-                $this->db->where('sd_ud_id', $user_id);
+                $this->db->where('sd_ud_id', decrypt_it($user_id));
                 break;
             case 1:
                 $this->db->from('runner_data');
-                $this->db->where('rd_ud_id', $user_id);
+                $this->db->where('rd_ud_id', decrypt_it($user_id));
                 break;
             default:
                 $this->db->from('customer_data');
-                $this->db->where('cd_ud_id', $user_id);
+                $this->db->where('cd_ud_id', decrypt_it($user_id));
                 break;
         }
         return $this->db->get()->row();

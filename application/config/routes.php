@@ -2,6 +2,8 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 $route['default_controller'] = 'loginController';
+$route['404_override'] = '';
+$route['translate_uri_dashes'] = FALSE;
 
 $route['login'] = 'loginController/index';
 $route['create'] = 'loginController/index/create';
@@ -25,8 +27,17 @@ $route['profile'] = 'profileController/index';
 $route['profile/update'] = 'profileController/index/update';
 $route['profile/set_profile_update'] = 'profileController/set_profile_update';
 
-$route['payment'] = 'paymentController';
+$route['payment'] = 'paymentController/index';
 $route['payment/pay/(:any)'] = 'paymentController/pay/$1';
 
-$route['404_override'] = '';
-$route['translate_uri_dashes'] = FALSE;
+// Staff routes
+$route['staff/dashboard'] = 'staff/dashboardController/index';
+$route['staff/dashboard/view/(:any)'] = 'staff/dashboardController/index/view/$1';
+$route['staff/dashboard/take_repair_request/(:any)'] = 'staff/DashboardController/take_repair_request/$1';
+$route['staff/dashboard/delete/(:any)'] = 'staff/dashboardController/delete_request/$1';
+
+$route['staff/profile'] = 'profileController/index';
+$route['staff/profile/update'] = 'profileController/index/update';
+$route['staff/profile/set_profile_update'] = 'profileController/set_profile_update';
+
+
