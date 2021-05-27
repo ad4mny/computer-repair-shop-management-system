@@ -16,7 +16,6 @@ class PaymentModel extends CI_Model
         $data = array(
             'pd_cd_id' => decrypt_it($paypal_return["custom"]),
             'pd_rsd_id' => decrypt_it($paypal_return["item_number"]),
-            'pd_txn_id' => $paypal_return["txn_id"],
             'pd_payment_gross' => $paypal_return["mc_gross"],
             'pd_status' => $paypal_return["payment_status"],
             'pd_log' => date('h:m:s Y-m-d')
@@ -25,18 +24,22 @@ class PaymentModel extends CI_Model
         return $this->db->insert('payment_data', $data);
     }
 
-    public function add_tracking_model($pickup_time, $pickup_date, $request_id)
+    public function add_tracking_model($request_id)
     {
         $data = array(
-            'td_cd_id' => decrypt_it($this->session->userdata('customerid')),
-            'td_rsd_id' =>  decrypt_it($request_id),
-            'td_pickup_date' => $pickup_date,
-            'td_pickup_time' => $pickup_time,
-            'td_status' => 'Paid',
-            'td_log' => date('h:m:s Y-m-d')
+            array(
+                'td_rsd_id' =>  decrypt_it($request_id),
+                'td_status' => 'Paid',
+                'td_log' => date('h:m:s Y-m-d')
+            ),
+            array(
+                'td_rsd_id' =>  decrypt_it($request_id),
+                'td_status' => 'Repairing',
+                'td_log' => date('h:m:s Y-m-d')
+            )
         );
 
-        return $this->db->insert('track_data', $data);
+        return $this->db->insert_batch('track_data', $data);
     }
 
     public function set_request_ongoing_model($request_id)

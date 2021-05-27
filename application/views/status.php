@@ -111,8 +111,8 @@
                                             echo '<span class="text-success">Paid</span>';
                                         } ?>
                                     </h4>
-                                    <small>Insepction Charge </small>
-                                    <p class="text-capitalize mb-0">RM 50.00</p>
+                                    <small>Inspection Charge </small>
+                                    <p class="text-capitalize mb-0">RM 20.00</p>
                                     <small>Repair Cost</small>
                                     <p class="text-capitalize mb-0">
                                         <?php
@@ -130,7 +130,7 @@
                                     <small>Total Price</small>
                                     <h4 class="text-capitalize mb-0">
                                         <?php
-                                        echo 'RM ' . number_format((int)$repair_cost + (int)$service_tax + 50, 2);
+                                        echo 'RM ' . number_format((int)$repair_cost + (int)$service_tax + 20, 2);
                                         ?>
                                     </h4>
                                 </div>
@@ -236,7 +236,7 @@
                         <small>Total Price</small>
                         <h2 class="text-capitalize mb-0">
                             <?php
-                            echo 'RM ' . number_format((int)$repair_cost + (int)$service_tax + 50, 2);
+                            echo 'RM ' . number_format((int)$repair_cost + (int)$service_tax + 20, 2);
                             ?>
                         </h2>
                         <small class="text-muted ">Note: Please present Service ID during device collection.</small><br>

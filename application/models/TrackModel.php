@@ -6,8 +6,7 @@ class TrackModel extends CI_Model
         $this->db->select('*');
         $this->db->from('repair_service_data');
         $this->db->where('rsd_cd_id', decrypt_it($customer_id));
-        $this->db->where('rsd_status', 1);
-        $this->db->where('rsd_progress !=', 2);
+        $this->db->where('rsd_progress !=', 0);
         $this->db->order_by('rsd_id', 'DESC');
         $query = $this->db->get();
         return $query->result_array();
@@ -15,13 +14,20 @@ class TrackModel extends CI_Model
 
     public function get_latest_tracking_request_model($customer_id)
     {
+        $data = array();
+        $result = $this->get_all_tracking_id_model($customer_id);
+
+        foreach ($result as $row) {
+            array_push($data, $row['rsd_id']);
+        }
+
         $this->db->select('td_rsd_id');
         $this->db->from('track_data');
-        $this->db->where('td_cd_id', decrypt_it($customer_id));
+        $this->db->where_in('td_rsd_id', $data);
         $this->db->order_by('td_id', 'DESC');
         $this->db->limit(1);
         $query = $this->db->get();
-        
+
         if ($query->num_rows() > 0) {
             $result = $query->result_array();
             $this->db->select('*');

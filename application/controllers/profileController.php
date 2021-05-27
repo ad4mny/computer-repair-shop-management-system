@@ -14,9 +14,9 @@ class ProfileController extends CI_Controller
         $this->load->view('templates/header');
         $this->load->view('templates/navigation');
         if ($page === 'update') {
-            $this->load->view('update_profile', $data);
+            $this->load->view('profile/UpdateProfileInterface', $data);
         } else {
-            $this->load->view('profile', $data);
+            $this->load->view('profile/ProfileInterface', $data);
         }
         $this->load->view('templates/footer');
     }

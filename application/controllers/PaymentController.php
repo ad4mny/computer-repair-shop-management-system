@@ -37,12 +37,11 @@ class PaymentController extends CI_Controller
         auth_session();
         $this->load->view('templates/header');
         $this->load->view('templates/navigation');
+        $data['flag'] = true;
         if ($page === 'success') {
-            $this->load->view('payment/success', $data);
-        } else if ($page === 'cancel') {
-            $this->load->view('payment/cancel');
+            $this->load->view('payment/PaymentInterface', $data);
         } else {
-            $this->load->view('payment/return', $data);
+            $this->load->view('payment/PaymentInterface', $data);
         }
         $this->load->view('templates/footer');
     }
@@ -66,7 +65,7 @@ class PaymentController extends CI_Controller
         $service = $this->StatusModel->get_ongoing_request_by_id_model($request_id);
         $service_name = ucfirst($service[0]['rsd_device_brand']) . ' ' . ucfirst($service[0]['rsd_device_model']);
         $service_id = encrypt_it($service[0]['rsd_id']);
-        $service_price = $service[0]['rsd_repair_cost'] + ((6 / 100) * $service[0]['rsd_repair_cost']) + 50;
+        $service_price = $service[0]['rsd_repair_cost'] + ((6 / 100) * $service[0]['rsd_repair_cost']) + 20;
 
         // Add fields to paypal form 
         $this->paypal_field('return', base_url() . 'paymentController/get_pay_ipn');
@@ -93,19 +92,17 @@ class PaymentController extends CI_Controller
     {
         // Retrieve transaction data from PayPal IPN POST 
         $paypal = $this->input->post();
-
+        
         if (!empty($paypal)) {
             // Validate and get the ipn response 
             $ipn_check = $this->validate_ipn($paypal);
-
             // Check whether the transaction is valid 
             if ($ipn_check) {
                 // Check whether the transaction data is exists 
                 if ($this->PaymentModel->get_existing_payment_model($paypal["item_number"]) === 0) {
-
                     // Insert the transaction data in the database 
                     $this->PaymentModel->add_transaction_model($paypal);
-                    $this->PaymentModel->add_tracking_model($this->session->userdata('pickup_time'), $this->session->userdata('pickup_date'), $paypal["item_number"]);
+                    $this->PaymentModel->add_tracking_model($paypal["item_number"]);
                     $this->PaymentModel->set_request_ongoing_model($paypal["item_number"]);
                     $data['paypal'] = $paypal;
                     $this->index('success', $data);
@@ -132,7 +129,7 @@ class PaymentController extends CI_Controller
 
         $this->load->view('templates/header');
         $this->load->view('templates/navigation');
-        $this->load->view('payment/payment_redirect', $data);
+        $this->load->view('payment/RedirectInterface', $data);
         $this->load->view('templates/footer');
     }
 

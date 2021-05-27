@@ -6,6 +6,7 @@ class DashboardController extends CI_Controller
         parent::__construct();
         $this->load->model('staff/DashboardModel');
     }
+    
     public function index($page = 'dashboard', $repair_id = null)
     {
         auth_session();

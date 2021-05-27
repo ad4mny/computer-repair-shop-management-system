@@ -1,6 +1,12 @@
 <?php
 class DashboardController extends CI_Controller
 {
+    public function __construct()
+    {
+        parent::__construct();
+        $this->load->model('DashboardModel');
+    }
+    
     public function index()
     {
         auth_session();
@@ -15,20 +21,17 @@ class DashboardController extends CI_Controller
     public function get_booking_request()
     {
         $customer_id = $this->session->userdata('customerid');
-        $this->load->model('dashboardModel');
-        return $this->dashboardModel->get_booking_request_model($customer_id);
+        return $this->DashboardModel->get_booking_request_model($customer_id);
     }
 
     public function get_technician_info($staff_id)
     {
-        $this->load->model('dashboardModel');
-        return $this->dashboardModel->get_technician_info_model($staff_id);
+        return $this->DashboardModel->get_technician_info_model($staff_id);
     }
 
     public function delete_request($request_id)
     {
-        $this->load->model('dashboardModel');
-        if($this->dashboardModel->delete_request_model($request_id) === true) {
+        if($this->DashboardModel->delete_request_model($request_id) === true) {
             redirect(base_url() . 'dashboard');
         } else {
             $this->session->set_flashdata('error', 'Unable to process request.');
