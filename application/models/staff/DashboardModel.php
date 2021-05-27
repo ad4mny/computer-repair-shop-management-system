@@ -5,7 +5,7 @@ class DashboardModel extends CI_Model
     {
         $this->db->select('*');
         $this->db->from('repair_service_data');
-        $this->db->where('rsd_status', 0);
+        $this->db->where('rsd_status', NULL);
         $this->db->where('rsd_progress', 0);
         $this->db->order_by('rsd_progress', 'ASC');
         $query = $this->db->get();
@@ -21,7 +21,7 @@ class DashboardModel extends CI_Model
         return $query->result_array();
     }
 
-    public function take_repair_request_model($request_id, $staff_id, $brand, $model, $color, $severity, $information, $status, $reason)
+    public function take_repair_request_model($request_id, $staff_id, $brand, $model, $color, $severity, $information, $status, $reason, $price)
     {
         $data = array(
             'rsd_sd_id' =>  decrypt_it($staff_id),
@@ -33,6 +33,7 @@ class DashboardModel extends CI_Model
             'rsd_damage_severity' => $severity,
             'rsd_damage_info' => $information,
             'rsd_comment' => $reason,
+            'rsd_repair_cost' => $price
         );
         $this->db->where('rsd_id', decrypt_it($request_id));
         return $this->db->update('repair_service_data', $data);

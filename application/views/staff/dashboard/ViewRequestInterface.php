@@ -14,49 +14,58 @@
             <div class="col-4">
                 <?php
                 if (is_array($request) && !empty($request)) {
-                    echo '<div class="card text-white bg-info shadow rounded-lg border position-relative h-100">';
-                    echo '<div class="card-body">';
-                    echo '<span><i class="fas fa-plus fa-lg"></i></span>';
+                ?>
+                    <div class="col mb-5">
+                        <div class="card text-white bg-info shadow-lg border rounded position-relative h-100">
+                            <span class="position-absolute top-0 start-0 m-3"><i class="fas fa-clock fa-lg fa-fw"></i></span>
+                            <span class="position-absolute top-0 end-0 m-3"><?php echo 'DCRS-' . encrypt_it($request[0]['rsd_id']); ?></span>
+                            <div class="card-body">
+                                <div class="card-title  px-4 py-5 fw-light text-capitalize">
+                                    <h1>
+                                        <?php echo $request[0]['rsd_device_brand']; ?><br>
+                                        <small><?php echo $request[0]['rsd_device_model']; ?></small>
+                                    </h1>
+                                </div>
+                                <div class="px-4 pb-5 mb-5">
+                                    <div class="card-text text-capitalize"><?php echo $request[0]['rsd_damage_info']; ?></div>
+                                    <div class="card-text text-capitalize">
+                                        <?php
+                                        if ($request[0]['rsd_sd_id'] === null) {
+                                            echo 'No technician assigned';
+                                        } else {
+                                            $technician = $controller->get_technician_info($request[0]['rsd_sd_id']);
+                                            $technician_name = explode(' ', $technician[0]['sd_full_name']);
+                                            echo 'Technician ' . $technician_name[0];
+                                        }
+                                        ?>
+                                    </div>
+                                    <div class="card-text text-capitalize">
+                                        <?php
+                                        switch ($request[0]['rsd_damage_severity']) {
+                                            case 2:
+                                                echo 'Severity Worst';
+                                                break;
+                                            case 1:
+                                                echo 'Severity Average';
+                                                break;
+                                            default:
+                                                echo 'Severity Fair';
+                                                break;
+                                        }
+                                        ?>
+                                    </div>
+                                </div>
+                            </div>
+                            <a href="<?php echo base_url() . 'staff/dashboard/'; ?>" class="position-absolute top-100 start-50 translate-middle">
+                                <span class="fa-stack fa-2x">
+                                    <i class="fa fa-circle fa-stack-2x text-primary"></i>
+                                    <i class="fa fa-eye-slash fa-stack-1x text-white"></i>
+                                </span>
+                            </a>
 
-                    echo '<h1 class="card-title p-4 fw-light text-capitalize">' . $request[0]['rsd_device_brand'] . '<br>' .  $request[0]['rsd_device_model'] . '</h1>';
-
-                    echo  '<div class="p-4">';
-                    echo  '<div class="card-text text-capitalize">' . $request[0]['rsd_damage_info'] . '</div>';
-                    echo '<div class="card-text text-capitalize">';
-
-                    if ($request[0]['rsd_sd_id'] === null) {
-                        echo 'No technician assigned';
-                    } else {
-                        $technician = $controller->get_technician_info($request[0]['rsd_sd_id']);
-                        $technician_name = explode(' ', $technician[0]['sd_full_name']);
-                        echo 'Technician ' . $technician_name[0];
-                    }
-
-                    echo '</div>';
-                    echo '<div class="card-text text-capitalize">';
-
-                    switch ($request[0]['rsd_damage_severity']) {
-                        case 2:
-                            echo 'Severity Worst';
-                            break;
-                        case 1:
-                            echo 'Severity Average';
-                            break;
-                        default:
-                            echo 'Severity Fair';
-                            break;
-                    }
-
-                    echo '</div>';
-                    echo '</div>';
-                    echo '</div>';
-
-                    echo '<a href="' . base_url() . 'staff/dashboard" class="position-absolute top-100 start-50 translate-middle" onclick="return confirm("Are you sure you want to cancel your request");"><span class="fa-stack fa-2x "><i class="fa fa-circle fa-stack-2x text-primary" ></i><i class="fa fa-eye-slash fa-stack-1x text-white"></i></span></a>';
-                    echo '</div>';
-
-                    echo '<div class="d-flex justify-content-center pt-3">';
-
-                    echo '</div>';
+                        </div>
+                    </div>
+                <?php
                 } else {
                     redirect(base_url() . 'staff/dashboard');
                 }
@@ -95,18 +104,26 @@
                                 </div>
                                 <div class="form-group pb-2">
                                     <small class="text-muted">Repair Status</small>
-                                    <select class="form-select" name="status" required>
+                                    <select class="form-select" name="status" id="status_select" required>
                                         <option value="0">Unable to repair</option>
                                         <option value="1">Can be repair</option>
                                     </select>
                                 </div>
-                                <div class="form-group pb-2">
+                                <div class="form-group pb-2" id="reason_select">
                                     <small class="text-muted">Repair Reason</small>
-                                    <select class="form-select" name="severity" required>
-                                        <option <?php if ($request[0]['rsd_comment'] == 'Waiting customer confirmation')  echo 'selected'; ?>>Waiting customer confirmation</option>
+                                    <select class="form-select" name="reason">
                                         <option <?php if ($request[0]['rsd_comment'] == 'No parts available')  echo 'selected'; ?>>No parts available</option>
                                         <option <?php if ($request[0]['rsd_comment'] == 'No technician available')  echo 'selected'; ?>>No technician available</option>
                                     </select>
+                                </div>
+                                <div class="form-group pb-2">
+                                    <small class="text-muted">Repair Estimation Cost</small>
+                                    <div class="input-group mb-2">
+                                        <div class="input-group-prepend">
+                                            <div class="input-group-text">RM</div>
+                                        </div>
+                                        <input type="number" class="form-control" name="price" placeholder="Enter quotation price" value="<?php echo $request[0]['rsd_repair_cost']; ?>" required>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -122,3 +139,14 @@
         </div>
     </div>
 </div>
+<script>
+    $(document).ready(function() {
+        $('#status_select').on('change', function() {
+            if ($('#status_select').val() == '0') {
+                $('#reason_select').show();
+            } else {
+                $('#reason_select').hide();
+            }
+        });
+    });
+</script>

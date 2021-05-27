@@ -44,4 +44,6 @@ $route['staff/profile'] = 'staff/profileController/index';
 $route['staff/profile/update'] = 'staff/profileController/index/update';
 $route['staff/profile/set_profile_update'] = 'staff/profileController/set_profile_update';
 
-
+$route['staff/status'] = 'staff/statusController/index';
+$route['staff/status/view/(:any)'] = 'staff/statusController/index/view/$1';
+$route['staff/status/update/(:any)'] = 'staff/statusController/update_repair_request/$1';

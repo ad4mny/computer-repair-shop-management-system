@@ -5,7 +5,6 @@ class RequestModel extends CI_Model
     {
         $data = array(
             'rsd_cd_id' =>  decrypt_it($customer_id),
-            'rsd_status' =>  0,
             'rsd_progress' =>  0,
             'rsd_device_brand' => $brand,
             'rsd_device_model' => $model,

@@ -64,17 +64,14 @@
                 $temp = '';
                 if (isset($tracking) && is_array($tracking) && !empty($tracking) && isset($track) && is_array($track) && !empty($track)) {
                     foreach ($tracking as $row) {
-                        if ($row['td_rsd_id'] !== $temp) {
-                            $temp = $row['td_rsd_id'];
-                            echo '<a href="' . base_url() . 'track/' . encrypt_it($row['rsd_id']) . '" class="text-capitalize">';
-                            echo '<div class="card bg-white rounded-lg mb-2">';
-                            echo '<div class="card-body">';
-                            echo '<h4 class="card-title fw-light text-capitalize text-primary">' . $row['rsd_device_brand'] . ' ' . $row['rsd_device_model'] . '</h4>';
-                            echo '<div class="card-text text-muted">Service ID: ' . encrypt_it($row['rsd_id']) . '</div>';
-                            echo '</div>';
-                            echo '</div>';
-                            echo '</a>';
-                        }
+                        echo '<a href="' . base_url() . 'track/' . encrypt_it($row['rsd_id']) . '" class="text-capitalize">';
+                        echo '<div class="card bg-white rounded-lg mb-2">';
+                        echo '<div class="card-body">';
+                        echo '<h4 class="card-title fw-light text-capitalize text-primary">' . $row['rsd_device_brand'] . ' ' . $row['rsd_device_model'] . '</h4>';
+                        echo '<div class="card-text text-muted">Service ID: ' . encrypt_it($row['rsd_id']) . '</div>';
+                        echo '</div>';
+                        echo '</div>';
+                        echo '</a>';
                     }
                 } else {
                     echo '<p>None.</p>';

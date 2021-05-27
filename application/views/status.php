@@ -10,12 +10,20 @@
                 <div class="row m-3 border-start border-2 ">
                     <div class="col">
                         <div class="card text-white bg-primary shadow rounded-lg border position-relative h-100">
-                            <div class="card-body">
-                                <span><i class="fas fa-clock fa-lg"></i></span>
-                                <h1 class="card-title p-4 fw-light text-capitalize">
-                                    <?php echo $request[0]['rsd_device_brand']; ?><br>
-                                    <?php echo $request[0]['rsd_device_model']; ?>
-                                </h1>
+
+                            <?php if ($request[0]['rsd_progress'] == 0) {
+                                echo '<span class="position-absolute top-0 start-0 m-3"><i class="fas fa-clock fa-lg fa-fw"></i> PENDING</span>';
+                            } else {
+                                echo '<span class="position-absolute top-0 start-0 m-3"><i class="fas fa-spinner fa-lg fa-fw"></i> REPAIRING</span>';
+                            }
+                            ?>
+
+                            <div class="card-body pt-5">
+                                <div class="card-text px-4 py-5 fw-light text-capitalize ">
+                                    <h1> <?php echo $request[0]['rsd_device_brand']; ?><br>
+                                        <small><?php echo $request[0]['rsd_device_model']; ?></small>
+                                    </h1>
+                                </div>
                                 <div class="p-4">
                                     <div class="card-text text-capitalize"> <?php echo $request[0]['rsd_damage_info']; ?></div>
                                     <div class="card-text text-capitalize">
@@ -47,7 +55,7 @@
                                 </div>
                             </div>
                             <div class="card-footer text-center">
-                                <div class="card-text px-3">ONGOING</div>
+                                <div class="card-text text-capitalize text-center"><?php echo 'DCRS-' . encrypt_it($request[0]['rsd_id']); ?></div>
                             </div>
                         </div>
                     </div>
@@ -153,8 +161,17 @@
                     <div class="col text-end">
                         <?php
                         if ($request[0]['rsd_progress'] != '1') {
-                            echo '<a href="' . base_url() . '/dashboard" class="btn btn-secondary me-2">CANCEL REQUEST</a>';
-                            echo '<button class="btn btn-primary" id="continue_btn">CONTINUE</button>';
+                            if ($request[0]['rsd_status'] != '1') {
+                                echo '<form method="post" action="' . base_url() . 'payment/pay/' . encrypt_it($request[0]['rsd_id']) . '">';
+                                echo '<input type="hidden" name="pickup_date">';
+                                echo '<input type="hidden" name="pickup_time">';
+                                echo '<button type="submit" class="btn btn-primary" name="submit">PROCEED PAYMENT</button>
+                                ';
+                                echo '</form>';
+                            } else {
+                                echo '<a href="' . base_url() . '/dashboard" class="btn btn-secondary me-2">CANCEL REQUEST</a>';
+                                echo '<button class="btn btn-primary" id="continue_btn">CONTINUE</button>';
+                            }
                         }
                         ?>
                     </div>

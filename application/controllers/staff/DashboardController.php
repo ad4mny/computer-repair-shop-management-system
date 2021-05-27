@@ -48,9 +48,15 @@ class DashboardController extends CI_Controller
         $severity = $this->input->post('severity');
         $information = $this->input->post('information');
         $status = $this->input->post('status');
-        $reason = $this->input->post('reason');
+        $price = $this->input->post('price');
 
-        if ($this->DashboardModel->take_repair_request_model($request_id, $staff_id, $brand, $model, $color, $severity, $information, $status, $reason) !== false) {
+        if ($status == 0) {
+            $reason = $this->input->post('reason');
+        } else {
+            $reason = 'Waiting customer confirmation';
+        }
+
+        if ($this->DashboardModel->take_repair_request_model($request_id, $staff_id, $brand, $model, $color, $severity, $information, $status, $reason, $price) !== false) {
             redirect(base_url() . 'staff/dashboard');
         } else {
             $this->session->set_flashdata('error', 'unable to complete request');

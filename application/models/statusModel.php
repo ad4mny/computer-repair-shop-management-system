@@ -8,7 +8,7 @@ class StatusModel extends CI_Model
         $this->db->where('rsd_cd_id', decrypt_it($customer_id));
         $this->db->where('rsd_status', 1);
         $this->db->where('rsd_progress !=', 2);
-        $this->db->order_by('rsd_progress', 'ASC');
+        $this->db->order_by('rsd_id', 'DESC');
         $this->db->limit(1); 
         $query = $this->db->get();
         return $query->result_array();
@@ -30,7 +30,7 @@ class StatusModel extends CI_Model
         $this->db->where('rsd_cd_id', decrypt_it($customer_id));
         $this->db->where('rsd_status', 1);
         $this->db->where('rsd_progress !=', 2);
-        $this->db->order_by('rsd_progress', 'ASC');
+        $this->db->order_by('rsd_id', 'DESC');
         $query = $this->db->get();
         return $query->result_array();
     }  

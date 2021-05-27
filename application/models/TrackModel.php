@@ -4,10 +4,11 @@ class TrackModel extends CI_Model
     public function get_all_tracking_id_model($customer_id)
     {
         $this->db->select('*');
-        $this->db->from('track_data');
-        $this->db->join('repair_service_data', 'rsd_id = td_rsd_id');
-        $this->db->where('td_cd_id', decrypt_it($customer_id));
-        $this->db->order_by('td_id', 'DESC');
+        $this->db->from('repair_service_data');
+        $this->db->where('rsd_cd_id', decrypt_it($customer_id));
+        $this->db->where('rsd_status', 1);
+        $this->db->where('rsd_progress !=', 2);
+        $this->db->order_by('rsd_id', 'DESC');
         $query = $this->db->get();
         return $query->result_array();
     }
