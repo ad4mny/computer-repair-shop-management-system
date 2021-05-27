@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: May 26, 2021 at 12:00 PM
+-- Generation Time: May 27, 2021 at 06:01 PM
 -- Server version: 8.0.23
 -- PHP Version: 8.0.3
 
@@ -45,11 +45,9 @@ CREATE TABLE `customer_data` (
 --
 
 INSERT INTO `customer_data` (`cd_id`, `cd_ud_id`, `cd_full_name`, `cd_phone`, `cd_street_1`, `cd_street_2`, `cd_postcode`, `cd_city`, `cd_state`, `cd_log`) VALUES
-(2, 1, 'adam aiman bin zulkornain', '0108884285', 'no 26 jalan perjiranan 11/18', 'bandar dato onn', 81100, 'johor bahru', 'johor', '06:05:21 23/05/21'),
+(2, 1, 'adam aiman bin zulkornain', '0108884285', 'no 26 jalan perjiranan 11/18', 'bandar dato onn', 81100, 'johor bahru', 'johor', '04:05:49 2021-05-27'),
 (3, 7, 'siti noormaimunah binti syed hadi', '0197274670', 'no 5 lorong jalan tegak', 'kampung baru', 41020, 'wilayah persekutuan', 'kuala lumpur', '11:05:54 2021-05-26'),
-(4, 10, 'mazliana', '0108884287', 'b4 unit 304 ', 'pangkalan tldm', 32100, 'lumut', 'perak', NULL),
-(25, 31, 'sarah najwa binti zaim', '0197876765', 'no 109 residence 11', 'damansara height', 41100, 'damansara', 'kuala lumpur', NULL),
-(26, 32, 'ivy seroja binti ahmad', '0107879651', 'no 4 jalan lenggok', 'perkampungan baru', 41200, 'wilayah persekutuan', 'kuala lumpur', NULL);
+(4, 10, 'mazliana', '0108884287', 'b4 unit 304 ', 'pangkalan tldm', 32100, 'lumut', 'perak', NULL);
 
 -- --------------------------------------------------------
 
@@ -61,7 +59,6 @@ CREATE TABLE `payment_data` (
   `pd_id` int NOT NULL,
   `pd_cd_id` int DEFAULT NULL,
   `pd_rsd_id` int DEFAULT NULL,
-  `pd_txn_id` int DEFAULT NULL,
   `pd_payment_gross` double DEFAULT NULL,
   `pd_status` varchar(50) DEFAULT NULL,
   `pd_log` varchar(50) DEFAULT NULL
@@ -71,9 +68,13 @@ CREATE TABLE `payment_data` (
 -- Dumping data for table `payment_data`
 --
 
-INSERT INTO `payment_data` (`pd_id`, `pd_cd_id`, `pd_rsd_id`, `pd_txn_id`, `pd_payment_gross`, `pd_status`, `pd_log`) VALUES
-(23, 2, 13, 37, 686, 'Completed', '04:05:08 2021-05-21'),
-(24, 2, 14, 2147483647, 1640, 'Completed', '03:05:08 2021-05-26');
+INSERT INTO `payment_data` (`pd_id`, `pd_cd_id`, `pd_rsd_id`, `pd_payment_gross`, `pd_status`, `pd_log`) VALUES
+(23, 2, 13, 686, 'Completed', '04:05:08 2021-05-21'),
+(24, 2, 14, 1640, 'Completed', '03:05:08 2021-05-26'),
+(25, 2, 19, 50, 'Completed', '10:05:46 2021-05-27'),
+(27, 2, 22, 410.4, 'Completed', '02:05:42 2021-05-27'),
+(29, 3, 16, 285, 'Completed', '05:05:46 2021-05-27'),
+(30, 3, 21, 2733.6, 'Completed', '05:05:28 2021-05-27');
 
 -- --------------------------------------------------------
 
@@ -103,11 +104,14 @@ CREATE TABLE `repair_service_data` (
 
 INSERT INTO `repair_service_data` (`rsd_id`, `rsd_cd_id`, `rsd_sd_id`, `rsd_status`, `rsd_progress`, `rsd_comment`, `rsd_repair_cost`, `rsd_device_brand`, `rsd_device_model`, `rsd_device_color`, `rsd_damage_severity`, `rsd_damage_info`, `rsd_log`) VALUES
 (11, 2, 1, 1, 2, 'Repair has been completed', 600, 'apple', 'macbook air 2021', 'silver', 0, 'battery replacement', '04:05:08 2021-05-25'),
-(12, 2, NULL, 0, 0, NULL, NULL, 'acer', 'aspire 5', 'brown', 1, 'keyboard problem', NULL),
+(12, 2, 2, 0, 0, 'No technician available', 0, 'acer', 'aspire 5', 'brown', 0, 'keyboard problem', NULL),
 (13, 2, 1, 1, 1, 'Repairing', 600, 'lenovo', 'legion y520', 'black', 2, 'Battery Replacement', '04:05:08 2021-05-25'),
-(14, 2, 1, 1, 1, 'Repairing', 1500, 'xiaomi', 'mattebook', 'white', 2, 'Motherboard problem', '03:05:08 2021-05-26'),
-(16, 3, NULL, 0, 0, NULL, NULL, 'acer', 'nitro 5', 'black', 0, 'battery replacement', NULL),
-(17, 3, NULL, 0, 0, NULL, NULL, 'apple', 'ipad pro 12', 'navy blue', 2, 'screen replacement', NULL);
+(14, 2, 1, 1, 2, 'Repair is complete', 1500, 'xiaomi', 'mattebook', 'white', 2, 'Motherboard problem', '03:05:08 2021-05-26'),
+(16, 3, 2, 1, 1, 'Repairing', 250, 'acer', 'nitro 5', 'black', 0, 'battery replacement', '05:05:46 2021-05-27'),
+(18, 3, NULL, NULL, 0, NULL, NULL, 'acer', 'aspire 5', 'black', 2, 'motherboard problem', NULL),
+(19, 2, 3, 0, 1, 'Repairing', NULL, 'apple', 'imac pro', 'pink', 2, 'screen replacement', '10:05:46 2021-05-27'),
+(21, 3, 3, 1, 2, 'Repair is complete', 2560, 'apple', 'macbook pro 2011', 'space grey', 1, 'screen replacement', '05:05:28 2021-05-27'),
+(22, 2, 3, 1, 1, 'Repairing', 340, '1M4U', 'Notebook malaysia', 'black', 2, 'motherboard problem', '02:05:42 2021-05-27');
 
 -- --------------------------------------------------------
 
@@ -128,7 +132,8 @@ CREATE TABLE `runner_data` (
 --
 
 INSERT INTO `runner_data` (`rd_id`, `rd_ud_id`, `rd_full_name`, `rd_phone`, `rd_plat_num`) VALUES
-(1, 9, 'ahmad mamat bin malek', '0108884287', 'NDA 900');
+(1, 9, 'ahmad mamat bin malek', '0108884287', 'NDA 900'),
+(2, 33, 'ismail bin mail', '0109898761', 'jsf 7009');
 
 -- --------------------------------------------------------
 
@@ -148,7 +153,9 @@ CREATE TABLE `staff_data` (
 --
 
 INSERT INTO `staff_data` (`sd_id`, `sd_ud_id`, `sd_full_name`, `sd_phone`) VALUES
-(1, 8, 'abu bin bakar ali', '0137867819');
+(1, 8, 'abu bin bakar ali', '0137867819'),
+(2, 31, 'sarah najwa binti adam', '010882912'),
+(3, 32, 'ivy seroja binti adam ', '01928811231');
 
 -- --------------------------------------------------------
 
@@ -158,11 +165,8 @@ INSERT INTO `staff_data` (`sd_id`, `sd_ud_id`, `sd_full_name`, `sd_phone`) VALUE
 
 CREATE TABLE `track_data` (
   `td_id` int NOT NULL,
-  `td_cd_id` int DEFAULT NULL,
   `td_rsd_id` int DEFAULT NULL,
   `td_rd_id` int DEFAULT NULL,
-  `td_pickup_time` varchar(50) DEFAULT NULL,
-  `td_pickup_date` varchar(50) DEFAULT NULL,
   `td_status` varchar(20) DEFAULT NULL,
   `td_log` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -171,12 +175,23 @@ CREATE TABLE `track_data` (
 -- Dumping data for table `track_data`
 --
 
-INSERT INTO `track_data` (`td_id`, `td_cd_id`, `td_rsd_id`, `td_rd_id`, `td_pickup_time`, `td_pickup_date`, `td_status`, `td_log`) VALUES
-(18, 2, 13, NULL, '10', '2021-05-27', 'Paid', '04:05:08 2021-05-26'),
-(19, 2, 13, 1, '10', '2021-05-27', 'Completed', '10:14:59 2021-05-28'),
-(20, 2, 13, 1, '10', '2021-05-27', 'Delivering', '17:33:29 2021-05-28'),
-(21, 2, 14, NULL, '2', '2021-05-26', 'Paid', '03:05:08 2021-05-26'),
-(22, 2, 13, 1, '10', '2021-05-27', 'Delivered', '17:33:29 2021-05-29');
+INSERT INTO `track_data` (`td_id`, `td_rsd_id`, `td_rd_id`, `td_status`, `td_log`) VALUES
+(7, 11, NULL, 'Paid', '04:05:08 2021-05-26'),
+(8, 11, 1, 'Completed', '10:14:59 2021-05-28'),
+(9, 11, 1, 'Delivering', '17:33:29 2021-05-28'),
+(10, 11, 1, 'Delivered', '17:33:29 2021-05-29'),
+(18, 13, NULL, 'Paid', '04:05:08 2021-05-26'),
+(19, 13, 1, 'Completed', '10:14:59 2021-05-28'),
+(20, 13, 1, 'Delivering', '17:33:29 2021-05-28'),
+(21, 14, NULL, 'Paid', '03:05:08 2021-05-26'),
+(22, 13, 1, 'Delivered', '17:33:29 2021-05-29'),
+(23, 19, NULL, 'Paid', '10:05:46 2021-05-27'),
+(25, 22, NULL, 'Paid', '02:05:42 2021-05-27'),
+(27, 16, NULL, 'Paid', '05:05:46 2021-05-27'),
+(28, 16, NULL, 'Repairing', '05:05:46 2021-05-27'),
+(29, 21, NULL, 'Paid', '05:05:28 2021-05-27'),
+(30, 21, NULL, 'Repairing', '05:05:28 2021-05-27'),
+(31, 21, NULL, 'Completed', '01:05:51 2021-05-28');
 
 -- --------------------------------------------------------
 
@@ -198,13 +213,14 @@ CREATE TABLE `user_data` (
 --
 
 INSERT INTO `user_data` (`ud_id`, `ud_usr`, `ud_pwd`, `ud_role`, `ud_log`, `ud_created`) VALUES
-(1, 'adamny', '132c9256f087c8c267a30a22a7fa5356', 0, '06:05:05 2021-05-26', '09:05:42 2021-05-19'),
-(7, 'siti', 'db04eb4b07e0aaf8d1d477ae342bdff9', 0, '11:05:53 2021-05-26', '06:05:02 2021-05-21'),
-(8, 'abu', '34d71b97c471931334f385b4e7b7379c', 2, '06:05:02 2021-05-20', '06:05:02 2021-05-20'),
-(9, 'mamat', '24b65fcef95d94b6d41ecaa85a70e46f', 1, '06:05:02 2021-05-20', '06:05:02 2021-05-20'),
+(1, 'adamny', '132c9256f087c8c267a30a22a7fa5356', 0, '01:05:20 2021-05-28', '09:05:42 2021-05-19'),
+(7, 'siti', 'db04eb4b07e0aaf8d1d477ae342bdff9', 0, '01:05:00 2021-05-28', '06:05:02 2021-05-21'),
+(8, 'abu', '132c9256f087c8c267a30a22a7fa5356', 2, '04:05:46 2021-05-27', '06:05:02 2021-05-20'),
+(9, 'mamat', '132c9256f087c8c267a30a22a7fa5356', 1, '06:05:02 2021-05-20', '06:05:02 2021-05-20'),
 (10, 'mazliana', 'b93cc4d98183a6d942de3e0a6ab91e4c', 0, '11:05:21 2021-05-26', '11:05:21 2021-05-26'),
-(31, 'sarah', 'cd3a77622ef59e64711dfd05f1a263a6', 2, '11:05:21 2021-05-26', '11:05:21 2021-05-26'),
-(32, 'seroja', '8d6e7982477080010e3bef76d9e52194', 2, '11:05:23 2021-05-26', '11:05:23 2021-05-26');
+(31, 'sarah', 'cd3a77622ef59e64711dfd05f1a263a6', 2, '05:05:42 2021-05-27', '11:05:21 2021-05-26'),
+(32, 'seroja', '8d6e7982477080010e3bef76d9e52194', 2, '01:05:47 2021-05-28', '11:05:23 2021-05-26'),
+(33, 'ismail', 'b3c55a02882e9050dcd4a6739d4a288c', 1, '05:05:38 2021-05-26', '05:05:25 2021-05-26');
 
 --
 -- Indexes for dumped tables
@@ -252,7 +268,6 @@ ALTER TABLE `staff_data`
 --
 ALTER TABLE `track_data`
   ADD PRIMARY KEY (`td_id`),
-  ADD KEY `td_cd_id` (`td_cd_id`),
   ADD KEY `td_rd_id` (`td_rd_id`),
   ADD KEY `td_rsd_id` (`td_rsd_id`);
 
@@ -276,37 +291,37 @@ ALTER TABLE `customer_data`
 -- AUTO_INCREMENT for table `payment_data`
 --
 ALTER TABLE `payment_data`
-  MODIFY `pd_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `pd_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- AUTO_INCREMENT for table `repair_service_data`
 --
 ALTER TABLE `repair_service_data`
-  MODIFY `rsd_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `rsd_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT for table `runner_data`
 --
 ALTER TABLE `runner_data`
-  MODIFY `rd_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `rd_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `staff_data`
 --
 ALTER TABLE `staff_data`
-  MODIFY `sd_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `sd_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `track_data`
 --
 ALTER TABLE `track_data`
-  MODIFY `td_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `td_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 
 --
 -- AUTO_INCREMENT for table `user_data`
 --
 ALTER TABLE `user_data`
-  MODIFY `ud_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+  MODIFY `ud_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 
 --
 -- Constraints for dumped tables
@@ -348,7 +363,6 @@ ALTER TABLE `staff_data`
 -- Constraints for table `track_data`
 --
 ALTER TABLE `track_data`
-  ADD CONSTRAINT `track_data_ibfk_1` FOREIGN KEY (`td_cd_id`) REFERENCES `customer_data` (`cd_id`) ON DELETE SET NULL ON UPDATE SET NULL,
   ADD CONSTRAINT `track_data_ibfk_2` FOREIGN KEY (`td_rd_id`) REFERENCES `runner_data` (`rd_id`) ON DELETE SET NULL ON UPDATE SET NULL,
   ADD CONSTRAINT `track_data_ibfk_3` FOREIGN KEY (`td_rsd_id`) REFERENCES `repair_service_data` (`rsd_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
