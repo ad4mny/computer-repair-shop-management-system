@@ -58,6 +58,7 @@ class LoginModel extends CI_Model
         $data = array(
             'ud_usr' =>  $username,
             'ud_pwd' =>  $password,
+            'ud_role' => 0,
             'ud_log' => date('h:m:s Y-m-d'),
             'ud_created' => date('h:m:s Y-m-d')
         );
@@ -88,6 +89,49 @@ class LoginModel extends CI_Model
 
         // insert customer data 
         $this->db->insert('customer_data', $data);
+
+        return $this->login_auth_model($username, $password);
+    }
+
+    public function create_staff_account_model($username, $password, $type, $plat_num, $full_name, $contact_number)
+    {
+        // create new user data
+        $data = array(
+            'ud_usr' => $username,
+            'ud_pwd' => $password,
+            'ud_role' => $type,
+            'ud_log' => date('h:m:s Y-m-d'),
+            'ud_created' => date('h:m:s Y-m-d')
+        );
+
+        // insert user data
+        $this->db->insert('user_data', $data);
+
+        // get new inserted user data
+        $this->db->select('ud_id');
+        $this->db->from('user_data');
+        $this->db->where('ud_usr', $username);
+        $this->db->where('ud_pwd', $password);
+
+        // get user id 
+        $result = $this->db->get()->row();
+
+        if ($type == 2) {
+            $data = array(
+                'sd_ud_id' => $result->ud_id,
+                'sd_full_name' => $full_name,
+                'sd_phone' => $contact_number
+            );
+            $this->db->insert('staff_data', $data);
+        } else {
+            $data = array(
+                'rd_ud_id' => $result->ud_id,
+                'rd_full_name' => $full_name,
+                'rd_phone' => $contact_number,
+                'rd_plat_num' => $plat_num
+            );
+            $this->db->insert('runner_data', $data);
+        }
 
         return $this->login_auth_model($username, $password);
     }

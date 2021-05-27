@@ -31,13 +31,17 @@ $route['payment'] = 'paymentController/index';
 $route['payment/pay/(:any)'] = 'paymentController/pay/$1';
 
 // Staff routes
+$route['create_staff'] = 'loginController/index/create_staff';
+$route['login/create_staff'] = 'loginController/create_staff_account';
+$route['login/check_username'] = 'loginController/check_username';
+
 $route['staff/dashboard'] = 'staff/dashboardController/index';
 $route['staff/dashboard/view/(:any)'] = 'staff/dashboardController/index/view/$1';
 $route['staff/dashboard/take_repair_request/(:any)'] = 'staff/DashboardController/take_repair_request/$1';
 $route['staff/dashboard/delete/(:any)'] = 'staff/dashboardController/delete_request/$1';
 
-$route['staff/profile'] = 'profileController/index';
-$route['staff/profile/update'] = 'profileController/index/update';
-$route['staff/profile/set_profile_update'] = 'profileController/set_profile_update';
+$route['staff/profile'] = 'staff/profileController/index';
+$route['staff/profile/update'] = 'staff/profileController/index/update';
+$route['staff/profile/set_profile_update'] = 'staff/profileController/set_profile_update';
 
 

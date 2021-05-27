@@ -11,14 +11,15 @@
                     <div class="form-group mb-2 input-group-lg">
                         <input type="text" class="form-control " name="usr" placeholder="Username" required>
                     </div>
-                    <div class="form-group mb-3 input-group-lg">
+                    <div class="form-group input-group-lg">
                         <input type="password" class="form-control input-lg" name="pwd" placeholder="Password" required>
                     </div>
-                    <div class="form-group text-center d-grid gap-2 input-group-lg">
+                    <span class="text-danger"><?php echo $this->session->flashdata("error") ?></span>
+                    <div class="form-group text-center d-grid gap-2 input-group-lg mt-3">
                         <button type="submit" class="btn btn-primary btn-block" name="submit"><i class="fas fa-sign-in-alt"></i> Log In</button>
                     </div>
-                    <div class="form-group mb-3 input-group-lg">
-                        <span class="text-danger"><?php echo $this->session->flashdata("error") ?></span>
+                    <div class="form-group mb-3 input-group-lg my-4">
+                        <small>Want to be part of our team? Register<a href="<?php echo base_url() ?>create_staff" class="text-primary"> here</a>.</small>
                     </div>
                     <div class="border-top text-center pt-3 input-group-lg">
                         <a href="<?php echo base_url() ?>create" class="btn btn-success btn-block">Create New Account</a>

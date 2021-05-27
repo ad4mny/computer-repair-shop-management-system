@@ -12,6 +12,8 @@ class LoginController extends CI_Controller
         $this->load->view('templates/header');
         if ($page === 'create') {
             $this->load->view('create_account');
+        } else  if ($page === 'create_staff') {
+            $this->load->view('RegisterInterface');
         } else {
             $this->load->view('login');
         }
@@ -88,6 +90,37 @@ class LoginController extends CI_Controller
         }
     }
 
+    public function create_staff_account()
+    {
+        $username = $this->input->post('username');
+        $password = md5($this->input->post('password'));
+        $type = $this->input->post('type');
+        $plat_num = $this->input->post('plat_num');
+        $full_name = $this->input->post('full_name');
+        $contact_number = $this->input->post('contact_number');
+
+        $return = $this->LoginModel->create_staff_account_model($username, $password, $type, $plat_num, $full_name, $contact_number);
+
+        if ($return !== false) {
+
+            $this->session->set_userdata('userid', encrypt_it($return->ud_id));
+            $this->session->set_userdata('username', encrypt_it($return->ud_usr));
+            $this->session->set_userdata('role', encrypt_it($return->ud_role));
+
+            $return = $this->LoginModel->login_role_model($this->session->userdata('userid'), $this->session->userdata('role'));
+
+            if (decrypt_it($this->session->userdata('role')) == 2) {
+                $this->session->set_userdata('staffid', encrypt_it($return->sd_id));
+            } else {
+                $this->session->set_userdata('runnerid', encrypt_it($return->rd_id));
+            }
+
+            echo json_encode($this->session->userdata());
+        } else {
+            echo json_encode(false);
+        }
+    }
+
     public function check_username()
     {
         $username = $this->input->post('username');
@@ -103,6 +136,7 @@ class LoginController extends CI_Controller
             'role'
         );
 
+        $this->session->set_flashdata('error', '');
         $this->session->unset_userdata($session_data);
         redirect(base_url());
     }
