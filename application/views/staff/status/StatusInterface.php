@@ -11,7 +11,7 @@
                     <p>Accepted repair request</p>
                 </div>
             </div>
-            <div class="row row-cols-1 row-cols-md-3 mx-3 mb-5 border-start border-2 text-uppercase">
+            <div class="row row-cols-1 row-cols-md-3 mx-3 mb-5 border-start border-2">
                 <?php if (is_array($request) && !empty($request)) {
                     foreach ($request as $row) {
                         if ($row['rsd_status'] != '0') { ?>
@@ -24,7 +24,6 @@
                                         echo '<span class="position-absolute top-0 end-0 m-3">DCRS-' . encrypt_it($row['rsd_id']) . '</span>';
                                     }
                                     ?>
-
                                     <div class="card-body">
                                         <div class="card-text px-4 py-5 fw-light text-capitalize ">
                                             <h1> <?php echo $row['rsd_device_brand']; ?><br>
@@ -32,9 +31,9 @@
                                             </h1>
                                         </div>
                                         <div class="px-4 pb-5">
-                                            <div class="card-text"> <?php echo $row['rsd_damage_info']; ?></div>
-                                            <div class="card-text">You has been assigned</div>
-                                            <div class="card-text pb-1">
+                                            <div class="card-text text-capitalize"> <?php echo $row['rsd_damage_info']; ?></div>
+                                            <div class="card-text text-capitalize">You has been assigned</div>
+                                            <div class="card-text text-capitalize pb-1">
                                                 <?php
                                                 switch ($row['rsd_damage_severity']) {
                                                     case 2:
@@ -56,7 +55,14 @@
                                     if ($row['rsd_progress'] == '0') {
                                         echo '<div class="card-footer"><div class="card-text text-capitalize text-center">DCRS-' . encrypt_it($row['rsd_id']) . '</div></div>';
                                     } else {
-                                        echo '<a href="' . base_url() . 'staff/status/update/' . encrypt_it($row['rsd_id']) . '" class="position-absolute top-100 start-50 translate-middle" onclick="return confirm("Mark this repair as completed?");"><span class="fa-stack fa-2x "><i class="fa fa-circle fa-stack-2x text-primary"></i><i class="fa fa-check fa-stack-1x text-white"></i></span></a>';
+                                    ?>
+                                        <a href="<?php echo base_url() . 'staff/status/update/' . encrypt_it($row['rsd_id']); ?>" class="position-absolute top-100 start-50 translate-middle" onclick="return confirm('Mark this repair as completed?');">
+                                            <span class="fa-stack fa-2x ">
+                                                <i class="fa fa-circle fa-stack-2x text-primary"></i>
+                                                <i class="fa fa-check fa-stack-1x text-white"></i>
+                                            </span>
+                                        </a>
+                                    <?php
                                     }
                                     ?>
                                 </div>
@@ -74,9 +80,9 @@
                                             </h1>
                                         </div>
                                         <div class="px-4 pb-5">
-                                            <div class="card-text"> <?php echo $row['rsd_damage_info']; ?></div>
-                                            <div class="card-text">You has been assigned</div>
-                                            <div class="card-text pb-1">
+                                            <div class="card-text text-capitalize"> <?php echo $row['rsd_damage_info']; ?></div>
+                                            <div class="card-text text-capitalize">You has been assigned</div>
+                                            <div class="card-text text-capitalize pb-1">
                                                 <?php
                                                 switch ($row['rsd_damage_severity']) {
                                                     case 2:

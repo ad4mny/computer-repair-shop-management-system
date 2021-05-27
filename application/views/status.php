@@ -10,14 +10,12 @@
                 <div class="row m-3 border-start border-2 ">
                     <div class="col">
                         <div class="card text-white bg-primary shadow rounded-lg border position-relative h-100">
-
                             <?php if ($request[0]['rsd_progress'] == 0) {
                                 echo '<span class="position-absolute top-0 start-0 m-3"><i class="fas fa-clock fa-lg fa-fw"></i> PENDING</span>';
                             } else {
                                 echo '<span class="position-absolute top-0 start-0 m-3"><i class="fas fa-spinner fa-lg fa-fw"></i> REPAIRING</span>';
                             }
                             ?>
-
                             <div class="card-body pt-5">
                                 <div class="card-text px-4 py-5 fw-light text-capitalize ">
                                     <h1> <?php echo $request[0]['rsd_device_brand']; ?><br>
