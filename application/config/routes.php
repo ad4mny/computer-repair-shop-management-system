@@ -26,6 +26,7 @@ $route['status/(:any)'] = 'statusController/index/$1';
 $route['profile'] = 'profileController/index';
 $route['profile/update'] = 'profileController/index/update';
 $route['profile/set_profile_update'] = 'profileController/set_profile_update';
+$route['profile/set_password_change'] = 'profileController/set_password_change';
 
 $route['payment'] = 'paymentController/index';
 $route['payment/pay/(:any)'] = 'paymentController/pay/$1';

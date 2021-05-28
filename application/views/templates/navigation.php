@@ -2,11 +2,14 @@
   <nav id="sidebar">
       <div class="sidebar-header my-3 p-3">
           <a href="<?php echo base_url(); ?>profile">
-              <div class=" d-inline-flex align-middle ">
-                  <span class="fa-stack fa-2x ">
-                      <i class="fa fa-circle fa-stack-2x text-white"></i>
-                      <i class="fa fa-user fa-stack-1x text-secondary"></i>
-                  </span>
+              <div class="d-inline-flex align-middle ">
+                  <?php
+                    if (decrypt_it($this->session->userdata('picture')) != "") {
+                        echo '<img src="' . base_url() . 'assets/img/profile/thumbnail/' . decrypt_it($this->session->userdata('picture')) . '" class="img-fluid rounded-circle shadow border border-3 border-white me-2" width="70">';
+                    } else {
+                        echo '<span class="fa-stack fa-2x "><i class="fa fa-circle fa-stack-2x text-white"></i><i class="fa fa-user fa-stack-1x text-secondary"></i></span>';
+                    }
+                    ?>
               </div>
               <div class="d-inline-flex flex-column align-middle">
                   <h5 class="mb-0  fw-bold">

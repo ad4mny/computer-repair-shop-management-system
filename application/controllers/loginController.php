@@ -31,6 +31,7 @@ class LoginController extends CI_Controller
 
             $this->session->set_userdata('userid', encrypt_it($return->ud_id));
             $this->session->set_userdata('username', encrypt_it($return->ud_usr));
+            $this->session->set_userdata('picture', encrypt_it($return->ud_pic));
             $this->session->set_userdata('role', encrypt_it($return->ud_role));
 
             $return = $this->LoginModel->login_role_model($this->session->userdata('userid'), $this->session->userdata('role'));
@@ -80,6 +81,7 @@ class LoginController extends CI_Controller
                 'userid' => encrypt_it($return->ud_id),
                 'username' => encrypt_it($return->ud_usr),
                 'customerid' => encrypt_it($return->cd_id),
+                'picture' => encrypt_it($return->ud_pic),
                 'role' => encrypt_it($return->ud_role)
             );
 
