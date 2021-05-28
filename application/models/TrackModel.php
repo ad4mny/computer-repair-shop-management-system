@@ -14,16 +14,11 @@ class TrackModel extends CI_Model
 
     public function get_latest_tracking_request_model($customer_id)
     {
-        $data = array();
-        $result = $this->get_all_tracking_id_model($customer_id);
-
-        foreach ($result as $row) {
-            array_push($data, $row['rsd_id']);
-        }
+        $data = $this->get_all_tracking_id_model($customer_id);
 
         $this->db->select('td_rsd_id');
         $this->db->from('track_data');
-        $this->db->where_in('td_rsd_id', $data);
+        $this->db->where('td_rsd_id', $data[0]['rsd_id']);
         $this->db->order_by('td_id', 'DESC');
         $this->db->limit(1);
         $query = $this->db->get();
