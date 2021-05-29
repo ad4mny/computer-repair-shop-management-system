@@ -116,13 +116,13 @@
                                         <option <?php if ($request[0]['rsd_comment'] == 'No technician available')  echo 'selected'; ?>>No technician available</option>
                                     </select>
                                 </div>
-                                <div class="form-group pb-2">
+                                <div class="form-group pb-2" id="price_input" style="display: none;">
                                     <small class="text-muted">Repair Estimation Cost</small>
                                     <div class="input-group mb-2">
                                         <div class="input-group-prepend">
                                             <div class="input-group-text">RM</div>
                                         </div>
-                                        <input type="number" class="form-control" name="price" placeholder="Enter quotation price" value="<?php echo $request[0]['rsd_repair_cost']; ?>" required>
+                                        <input type="number" class="form-control" name="price" placeholder="Enter quotation price" value="<?php echo $request[0]['rsd_repair_cost']; ?>" >
                                     </div>
                                 </div>
                             </div>
@@ -144,8 +144,10 @@
         $('#status_select').on('change', function() {
             if ($('#status_select').val() == '0') {
                 $('#reason_select').show();
+                $('#price_input').hide();
             } else {
                 $('#reason_select').hide();
+                $('#price_input').show();
             }
         });
     });
