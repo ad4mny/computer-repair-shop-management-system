@@ -77,16 +77,15 @@ class LoginController extends CI_Controller
 
         if ($return !== false) {
 
-            $session_data = array(
-                'userid' => encrypt_it($return->ud_id),
-                'username' => encrypt_it($return->ud_usr),
-                'customerid' => encrypt_it($return->cd_id),
-                'picture' => encrypt_it($return->ud_pic),
-                'role' => encrypt_it($return->ud_role)
-            );
+            $this->session->set_userdata('userid', encrypt_it($return->ud_id));
+            $this->session->set_userdata('username', encrypt_it($return->ud_usr));
+            $this->session->set_userdata('role', encrypt_it($return->ud_role));
+            
+            $return = $this->LoginModel->login_role_model($this->session->userdata('userid'), $this->session->userdata('role'));
+            
+            $this->session->set_userdata('customerid', encrypt_it($return->cd_id));
 
-            $this->session->set_userdata($session_data);
-            echo json_encode($this->session->userdata());
+            echo decrypt_it($this->session->userdata('role'));
         } else {
             echo json_encode(false);
         }
@@ -117,7 +116,7 @@ class LoginController extends CI_Controller
                 $this->session->set_userdata('runnerid', encrypt_it($return->rd_id));
             }
 
-            echo json_encode($this->session->userdata());
+            echo decrypt_it($this->session->userdata('role'));
         } else {
             echo json_encode(false);
         }

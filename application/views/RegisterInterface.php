@@ -81,7 +81,6 @@
             }
         });
 
-
         // password comparison for setup
         $('#password, #confirm_password').on('keyup', function() {
             if ($('#password').val() != $('#confirm_password').val()) {
@@ -141,8 +140,8 @@
                     contentType: false,
                     processData: false,
                     success: function(data) {
-                        if (data.userid != '') {
-                            switch (data.role) {
+                        if (data != '') {
+                            switch (data) {
                                 case '2':
                                     window.location.replace('<?php base_url(); ?>staff/dashboard');
                                     break;
