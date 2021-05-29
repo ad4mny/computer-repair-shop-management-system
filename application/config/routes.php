@@ -48,3 +48,15 @@ $route['staff/profile/set_profile_update'] = 'staff/profileController/set_profil
 $route['staff/status'] = 'staff/statusController/index';
 $route['staff/status/view/(:any)'] = 'staff/statusController/index/view/$1';
 $route['staff/status/update/(:any)'] = 'staff/statusController/update_repair_request/$1';
+
+// Runner routes
+$route['runner/dashboard'] = 'runner/DashboardController/index';
+$route['runner/dashboard/take_delivery_request/(:any)'] = 'runner/DashboardController/take_delivery_request/$1';
+
+$route['runner/delivery'] = 'runner/DeliveryController/index';
+$route['runner/delivery/cencal_delivery_request/(:any)'] = 'runner/DeliveryController/cencal_delivery_request/$1';
+$route['runner/delivery/complete_delivery_request/(:any)'] = 'runner/DeliveryController/complete_delivery_request/$1';
+
+$route['runner/profile'] = 'runner/profileController/index';
+$route['runner/profile/update'] = 'runner/profileController/index/update';
+$route['runner/profile/set_profile_update'] = 'runner/profileController/set_profile_update';

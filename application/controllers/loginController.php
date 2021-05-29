@@ -135,6 +135,7 @@ class LoginController extends CI_Controller
             'userid',
             'username',
             'customerid',
+            'picture',
             'role'
         );
 
