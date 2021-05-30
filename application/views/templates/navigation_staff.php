@@ -23,6 +23,6 @@
           <li class="<?php if ($this->uri->uri_string() == 'staff/dashboard') echo 'active'; ?>"><a href="<?php echo base_url(); ?>staff/dashboard"><i class="fas fa-columns fa-sm fa-fw me-2"></i> Dashboard</a></li>
           <li class="<?php if ($this->uri->uri_string() == 'staff/status') echo 'active'; ?>"><a href="<?php echo base_url(); ?>staff/status"><i class="fas fa-tasks fa-sm fa-fw me-2"></i> Status</a></li>
           <li class="<?php if ($this->uri->uri_string() == 'staff/manage') echo 'active'; ?>"><a href="<?php echo base_url(); ?>staff/manage"><i class="fas fa-cog fa-sm fa-fw me-2"></i> Manage</a></li>
-          <li class="text-warning pb-3" style="position: absolute;bottom: 0px;"><a href="<?php echo base_url(); ?>logout"><i class="fas fa-sign-out-alt fa-sm fa-fw me-2"></i> Logout</a></li>
+          <li class="pb-3" style="position: absolute;bottom: 0px;"><a href="<?php echo base_url(); ?>logout"><i class="fas fa-sign-out-alt fa-sm fa-fw me-2"></i> Logout</a></li>
       </ul>
   </nav>

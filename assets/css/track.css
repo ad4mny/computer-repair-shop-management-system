@@ -1,7 +1,8 @@
 
 .box{
     overflow: hidden;
-    padding: 0px 0 40px 60px
+    padding: 0px 0 40px 60px;
+    margin-top: -80px;
 }
 
 .box ul{
@@ -20,7 +21,7 @@
     display: block;
     width: 0;
     height: 100%;
-    border:1px dashed #007EF2;
+    border:1px dashed #c4c4c4;
     position: absolute;
     top:0;
     left:30px

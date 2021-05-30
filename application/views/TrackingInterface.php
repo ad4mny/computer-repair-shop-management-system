@@ -28,11 +28,11 @@
                         echo '</div>';
                     }
                 } else {
-                    echo '<p>None.</p>';
+                    echo '<p>No tracking data available.</p>';
                 }
                 ?>
             </div>
-            <div class="col ">
+            <div class="col">
                 <div class="box">
                     <ul id="first-list">
                         <?php if (isset($track) && is_array($track) && !empty($track)) {
@@ -78,7 +78,7 @@
                             }
                         } else {
                             echo '<li>';
-                            echo '<div class=" text-primary"><p>No tracking detail available.</p></div>';
+                            echo '<div class=" text-primary"><p>No tracking information available.</p></div>';
                             echo '</li>';
                         } ?>
                     </ul>

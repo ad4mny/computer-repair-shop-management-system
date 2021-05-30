@@ -10,7 +10,7 @@
                 <p>All new repair request</p>
             </div>
         </div>
-        <div class="row row-cols-1 row-cols-md-3 mx-3 mb-5  border-start border-2">
+        <div class="row row-cols-1 row-cols-md-3 mx-3 border-start border-2">
 
             <?php
             if (is_array($request) && !empty($request)) {
