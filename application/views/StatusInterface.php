@@ -172,6 +172,8 @@
                                                 echo '<small class="text-muted">Please wait while the technician inspecting your repair request.</small>';
                                                 break;
                                         }
+                                    } else {
+                                        echo '<small class="text-muted">Please wait while the technician repairing your device.</small>';
                                     }
                                     ?>
                                 </div>
