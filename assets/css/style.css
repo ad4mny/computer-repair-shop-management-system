@@ -157,13 +157,9 @@ a.article:hover {
 /* ---------------------------------------------------
     MEDIAQUERIES
 ----------------------------------------------------- */
-@media (max-width: 1280px) {
-    #content {
-        position: absolute !important;
-    }
-}
-
-@media (max-width: 1366px) {
+@media screen 
+    and (max-device-width: 1280px) 
+    and (max-device-width: 1366px) {
     #content {
         position: absolute !important;
     }
@@ -172,5 +168,11 @@ a.article:hover {
 @media (max-width: 1920px) {
     #content {
         position: unset;
+    }
+}
+
+@media (max-device-width: 2880px) {
+    #content {
+        position: absolute !important;
     }
 }
