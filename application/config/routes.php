@@ -1,53 +1,53 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-$route['default_controller'] = 'loginController';
+$route['default_controller'] = 'LoginController';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 
-$route['login'] = 'loginController/index';
-$route['create'] = 'loginController/index/create';
-$route['login/auth'] = 'loginController/login_auth';
-$route['login/create_account'] = 'loginController/create_user_account';
-$route['login/check_username'] = 'loginController/check_username';
-$route['logout'] = 'loginController/logout';
+$route['login'] = 'LoginController/index';
+$route['create'] = 'LoginController/index/create';
+$route['login/auth'] = 'LoginController/login_auth';
+$route['login/create_account'] = 'LoginController/create_user_account';
+$route['login/check_username'] = 'LoginController/check_username';
+$route['logout'] = 'LoginController/logout';
 
-$route['dashboard'] = 'dashboardController/index';
-$route['dashboard/delete/(:any)'] = 'dashboardController/delete_request/$1';
+$route['dashboard'] = 'DashboardController/index';
+$route['dashboard/delete/(:any)'] = 'DashboardController/delete_request/$1';
 
-$route['request'] = 'requestController/index';
+$route['request'] = 'RequestController/index';
 
-$route['track'] = 'trackController/index';
-$route['track/(:any)'] = 'trackController/index/$1';
+$route['track'] = 'TrackingController/index';
+$route['track/(:any)'] = 'TrackingController/index/$1';
 
-$route['status'] = 'statusController';
-$route['status/(:any)'] = 'statusController/index/$1';
+$route['status'] = 'StatusController';
+$route['status/(:any)'] = 'StatusController/index/$1';
 
-$route['profile'] = 'profileController/index';
-$route['profile/update'] = 'profileController/index/update';
-$route['profile/set_profile_update'] = 'profileController/set_profile_update';
-$route['profile/set_password_change'] = 'profileController/set_password_change';
+$route['profile'] = 'ProfileController/index';
+$route['profile/update'] = 'ProfileController/index/update';
+$route['profile/set_profile_update'] = 'ProfileController/set_profile_update';
+$route['profile/set_password_change'] = 'ProfileController/set_password_change';
 
-$route['payment'] = 'paymentController/index';
-$route['payment/pay/(:any)'] = 'paymentController/pay/$1';
+$route['payment'] = 'PaymentController/index';
+$route['payment/pay/(:any)'] = 'PaymentController/pay/$1';
 
 // Staff routes
-$route['create_staff'] = 'loginController/index/create_staff';
-$route['login/create_staff'] = 'loginController/create_staff_account';
-$route['login/check_username'] = 'loginController/check_username';
+$route['register'] = 'LoginController/index/create_staff';
+$route['login/create_staff'] = 'LoginController/create_staff_account';
+$route['login/check_username'] = 'LoginController/check_username';
 
-$route['staff/dashboard'] = 'staff/dashboardController/index';
-$route['staff/dashboard/view/(:any)'] = 'staff/dashboardController/index/view/$1';
+$route['staff/dashboard'] = 'staff/DashboardController/index';
+$route['staff/dashboard/view/(:any)'] = 'staff/DashboardController/index/view/$1';
 $route['staff/dashboard/take_repair_request/(:any)'] = 'staff/DashboardController/take_repair_request/$1';
-$route['staff/dashboard/delete/(:any)'] = 'staff/dashboardController/delete_request/$1';
+$route['staff/dashboard/delete/(:any)'] = 'staff/DashboardController/delete_request/$1';
 
-$route['staff/profile'] = 'staff/profileController/index';
-$route['staff/profile/update'] = 'staff/profileController/index/update';
-$route['staff/profile/set_profile_update'] = 'staff/profileController/set_profile_update';
+$route['staff/profile'] = 'staff/ProfileController/index';
+$route['staff/profile/update'] = 'staff/ProfileController/index/update';
+$route['staff/profile/set_profile_update'] = 'staff/ProfileController/set_profile_update';
 
-$route['staff/status'] = 'staff/statusController/index';
-$route['staff/status/view/(:any)'] = 'staff/statusController/index/view/$1';
-$route['staff/status/update/(:any)'] = 'staff/statusController/update_repair_request/$1';
+$route['staff/status'] = 'staff/StatusController/index';
+$route['staff/status/view/(:any)'] = 'staff/StatusController/index/view/$1';
+$route['staff/status/update/(:any)'] = 'staff/StatusController/update_repair_request/$1';
 
 $route['staff/manage'] = 'staff/ManageController/index';
 $route['staff/manage/view/(:any)'] = 'staff/ManageController/index/view/$1';
@@ -57,9 +57,9 @@ $route['runner/dashboard'] = 'runner/DashboardController/index';
 $route['runner/dashboard/take_delivery_request/(:any)'] = 'runner/DashboardController/take_delivery_request/$1';
 
 $route['runner/delivery'] = 'runner/DeliveryController/index';
-$route['runner/delivery/cencal_delivery_request/(:any)'] = 'runner/DeliveryController/cencal_delivery_request/$1';
+$route['runner/delivery/cancel_delivery_request/(:any)'] = 'runner/DeliveryController/cancel_delivery_request/$1';
 $route['runner/delivery/complete_delivery_request/(:any)'] = 'runner/DeliveryController/complete_delivery_request/$1';
 
-$route['runner/profile'] = 'runner/profileController/index';
-$route['runner/profile/update'] = 'runner/profileController/index/update';
-$route['runner/profile/set_profile_update'] = 'runner/profileController/set_profile_update';
+$route['runner/profile'] = 'runner/ProfileController/index';
+$route['runner/profile/update'] = 'runner/ProfileController/index/update';
+$route['runner/profile/set_profile_update'] = 'runner/ProfileController/set_profile_update';

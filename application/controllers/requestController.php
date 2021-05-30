@@ -4,15 +4,16 @@ class RequestController extends CI_Controller
     public function __construct()
     {
         parent::__construct();
+        auth_session();
+
         $this->load->model('RequestModel');
     }
 
     public function index()
     {
-        auth_session();
         $this->load->view('templates/header');
         $this->load->view('templates/navigation');
-        $this->load->view('request');
+        $this->load->view('RepairRequestInterface');
         $this->load->view('templates/footer');
     }
 

@@ -4,6 +4,8 @@ class ProfileController extends CI_Controller
     public function __construct()
     {
         parent::__construct();
+        auth_session();
+
         $this->load->model('ProfileModel');
         $this->load->library('upload');
         $this->load->helper('image');
@@ -11,7 +13,6 @@ class ProfileController extends CI_Controller
 
     public function index($page = 'profile')
     {
-        auth_session();
         $data['profile'] = $this->get_profile_info();
         $this->load->view('templates/header');
         $this->load->view('templates/navigation');

@@ -14,7 +14,7 @@ class DashboardController extends CI_Controller
         $data['request'] = $this->get_booking_request();
         $this->load->view('templates/header');
         $this->load->view('templates/navigation');
-        $this->load->view('dashboard', $data);
+        $this->load->view('DashboardInterface', $data);
         $this->load->view('templates/footer');
     }
 

@@ -11,11 +11,11 @@ class LoginController extends CI_Controller
     {
         $this->load->view('templates/header');
         if ($page === 'create') {
-            $this->load->view('create_account');
+            $this->load->view('login/CreateInterface');
         } else  if ($page === 'create_staff') {
-            $this->load->view('RegisterInterface');
+            $this->load->view('login/RegisterInterface');
         } else {
-            $this->load->view('login');
+            $this->load->view('login/LoginInterface');
         }
         $this->load->view('templates/footer');
     }
@@ -80,9 +80,9 @@ class LoginController extends CI_Controller
             $this->session->set_userdata('userid', encrypt_it($return->ud_id));
             $this->session->set_userdata('username', encrypt_it($return->ud_usr));
             $this->session->set_userdata('role', encrypt_it($return->ud_role));
-            
+
             $return = $this->LoginModel->login_role_model($this->session->userdata('userid'), $this->session->userdata('role'));
-            
+
             $this->session->set_userdata('customerid', encrypt_it($return->cd_id));
 
             echo decrypt_it($this->session->userdata('role'));

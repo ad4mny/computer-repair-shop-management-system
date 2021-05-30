@@ -4,6 +4,8 @@ class StatusController extends CI_Controller
     public function __construct()
     {
         parent::__construct();
+        auth_session();
+
         $this->load->model('ProfileModel');
         $this->load->model('StatusModel');
         $this->load->model('DashboardModel');
@@ -11,19 +13,17 @@ class StatusController extends CI_Controller
 
     public function index($repair_id = null)
     {
-        auth_session();
         $this->load->view('templates/header');
         $this->load->view('templates/navigation');
         $data['profile'] = $this->ProfileModel->get_profile_info_model($this->session->userdata('userid'));
         $data['controller'] = $this;
-        $data['services'] = $this->get_all_request_id();
 
         if ($repair_id !== null) {
             $data['request'] = $this->get_ongoing_request_by_id($repair_id);
-            $this->load->view('status', $data);
+            $this->load->view('StatusInterface', $data);
         } else {
             $data['request'] = $this->get_latest_ongoing_request();
-            $this->load->view('status', $data);
+            $this->load->view('StatusInterface', $data);
         }
 
         $this->load->view('templates/footer');

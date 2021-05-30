@@ -3,11 +3,16 @@
         <div id="repair_info">
             <div class="row">
                 <div class="col">
-                    <h3 class="display-4 mb-0 text-secondary ">Repair Status </h3>
+                    <h3 class="display-4 mb-0 text-secondary ">Status</h3>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col mt-3 mx-3">
+                    <p>Latest repair request status</p>
                 </div>
             </div>
             <?php if (is_array($request) && !empty($request)) { ?>
-                <div class="row m-3 border-start border-2 ">
+                <div class="row mx-3 border-start border-2 ">
                     <div class="col">
                         <div class="card text-white bg-primary shadow rounded-lg border position-relative h-100">
                             <?php if ($request[0]['rsd_progress'] == 0) {
@@ -68,10 +73,16 @@
                                 <div class="py-3 border-bottom">
                                     <small>Repair Status</small>
                                     <?php
-                                    if ($request[0]['rsd_status'] == 1) {
-                                        echo '<p class="text-capitalize mb-0 text-info"><i class="fas fa-circle-notch fa-xs fa-fw"></i> Can be repair</p>';
-                                    } else {
-                                        echo '<p class="text-capitalize mb-0 text-danger"><i class="fas fa-circle-notch fa-xs fa-fw"></i> Cannot be repair</p>';
+                                    switch ($request[0]['rsd_status']) {
+                                        case '1':
+                                            echo '<p class="text-capitalize mb-0 text-info"><i class="fas fa-circle-notch fa-xs fa-fw"></i> Can be repair</p>';
+                                            break;
+                                        case '0':
+                                            echo '<p class="text-capitalize mb-0 text-danger"><i class="fas fa-circle-notch fa-xs fa-fw"></i> Cannot be repair</p>';
+                                            break;
+                                        default:
+                                            echo '<p class="text-capitalize mb-0 text-muted"><i class="fas fa-circle-notch fa-xs fa-fw"></i> Pending</p>';
+                                            break;
                                     }
                                     ?>
                                 </div>
@@ -83,10 +94,10 @@
                                     <small class="">Repair Progress</small>
                                     <?php
                                     switch ($request[0]['rsd_progress']) {
-                                        case 2:
+                                        case '2':
                                             echo '<p class="text-capitalize mb-0"><i class="fas fa-circle-notch fa-xs fa-fw"></i> Completed</p>';
                                             break;
-                                        case 1:
+                                        case '1':
                                             echo '<p class="text-capitalize mb-0"><i class="fas fa-circle-notch fa-xs fa-fw"></i> Ongoing</p>';
                                             break;
                                         default:
@@ -97,15 +108,23 @@
                                 </div>
                                 <div class="py-3">
                                     <small>Comment</small>
-                                    <p class="text-capitalize mb-0"><i class="fas fa-circle-notch fa-xs fa-fw"></i> <?php echo $request[0]['rsd_comment']; ?></p>
+                                    <p class="text-capitalize mb-0"><i class="fas fa-circle-notch fa-xs fa-fw"></i>
+                                        <?php
+                                        if (!empty($request[0]['rsd_comment'])) {
+                                            echo $request[0]['rsd_comment'];
+                                        } else {
+                                            echo 'None';
+                                        }
+                                        ?>
+                                    </p>
                                 </div>
                             </div>
-                            <div class="col border-start">
+                            <div class="col border-start position-relative mb-5">
                                 <div class="py-3">
                                     <small>Payment Status</small>
                                     <h4 class="text-capitalize mb-0 ">
                                         <?php
-                                        if ($request[0]['rsd_progress'] != '1') {
+                                        if ($request[0]['rsd_progress'] == '0') {
                                             echo '<span class="text-warning">Pending</span>';
                                         } else {
                                             echo '<span class="text-success">Paid</span>';
@@ -134,51 +153,40 @@
                                         ?>
                                     </h4>
                                 </div>
+                                <div class="position-absolute top-100 end-0 ms-3">
+                                    <?php
+                                    if ($request[0]['rsd_progress'] == '0') {
+                                        switch ($request[0]['rsd_status']) {
+                                            case '1':
+                                                echo '<a href="' . base_url() . '/dashboard" class="btn btn-danger me-2">CANCEL</a>';
+                                                echo '<button class="btn btn-primary" id="continue_btn">CONTINUE <i class="fas fa-chevron-down fa-fw"></i></button>';
+                                                break;
+                                            case '0':
+                                                echo '<form method="post" action="' . base_url() . 'payment/pay/' . encrypt_it($request[0]['rsd_id']) . '">';
+                                                echo '<input type="hidden" name="pickup_date">';
+                                                echo '<input type="hidden" name="pickup_time">';
+                                                echo '<button type="submit" class="btn btn-primary" name="submit">PAY INSPECTION FEE <i class="fas fa-chevron-right fa-fw"></i></button>';
+                                                echo '</form>';
+                                                break;
+                                            default:
+                                                echo '<small class="text-muted">Please wait while the technician inspecting your repair request.</small>';
+                                                break;
+                                        }
+                                    }
+                                    ?>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="row m-3">
-                    <div class="col-4 m-auto">
-                        <select class="form-select text-capitalize" id="request_list">
-                            <?php
-                            if (is_array($services) && !empty($services) && is_array($request) && !empty($request)) {
-                                foreach ($services as $row) {
-                                    if ($row['rsd_id'] === $request[0]['rsd_id']) {
-                                        echo '<option disabled selected>' . $row['rsd_device_brand'] . ' ' . $row['rsd_device_model'] . '</option>';
-                                    } else {
-                                        echo '<option value="' . encrypt_it($row['rsd_id']) . '">' . $row['rsd_device_brand'] . ' ' . $row['rsd_device_model'] . '</option>';
-                                    }
-                                }
-                            } else {
-                                echo '<option disabled selected>No service request</option>';
-                            }
-                            ?>
-                        </select>
-                    </div>
-                    <div class="col text-end">
-                        <?php
-                        if ($request[0]['rsd_progress'] != '1') {
-                            if ($request[0]['rsd_status'] != '1') {
-                                echo '<form method="post" action="' . base_url() . 'payment/pay/' . encrypt_it($request[0]['rsd_id']) . '">';
-                                echo '<input type="hidden" name="pickup_date">';
-                                echo '<input type="hidden" name="pickup_time">';
-                                echo '<button type="submit" class="btn btn-primary" name="submit">PROCEED PAYMENT</button>
-                                ';
-                                echo '</form>';
-                            } else {
-                                echo '<a href="' . base_url() . '/dashboard" class="btn btn-secondary me-2">CANCEL REQUEST</a>';
-                                echo '<button class="btn btn-primary" id="continue_btn">CONTINUE</button>';
-                            }
-                        }
-                        ?>
-                    </div>
+
                 </div>
             <?php } else {
                 echo '<div class="row m-3 border-start border-2 "><p class="col">No ongoing repair request.</p></div>';
             } ?>
         </div>
-        <?php if (isset($request[0]['rsd_progress']) && $request[0]['rsd_progress'] != '1') { ?>
+        <?php if (isset($request[0]['rsd_progress']) && $request[0]['rsd_progress'] == '0') { ?>
             <div class="my-5" id="delivery_info" style="display:none;">
                 <div class="row pt-5">
                     <div class="col">

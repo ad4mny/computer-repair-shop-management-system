@@ -1,11 +1,37 @@
 <div class="wrapper">
     <div class="container p-5" id="content">
-        <div class="row">
+    <div class="row">
             <div class="col">
-                <h3 class="display-4 mb-0 text-secondary ">Tracking </h3>
+                <h3 class="display-4 mb-0 text-secondary ">Tracking</h3>
             </div>
         </div>
         <div class="row">
+            <div class="col mt-3 mx-3">
+                <p>All tracking and delivery list</p>
+            </div>
+        </div>
+        <div class="row mx-3 border-start border-2">
+            <div class="col ">
+                <?php
+                if (isset($tracking) && is_array($tracking) && !empty($tracking) && isset($track) && is_array($track) && !empty($track)) {
+                    foreach ($tracking as $row) {
+                        if ($track[0]['td_rsd_id'] == $row['rsd_id']) {
+                            echo '<div class="py-2 bg-white rounded-lg mb-2 border-start border-primary border-5 shadow position-relative">';
+                        } else {
+                            echo '<div class="border py-2 bg-white rounded-lg mb-2 position-relative">';
+                        }
+                        echo '<a href="' . base_url() . 'track/' . encrypt_it($row['rsd_id']) . '" class="text-capitalize">';
+                        echo '<h4 class="px-3 fw-light text-capitalize text-primary">' . $row['rsd_device_brand'] . ' ' . $row['rsd_device_model'] . '</h4>';
+                        echo '<div class="px-3  text-muted">Service ID: ' . encrypt_it($row['rsd_id']) . '</div>';
+                        echo '</a>';
+                        echo '<span class="position-absolute top-50 end-0 translate-middle me-1"><i class="fas fa-chevron-right fa-fw fa-lg text-muted"></i></span>';
+                        echo '</div>';
+                    }
+                } else {
+                    echo '<p>None.</p>';
+                }
+                ?>
+            </div>
             <div class="col ">
                 <div class="box">
                     <ul id="first-list">
@@ -57,27 +83,6 @@
                         } ?>
                     </ul>
                 </div>
-            </div>
-            <div class="col border-start ps-5">
-                <p>All tracking list</p>
-                <?php
-                if (isset($tracking) && is_array($tracking) && !empty($tracking) && isset($track) && is_array($track) && !empty($track)) {
-                    foreach ($tracking as $row) {
-                        if ($track[0]['td_rsd_id'] == $row['rsd_id']) {
-                            echo '<div class="py-2 bg-white rounded-lg mb-2 border-start border-primary border-5 shadow">';
-                        } else {
-                            echo '<div class="border py-2 bg-white rounded-lg mb-2">';
-                        }
-                        echo '<a href="' . base_url() . 'track/' . encrypt_it($row['rsd_id']) . '" class="text-capitalize">';
-                        echo '<h4 class="px-3 fw-light text-capitalize text-primary">' . $row['rsd_device_brand'] . ' ' . $row['rsd_device_model'] . '</h4>';
-                        echo '<div class="px-3  text-muted">Service ID: ' . encrypt_it($row['rsd_id']) . '</div>';
-                        echo '</a>';
-                        echo '</div>';
-                    }
-                } else {
-                    echo '<p>None.</p>';
-                }
-                ?>
             </div>
         </div>
     </div>

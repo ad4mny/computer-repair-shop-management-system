@@ -130,7 +130,7 @@
                         <div class="row p-3">
                             <div class="col text-end">
                                 <a href="<?php echo base_url(); ?>staff/dashboard/delete/<?php echo encrypt_it($request[0]['rsd_id']); ?>" class="btn btn-danger" onclick="return confirm('Are sure you want to delete this repair request?');">DELETE REQUEST</a>
-                                <button type="submit" class="btn btn-primary" name="submit" value="submit" onclick="return confirm('Are sure you want to take this repair request as it will be assigned to you?');">DO REPAIR</button>
+                                <button type="submit" class="btn btn-primary" name="submit" value="submit" onclick="return confirm('Are sure you want to update this repair request as it will be assigned to you?');">UPDATE REQUEST</button>
                             </div>
                         </div>
                     </form>

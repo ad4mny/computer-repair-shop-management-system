@@ -1,5 +1,5 @@
 <div class="wrapper">
-    <div class="container p-5 " id="content">
+    <div class="container p-5" id="content">
         <div class="row">
             <div class="col">
                 <h3 class="display-4 mb-0 text-secondary ">Dashboard</h3>
@@ -57,13 +57,22 @@
                                         </div>
                                     </div>
                                 </div>
-                                <a href="<?php echo base_url() . 'dashboard/delete/' . encrypt_it($row['rsd_id']); ?>" class="position-absolute top-100 start-50 translate-middle" onclick="return confirm('Are you sure you want to cancel your request?');">
-                                    <span class="fa-stack fa-2x">
-                                        <i class="fa fa-circle fa-stack-2x text-danger"></i>
-                                        <i class="fa fa-times fa-stack-1x text-white"></i>
-                                    </span>
-                                </a>
-
+                                <div class="position-absolute top-100 start-50 translate-middle ">
+                                    <div class="d-inline-flex">
+                                        <a href="<?php echo base_url() . 'dashboard/delete/' . encrypt_it($row['rsd_id']); ?>" onclick="return confirm('Are you sure you want to cancel your request?');">
+                                            <span class="fa-stack fa-2x">
+                                                <i class="fa fa-circle fa-stack-2x text-danger"></i>
+                                                <i class="fa fa-times fa-stack-1x text-white"></i>
+                                            </span>
+                                        </a>
+                                        <a href="<?php echo base_url() . 'status/' . encrypt_it($row['rsd_id']); ?>">
+                                            <span class="fa-stack fa-2x">
+                                                <i class="fa fa-circle fa-stack-2x text-primary"></i>
+                                                <i class="fa fa-eye fa-stack-1x text-white"></i>
+                                            </span>
+                                        </a>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     <?php

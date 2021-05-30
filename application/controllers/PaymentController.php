@@ -13,6 +13,8 @@ class PaymentController extends CI_Controller
     public function __construct()
     {
         parent::__construct();
+        auth_session();
+
         $this->load->model('PaymentModel');
         $this->load->model('StatusModel');
         $this->load->model('ProfileModel');
@@ -34,7 +36,6 @@ class PaymentController extends CI_Controller
 
     public function index($page = 'payment', $data = array())
     {
-        auth_session();
         $this->load->view('templates/header');
         $this->load->view('templates/navigation');
         $data['flag'] = true;

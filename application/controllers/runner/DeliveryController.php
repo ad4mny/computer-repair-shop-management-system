@@ -23,9 +23,10 @@ class DeliveryController extends CI_Controller
         return $this->DeliveryModel->get_accepted_delivery_model($runner_id);
     }
 
-    public function cancel_delivery_request($request_id)
+    public function cancel_delivery_request($request_id,)
     {
-        if ($this->DeliveryModel->cancel_delivery_request_model($request_id) === true) {
+        $runner_id = $this->session->userdata('runnerid');
+        if ($this->DeliveryModel->cancel_delivery_request_model($request_id, $runner_id) === true) {
             redirect(base_url() . 'runner/delivery');
         } else {
             $this->session->set_flashdata('error', 'Unable to process request.');

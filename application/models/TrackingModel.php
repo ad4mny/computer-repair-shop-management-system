@@ -1,5 +1,5 @@
 <?php
-class TrackModel extends CI_Model
+class TrackingModel extends CI_Model
 {
     public function get_all_tracking_id_model($customer_id)
     {

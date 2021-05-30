@@ -19,7 +19,7 @@
                         <button type="submit" class="btn btn-primary btn-block" name="submit"><i class="fas fa-sign-in-alt"></i> Log In</button>
                     </div>
                     <div class="form-group mb-3 input-group-lg my-4">
-                        <small>Want to be part of our team? Register<a href="<?php echo base_url() ?>create_staff" class="text-primary"> here</a>.</small>
+                        <small>Want to be part of our team? Register<a href="<?php echo base_url() ?>register" class="text-primary"> here</a>.</small>
                     </div>
                     <div class="border-top text-center pt-3 input-group-lg">
                         <a href="<?php echo base_url() ?>create" class="btn btn-success btn-block">Create New Account</a>

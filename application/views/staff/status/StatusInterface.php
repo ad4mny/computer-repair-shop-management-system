@@ -14,7 +14,7 @@
             <div class="row row-cols-1 row-cols-md-3 mx-3 mb-5 border-start border-2">
                 <?php if (is_array($request) && !empty($request)) {
                     foreach ($request as $row) {
-                        if ($row['rsd_status'] != '0') { ?>
+                        if ($row['rsd_status'] == '1' && $row['rsd_progress'] != '2') { ?>
                             <div class="col mb-5">
                                 <div class="card text-white bg-info shadow rounded-lg border position-relative h-100">
                                     <?php if ($row['rsd_progress'] == '0') {
@@ -71,8 +71,15 @@
                         } else {
                         ?>
                             <div class="col mb-5">
-                                <div class="card text-white bg-danger rounded position-relative h-100">
-                                    <span class="position-absolute top-0 start-0 m-3"><i class="fas fa-times fa-lg fa-fw"></i> UNABLE TO REPAIR</span>
+                                <?php if ($row['rsd_progress'] == '2') {
+                                    echo '<div class="card text-dark bg-white rounded position-relative h-100">';
+                                    echo '<span class="position-absolute top-0 start-0 m-3"><i class="fas fa-check fa-lg fa-fw"></i> COMPLETED</span>';
+                                } else {
+                                    echo '<div class="card text-white bg-danger rounded position-relative h-100">';
+                                    echo '<span class="position-absolute top-0 start-0 m-3"><i class="fas fa-times fa-lg fa-fw"></i> UNABLE TO REPAIR</span>';
+                                }
+                                ?>
+                                    
                                     <div class="card-body">
                                         <div class="card-text px-4 py-5 fw-light text-capitalize ">
                                             <h1> <?php echo $row['rsd_device_brand']; ?><br>
