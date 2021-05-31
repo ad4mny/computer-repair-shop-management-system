@@ -10,7 +10,7 @@
                 <p>Add new repair quotation request here</p>
             </div>
         </div>
-        <form method="post" action="<?php echo base_url(); ?>requestController/add_new_request">
+        <form method="post" action="<?php echo base_url(); ?>request/add">
             <div class="row mx-3 border-start border-2 ">
                 <div class="col">
                     <div class="form-group pb-2">

@@ -16,7 +16,7 @@ class ProfileModel extends CI_Model
         $data = array(
             'ud_usr' => $username,
             'ud_pic' => $picture,
-            'ud_log' => date('h:m:s Y-m-d')
+            'ud_log' => date('H:m:s Y-m-d')
         );
 
         $this->db->where('ud_id', decrypt_it($user_id));
@@ -41,7 +41,7 @@ class ProfileModel extends CI_Model
         if (md5($old_password) == $result->ud_pwd) {
             $data = array(
                 'ud_pwd' => md5($password),
-                'ud_log' => date('h:m:s Y-m-d')
+                'ud_log' => date('H:m:s Y-m-d')
             );
 
             $this->db->where('ud_id', decrypt_it($user_id));
