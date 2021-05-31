@@ -22,7 +22,7 @@
                         }
                         echo '<a href="' . base_url() . 'track/' . encrypt_it($row['rsd_id']) . '" class="text-capitalize">';
                         echo '<h4 class="px-3 fw-light text-capitalize text-primary">' . $row['rsd_device_brand'] . ' ' . $row['rsd_device_model'] . '</h4>';
-                        echo '<div class="px-3  text-muted">Service ID: ' . encrypt_it($row['rsd_id']) . '</div>';
+                        echo '<div class="px-3  text-muted">Service ID: DCRS-' . encrypt_it($row['rsd_id']) . '</div>';
                         echo '</a>';
                         echo '<span class="position-absolute top-50 end-0 translate-middle me-1"><i class="fas fa-chevron-right fa-fw fa-lg text-muted"></i></span>';
                         echo '</div>';

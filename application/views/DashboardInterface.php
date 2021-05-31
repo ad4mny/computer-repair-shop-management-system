@@ -14,7 +14,7 @@
             <?php
             if (is_array($request) && !empty($request)) {
                 foreach ($request as $row) {
-                    if ($row['rsd_progress'] == '0') {
+                    if ($row['rsd_status'] != '0' && $row['rsd_progress'] != '2') {
             ?>
                         <div class="col mb-5">
                             <?php
@@ -64,16 +64,14 @@
                                     </div>
                                     <div class="card-text text-uppercase text-warning text-center mt-5 ">
                                         <?php
-                                        switch ($row['rsd_status']) {
-                                            case '1':
-                                                echo 'Payment Pending';
-                                                break;
-                                            case '0':
-                                                echo 'Payment Pending';
-                                                break;
-                                            default:
-                                                echo 'Inspection Pending';
-                                                break;
+                                        if ($row['rsd_status'] == '' && $row['rsd_progress'] == '0') {
+                                            echo 'Inspection Pending';
+                                        }
+                                        if ($row['rsd_status'] == '0' && $row['rsd_progress'] == '0') {
+                                            echo 'Payment Pending';
+                                        }
+                                        if ($row['rsd_status'] == '1' && $row['rsd_progress'] == '0') {
+                                            echo 'Payment Pending';
                                         }
                                         ?>
                                     </div>
@@ -92,11 +90,15 @@
                                     <a href="<?php echo base_url() . 'status/' . encrypt_it($row['rsd_id']); ?>">
                                         <span class="fa-stack fa-2x">
                                             <i class="fa fa-circle fa-stack-2x text-primary"></i>
-                                            <?php if ($row['rsd_status'] != '') {
-                                                echo '<i class="fab fa-paypal fa-stack-1x text-white"></i>';
-                                            } else {
+                                            <?php
+                                            if ($row['rsd_status'] == '' && $row['rsd_progress'] == '0') {
                                                 echo '<i class="fas fa-eye fa-stack-1x text-white"></i>';
-                                            } ?>
+                                            } else  if ($row['rsd_status'] == '1' && $row['rsd_progress'] == '1') {
+                                                echo '<i class="fas fa-eye fa-stack-1x text-white"></i>';
+                                            } else {
+                                                echo '<i class="fab fa-paypal fa-stack-1x text-white"></i>';
+                                            }
+                                            ?>
                                         </span>
                                     </a>
                                 </div>
@@ -117,53 +119,53 @@
                             }
                             ?>
 
-                                <div class="card-body">
-                                    <div class="card-title  px-4 py-5 fw-light text-capitalize">
-                                        <h1>
-                                            <?php echo $row['rsd_device_brand']; ?><br>
-                                            <small><?php echo $row['rsd_device_model']; ?></small>
-                                        </h1>
+                            <div class="card-body">
+                                <div class="card-title  px-4 py-5 fw-light text-capitalize">
+                                    <h1>
+                                        <?php echo $row['rsd_device_brand']; ?><br>
+                                        <small><?php echo $row['rsd_device_model']; ?></small>
+                                    </h1>
+                                </div>
+                                <div class="px-4 pb-5 mb-5">
+                                    <div class="card-text text-capitalize"><?php echo $row['rsd_damage_info']; ?></div>
+                                    <div class="card-text text-capitalize">
+                                        <?php
+                                        if ($row['rsd_sd_id'] === null) {
+                                            echo 'No technician assigned';
+                                        } else {
+                                            $technician = $controller->get_technician_info($row['rsd_sd_id']);
+                                            $technician_name = explode(' ', $technician[0]['sd_full_name']);
+                                            echo 'Technician ' . $technician_name[0];
+                                        }
+                                        ?>
                                     </div>
-                                    <div class="px-4 pb-5 mb-5">
-                                        <div class="card-text text-capitalize"><?php echo $row['rsd_damage_info']; ?></div>
-                                        <div class="card-text text-capitalize">
-                                            <?php
-                                            if ($row['rsd_sd_id'] === null) {
-                                                echo 'No technician assigned';
-                                            } else {
-                                                $technician = $controller->get_technician_info($row['rsd_sd_id']);
-                                                $technician_name = explode(' ', $technician[0]['sd_full_name']);
-                                                echo 'Technician ' . $technician_name[0];
-                                            }
-                                            ?>
-                                        </div>
-                                        <div class="card-text text-capitalize">
-                                            <?php
-                                            switch ($row['rsd_damage_severity']) {
-                                                case 2:
-                                                    echo 'Severity Worst';
-                                                    break;
-                                                case 1:
-                                                    echo 'Severity Average';
-                                                    break;
-                                                default:
-                                                    echo 'Severity Fair';
-                                                    break;
-                                            }
-                                            ?>
-                                        </div>
+                                    <div class="card-text text-capitalize">
+                                        <?php
+                                        switch ($row['rsd_damage_severity']) {
+                                            case 2:
+                                                echo 'Severity Worst';
+                                                break;
+                                            case 1:
+                                                echo 'Severity Average';
+                                                break;
+                                            default:
+                                                echo 'Severity Fair';
+                                                break;
+                                        }
+                                        ?>
                                     </div>
                                 </div>
-                                <div class="card-footer text-center"><?php echo 'DCRS-' . encrypt_it($row['rsd_id']); ?></div>
                             </div>
+                            <div class="card-footer text-center"><?php echo 'DCRS-' . encrypt_it($row['rsd_id']); ?></div>
                         </div>
-            <?php
+        </div>
+<?php
                     }
                 }
             } else {
                 echo '<div class="col"><p>No upcoming and past request.</p></div>';
             }
-            ?>
-        </div>
+?>
     </div>
+</div>
 </div>
