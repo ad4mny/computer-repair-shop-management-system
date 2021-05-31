@@ -7,7 +7,6 @@ class TrackingModel extends CI_Model
         $this->db->from('repair_service_data');
         $this->db->where('rsd_cd_id', decrypt_it($customer_id));
         $this->db->where('rsd_progress !=', 0);
-        $this->db->order_by('rsd_status', 'DESC');
         $this->db->order_by('rsd_id', 'DESC');
         $query = $this->db->get();
         return $query->result_array();
@@ -48,7 +47,6 @@ class TrackingModel extends CI_Model
         $this->db->join('repair_service_data', 'rsd_id = td_rsd_id');
         $this->db->join('staff_data', 'rsd_sd_id = sd_id');
         $this->db->where('td_rsd_id', decrypt_it($repair_id));
-        $this->db->order_by('rsd_status', 'DESC');
         $this->db->order_by('td_id', 'DESC');
         $query = $this->db->get();
         return $query->result_array();

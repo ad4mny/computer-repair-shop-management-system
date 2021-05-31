@@ -50,7 +50,7 @@
         </div>
         <div class="row mx-3 p-5 shadow-sm bg-white">
             <div class="col">
-                <div class="row mx-3 text-muted">
+                <div class="row text-muted">
                     <div class="col-1 text-center"><small>NO</small></div>
                     <div class="col-2 text-uppercase"><small>DATE</small></div>
                     <div class="col-2 text-capitalize"><small>SERIVCE ID</small></div>

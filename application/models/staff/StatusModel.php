@@ -7,6 +7,8 @@ class StatusModel extends CI_Model
         $this->db->from('repair_service_data');
         $this->db->where('rsd_sd_id', decrypt_it($staff_id));
         $this->db->where('rsd_status !=', NULL);
+        $this->db->order_by('rsd_progress', 'ASC');
+        $this->db->order_by('rsd_status', 'DESC');
         $this->db->order_by('rsd_id', 'DESC');
         $query = $this->db->get();
         return $query->result_array();
