@@ -16,7 +16,7 @@
                 if (is_array($request) && !empty($request)) {
                 ?>
                     <div class="col mb-5">
-                        <div class="card text-white bg-info shadow-lg border rounded position-relative h-100">
+                        <div class="card text-white bg-info shadow border rounded position-relative h-100">
                             <span class="position-absolute top-0 start-0 m-3"><i class="fas fa-clock fa-lg fa-fw"></i></span>
                             <span class="position-absolute top-0 end-0 m-3"><?php echo 'DCRS-' . encrypt_it($request[0]['rsd_id']); ?></span>
                             <div class="card-body">
