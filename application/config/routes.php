@@ -16,12 +16,14 @@ $route['dashboard'] = 'DashboardController/index';
 $route['dashboard/delete/(:any)'] = 'DashboardController/delete_request/$1';
 
 $route['request'] = 'RequestController/index';
+$route['request/update/(:any)'] = 'RequestController/update_request_by_id/$1';
 
 $route['track'] = 'TrackingController/index';
 $route['track/(:any)'] = 'TrackingController/index/$1';
 
 $route['status'] = 'StatusController';
 $route['status/(:any)'] = 'StatusController/index/$1';
+$route['status/(:any)/update'] = 'StatusController/index/$1/update';
 
 $route['profile'] = 'ProfileController/index';
 $route['profile/update'] = 'ProfileController/index/update';

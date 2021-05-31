@@ -153,7 +153,7 @@
                                         ?>
                                     </h4>
                                 </div>
-                                <div class="position-absolute top-100 end-0 ms-3">
+                                <div class="position-absolute bottom-0 end-0 ms-3 text-end">
                                     <?php
                                     if ($request[0]['rsd_progress'] == '0') {
                                         switch ($request[0]['rsd_status']) {
@@ -162,14 +162,16 @@
                                                 echo '<button class="btn btn-primary" id="continue_btn">CONTINUE <i class="fas fa-chevron-down fa-fw"></i></button>';
                                                 break;
                                             case '0':
+                                                echo '<small class="text-muted">The technician is unable to repair your device but you need to pay the inspection fees.</small><br>';
                                                 echo '<form method="post" action="' . base_url() . 'payment/pay/' . encrypt_it($request[0]['rsd_id']) . '">';
                                                 echo '<input type="hidden" name="pickup_date">';
                                                 echo '<input type="hidden" name="pickup_time">';
-                                                echo '<button type="submit" class="btn btn-primary" name="submit">PAY INSPECTION FEE <i class="fas fa-chevron-right fa-fw"></i></button>';
+                                                echo '<button type="submit" class="btn btn-primary mt-2" name="submit">PAY INSPECTION FEE <i class="fas fa-chevron-right fa-fw"></i></button>';
                                                 echo '</form>';
                                                 break;
                                             default:
-                                                echo '<small class="text-muted">Please wait while the technician inspecting your repair request.</small>';
+                                                echo '<small class="text-muted">Please wait while the technician inspecting your repair request.</small><br>';
+                                                echo '<a href="' . base_url() . 'status/' . encrypt_it($request[0]['rsd_id']) . '/update" class="btn btn-primary mt-2">UPDATE REQUEST</a>';
                                                 break;
                                         }
                                     } else {

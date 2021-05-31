@@ -11,19 +11,22 @@ class StatusController extends CI_Controller
         $this->load->model('DashboardModel');
     }
 
-    public function index($repair_id = null)
+    public function index($repair_id = null, $page = null)
     {
         $this->load->view('templates/header');
         $this->load->view('templates/navigation');
         $data['profile'] = $this->ProfileModel->get_profile_info_model($this->session->userdata('userid'));
         $data['controller'] = $this;
 
-        if ($repair_id !== null) {
+        if ($repair_id !== null && $page !== null) {
             $data['request'] = $this->get_ongoing_request_by_id($repair_id);
-            $this->load->view('StatusInterface', $data);
+            $this->load->view('status/RequestUpdateInterface', $data);
+        } else if ($repair_id !== null) {
+            $data['request'] = $this->get_ongoing_request_by_id($repair_id);
+            $this->load->view('status/StatusInterface', $data);
         } else {
             $data['request'] = $this->get_latest_ongoing_request();
-            $this->load->view('StatusInterface', $data);
+            $this->load->view('status/StatusInterface', $data);
         }
 
         $this->load->view('templates/footer');

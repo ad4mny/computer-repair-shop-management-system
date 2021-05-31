@@ -16,4 +16,19 @@ class RequestModel extends CI_Model
 
         return $this->db->insert('repair_service_data', $data);
     }
+
+    public function update_request_by_id_model($request_id, $brand, $model, $color, $severity, $information)
+    {
+        $data = array(
+            'rsd_progress' =>  0,
+            'rsd_device_brand' => $brand,
+            'rsd_device_model' => $model,
+            'rsd_device_color' => $color,
+            'rsd_damage_severity' => $severity,
+            'rsd_damage_info' => $information,
+            'rsd_log' => date('H:m:s Y-m-d')
+        );
+        $this->db->where('rsd_id', decrypt_it($request_id));
+        return $this->db->update('repair_service_data', $data);
+    }
 }

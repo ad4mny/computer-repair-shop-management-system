@@ -33,4 +33,21 @@ class RequestController extends CI_Controller
             redirect(base_url() . 'request');
         }
     }
+
+    public function update_request_by_id($request_id)
+    {
+        $customer_id = $this->session->userdata('customerid');
+        $brand = $this->input->post('brand');
+        $model = $this->input->post('model');
+        $color = $this->input->post('color');
+        $severity = $this->input->post('severity');
+        $information = $this->input->post('information');
+
+        if ($this->RequestModel->update_request_by_id_model($request_id, $brand, $model, $color, $severity, $information) !== false) {
+            redirect(base_url() . 'status/' . $request_id);
+        } else {
+            $this->session->set_flashdata('error', 'unable to complete request');
+            redirect(base_url() . 'status/' . $request_id . '/update');
+        }
+    }
 }
