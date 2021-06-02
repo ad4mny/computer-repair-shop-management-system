@@ -20,8 +20,8 @@
           </a>
       </div>
       <ul class="list-unstyled components">
-          <li class="<?php if ($this->uri->uri_string() == 'runner/dashboard') echo 'active'; ?>"><a href="<?php echo base_url(); ?>runner/dashboard"><i class="fas fa-columns fa-sm fa-fw me-2"></i> Dashboard</a></li>
-          <li class="<?php if ($this->uri->uri_string() == 'runner/delivery') echo 'active'; ?>"><a href="<?php echo base_url(); ?>runner/delivery"><i class="fas fa-box fa-sm fa-fw me-2"></i> Status</a></li>
+          <li class="<?php if ($this->uri->segment(2) == 'dashboard') echo 'active'; ?>"><a href="<?php echo base_url(); ?>runner/dashboard"><i class="fas fa-columns fa-sm fa-fw me-2"></i> Dashboard</a></li>
+          <li class="<?php if ($this->uri->segment(2) == 'delivery') echo 'active'; ?>"><a href="<?php echo base_url(); ?>runner/delivery"><i class="fas fa-box fa-sm fa-fw me-2"></i> Status</a></li>
           <li class="pb-3" style="position: absolute;bottom: 0px;"><a href="<?php echo base_url(); ?>logout"><i class="fas fa-sign-out-alt fa-sm fa-fw me-2"></i> Logout</a></li>
       </ul>
   </nav>
