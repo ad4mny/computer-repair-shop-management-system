@@ -55,6 +55,7 @@ $route['staff/status/update/(:any)'] = 'staff/StatusController/update_repair_req
 
 $route['staff/manage'] = 'staff/ManageController/index';
 $route['staff/manage/view/(:any)'] = 'staff/ManageController/index/view/$1';
+$route['staff/manage/search'] = 'staff/ManageController/search_user';
 
 // Runner routes
 $route['runner/dashboard'] = 'runner/DashboardController/index';

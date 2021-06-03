@@ -14,8 +14,8 @@ class ManageModel extends CI_Model
         $this->db->from('customer_data');
         $this->db->where('cd_id', decrypt_it($user_id));
         return $this->db->get()->row_array();
-    }  
-    
+    }
+
     public function get_device_information_by_user_model($user_id)
     {
         $this->db->select('*');
@@ -25,4 +25,12 @@ class ManageModel extends CI_Model
         return $this->db->get()->result_array();
     }
 
+    public function search_user_model($customer_id)
+    {
+        $this->db->select('*');
+        $this->db->from('customer_data');
+        $this->db->join('user_data', 'ud_id = cd_ud_id');
+        $this->db->where('cd_id', decrypt_it($customer_id));
+        return $this->db->get()->result_array();
+    }
 }
