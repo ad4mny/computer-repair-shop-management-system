@@ -52,11 +52,11 @@ class LoginController extends CI_Controller
                         break;
                 }
             } else {
-                $this->session->set_tempdata('error', 'Invalid user account, please register again.', 30);
+                $this->session->set_tempdata('error', 'Invalid user account, please register again.', 3);
                 redirect(base_url());
             }
         } else {
-            $this->session->set_tempdata('error', 'Wrong username or password entered.', 30);
+            $this->session->set_tempdata('error', 'Wrong username or password entered.', 3);
 
             redirect(base_url());
         }
@@ -139,7 +139,7 @@ class LoginController extends CI_Controller
             'role'
         );
 
-        $this->session->set_tempdata('notice', 'You have logout successfully.', 30);
+        $this->session->set_tempdata('notice', 'You have logout successfully.', 3);
         $this->session->unset_userdata($session_data);
         redirect(base_url());
     }

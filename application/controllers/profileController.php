@@ -49,18 +49,18 @@ class ProfileController extends CI_Controller
 
         if (!$this->upload->do_upload('picture')) {
             if (!empty($_FILES['picture']['name'])) {
-                $this->session->set_tempdata('error', $this->upload->display_errors('', ''), 5);
+                $this->session->set_tempdata('error', $this->upload->display_errors('', ''), 3);
                 echo json_encode(false);
                 exit;
             } else {
                 $return = $this->ProfileModel->set_profile_update_model($user_id, $username, NULL, $full_name, $contact_number, $street_1, $street_2, $postcode, $city, $state);
 
                 if ($return != false) {
-                    $this->session->set_tempdata('notice', 'Your profile has been updated successfully.', 5);
+                    $this->session->set_tempdata('notice', 'Your profile has been updated successfully.', 3);
                     echo json_encode($return);
                     exit;
                 } else {
-                    $this->session->set_tempdata('error', 'Error while updating your profile, please try again.', 5);
+                    $this->session->set_tempdata('error', 'Error while updating your profile, please try again.', 3);
                     echo json_encode(false);
                     exit;
                 }
@@ -72,11 +72,11 @@ class ProfileController extends CI_Controller
             $return = $this->ProfileModel->set_profile_update_model($user_id, $username, $picture, $full_name, $contact_number, $street_1, $street_2, $postcode, $city, $state);
 
             if ($return != false) {
-                $this->session->set_tempdata('notice', 'Your profile has been updated successfully.', 5);
+                $this->session->set_tempdata('notice', 'Your profile has been updated successfully.', 3);
                 $this->session->set_userdata('picture', encrypt_it($picture));
                 echo json_encode($return);
             } else {
-                $this->session->set_tempdata('error', 'Error while updating your profile, please try again.', 5);
+                $this->session->set_tempdata('error', 'Error while updating your profile, please try again.', 3);
                 echo json_encode(false);
             }
         }
@@ -87,7 +87,7 @@ class ProfileController extends CI_Controller
         $user_id = $this->session->userdata('userid');
         $old_password = $this->input->post('old_password');
         $password = $this->input->post('password');
-        $this->session->set_tempdata('notice', 'Your password has been changed successfully.', 5);
+        $this->session->set_tempdata('notice', 'Your password has been changed successfully.', 3);
         echo json_encode($this->ProfileModel->set_password_change_model($user_id, $old_password, $password));
     }
 
@@ -95,7 +95,7 @@ class ProfileController extends CI_Controller
     {
         $user_id = $this->session->userdata('userid');
         $password = $this->input->post('password');
-        $this->session->set_tempdata('notice', 'Your account has been deactivated.', 5);
+        $this->session->set_tempdata('notice', 'Your account has been deactivated.', 3);
         echo json_encode($this->ProfileModel->deactivate_account_model($user_id, $password));
     }
 }
