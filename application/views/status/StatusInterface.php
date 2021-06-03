@@ -258,7 +258,7 @@
                             <small>Pickup Date & Time</small>
                             <div class="row row-cols-auto g-1">
                                 <div class="col-auto">
-                                    <input type="date" class="form-control" name="pickup_date" required>
+                                    <input type="date" class="form-control" name="pickup_date" min="<?php echo date('Y-m-d'); ?>" required>
                                 </div>
                                 <div class="col-auto">
                                     <select class="form-select" name="pickup_time" required>
