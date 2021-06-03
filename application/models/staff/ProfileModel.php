@@ -13,12 +13,19 @@ class ProfileModel extends CI_Model
 
     public function set_profile_update_model($user_id, $username, $picture, $full_name, $contact_number)
     {
-        $data = array(
-            'ud_usr' => $username,
-            'ud_pic' => $picture,
-            'ud_log' => date('H:m:s Y-m-d')
-        );
-
+        if ($picture !== NULL) {
+            $data = array(
+                'ud_usr' => $username,
+                'ud_pic' => $picture,
+                'ud_log' => date('H:m:s Y-m-d')
+            );
+        } else {
+            $data = array(
+                'ud_usr' => $username,
+                'ud_log' => date('H:m:s Y-m-d')
+            );
+        }
+        
         $this->db->where('ud_id', decrypt_it($user_id));
         $this->db->update('user_data', $data);
 
