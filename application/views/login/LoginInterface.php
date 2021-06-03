@@ -1,4 +1,21 @@
 <div class="container d-flex h-100 flex-column">
+    <!-- alert  -->
+    <div id="alert" class="w-50 position-absolute top-0 start-50 translate-middle mt-5" style="z-index: 1;">
+        <?php
+        if ($this->session->tempdata('notice') != NULL) {
+            echo '<div class="alert alert-warning shadow-sm alert-dismissible fade show" role="alert">';
+            echo '<i class="fas fa-info-circle fa-fw"></i> ' . $this->session->tempdata('notice');
+            echo '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>';
+            echo '</div>';
+        }
+        if ($this->session->tempdata('error') != NULL) {
+            echo '<div class="alert alert-danger shadow-sm alert-dismissible fade show" role="alert">';
+            echo '<i class="fas fa-exclamation-circle fa-fw"></i> ' . $this->session->tempdata('error');
+            echo '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>';
+            echo '</div>';
+        }
+        ?>
+    </div>
     <!-- Login form -->
     <div class="row m-auto">
         <div class="col col-xs-12 m-auto ">
@@ -14,7 +31,6 @@
                     <div class="form-group input-group-lg">
                         <input type="password" class="form-control input-lg" name="pwd" placeholder="Password" required>
                     </div>
-                    <span class="text-danger"><?php echo $this->session->flashdata("error") ?></span>
                     <div class="form-group text-center d-grid gap-2 input-group-lg mt-3">
                         <button type="submit" class="btn btn-primary btn-block" name="submit"><i class="fas fa-sign-in-alt"></i> Log In</button>
                     </div>

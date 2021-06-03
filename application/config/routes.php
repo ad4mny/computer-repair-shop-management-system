@@ -30,6 +30,7 @@ $route['profile'] = 'ProfileController/index';
 $route['profile/update'] = 'ProfileController/index/update';
 $route['profile/set_profile_update'] = 'ProfileController/set_profile_update';
 $route['profile/set_password_change'] = 'ProfileController/set_password_change';
+$route['profile/deactivate_account'] = 'ProfileController/deactivate_account';
 
 $route['payment'] = 'PaymentController/index';
 $route['payment/pay/(:any)'] = 'PaymentController/pay/$1';

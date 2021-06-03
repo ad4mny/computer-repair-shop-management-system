@@ -1,11 +1,30 @@
 <div class="wrapper position-relative">
+    <!-- alert  -->
+    <div id="alert" class="w-50 position-absolute top-0 start-50 translate-middle mt-5" style="z-index: 1;">
+        <?php
+        if ($this->session->tempdata('notice') != NULL) {
+            echo '<div class="alert alert-success shadow alert-dismissible fade show" role="alert">';
+            echo '<i class="fas fa-info-circle fa-fw"></i> ' . $this->session->tempdata('notice');
+            echo '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>';
+            echo '</div>';
+        }
+        if ($this->session->tempdata('error') != NULL) {
+            echo '<div class="alert alert-danger shadow alert-dismissible fade show" role="alert">';
+            echo '<i class="fas fa-exclamation-circle fa-fw"></i> ' . $this->session->tempdata('error');
+            echo '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>';
+            echo '</div>';
+        }
+        ?>
+    </div>
     <div class="container p-5" id="content">
-        <!-- alert  -->
-        <div id="alert" class="w-50 position-absolute" style="z-index: 1; top:10%; left: 25%;">
-        </div>
         <div class="row">
             <div class="col">
-                <h3 class="display-4 mb-0 text-secondary">Manage My Account</h3><br>
+                <h3 class="display-4 mb-0 text-secondary ">Update Profile</h3>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col mt-3 mx-3">
+                <p>Update your personal and address information</p>
             </div>
         </div>
         <form method="post" action="" id="profile_form">
@@ -13,66 +32,75 @@
             if (is_array($profile)) {
                 foreach ($profile as $row) {
             ?>
-                    <div class="row rounded-3 mx-3 p-5 shadow-sm bg-white border-start border-primary border-5">
+                    <div class="row mx-3 border-start border-2">
                         <div class="col-4">
-                            <div class="form-group py-2">
-                                <small>Change Username</small>
+                            <div class="form-group pb-2">
+                                <small class="text-muted">Full Name</small>
+                                <input type="text" class="form-control" name="full_name" value="<?php echo $row['cd_full_name']; ?>" required>
+                            </div>
+                            <div class="form-group pb-2">
+                                <small class="text-muted">Contact Number</small>
+                                <input type="number" class="form-control" name="contact_number" value="<?php echo $row['cd_phone']; ?>" required>
+                            </div>
+                            <div class="form-group pb-2">
+                                <small class="text-muted">Change Username</small>
                                 <input type="text" class="form-control" name="username" id="username" value="<?php echo $row['ud_usr']; ?>">
                                 <small id="username_info" class="text-muted">
                                     Minimum 4 characters.
                                 </small>
                             </div>
-                            <div class="form-group pb-2">
-                                <small>Full Name</small>
-                                <input type="text" class="form-control" name="full_name" value="<?php echo $row['cd_full_name']; ?>" required>
-                            </div>
-
-                            <div class="form-group pb-2">
-                                <small>Contact Number</small>
-                                <input type="number" class="form-control" name="contact_number" value="<?php echo $row['cd_phone']; ?>" required>
-                            </div>
                         </div>
                         <div class="col">
-
-                            <div class="form-group py-2">
-                                <small>Street Address 1</small>
+                            <div class="form-group pb-2">
+                                <small class="text-muted">Street Address 1</small>
                                 <input type="text" class="form-control" name="street_1" value="<?php echo $row['cd_street_1']; ?>" required>
                             </div>
                             <div class="form-group pb-2">
-                                <small>Street Address 2</small>
+                                <small class="text-muted">Street Address 2</small>
                                 <input type="text" class="form-control" name="street_2" value="<?php echo $row['cd_street_2']; ?>" required>
                             </div>
-
                             <div class="form-group pb-2">
-                                <small>Postcode</small>
+                                <small class="text-muted">Postcode</small>
                                 <input type="number" class="form-control" name="postcode" value="<?php echo $row['cd_postcode']; ?>" required>
                             </div>
                             <div class="form-group pb-2">
-                                <small>City</small>
+                                <small class="text-muted">City</small>
                                 <input type="text" class="form-control" name="city" value="<?php echo $row['cd_city']; ?>" required>
                             </div>
                             <div class="form-group pb-2">
-                                <small>State</small>
+                                <small class="text-muted">State</small>
                                 <input type="text" class="form-control" name="state" value="<?php echo $row['cd_state']; ?>" required>
+                            </div>
+                            <div class="form-group pb-2">
+                                <small class="text-muted">Upload Profile Picture</small>
+                                <input class="form-control" type="file" name="picture">
                             </div>
                         </div>
                         <div class="col-4 text-center">
-                            <div class="my-2">
-                            <?php if ($row['ud_pic'] != "") {
-                                echo '<div class="rounded-circle bg-white d-inline-flex align-middle shadow mb-4"><img src="' . base_url() . 'assets/img/profile/thumbnail/' . $row['ud_pic'] . '" class="img-fluid rounded-circle shadow border border-5 border-white"></div>';
-                            } else {
-                                echo '<div class="rounded-circle bg-white d-inline-flex p-5 align-middle shadow mb-4"><i class="fas fa-user fa-4x text-secondary"></i></div>';
-                            }
-                            ?>
+                            <div class="pb-2">
+                                <?php if ($row['ud_pic'] != "") {
+                                    echo '<div class="rounded-circle bg-white d-inline-flex align-middle shadow mb-4"><img src="' . base_url() . 'assets/img/profile/thumbnail/' . $row['ud_pic'] . '" class="img-fluid rounded-circle shadow border border-5 border-white" width="250"></div>';
+                                } else {
+                                    echo '<div class="rounded-circle bg-white d-inline-flex p-5 align-middle shadow mb-4"><i class="fas fa-user fa-4x text-secondary" width="250"></i></div>';
+                                }
+                                ?>
                             </div>
-                            <div class="form-group">
-                                <input class="form-control" type="file" name="picture">
+                            <div class="pb-2 ">
+                                <button type="submit" class="btn btn-primary" name="submit">UPDATE PROFILE</button>
                             </div>
-                            <div class="mt-5">
-                                <a href="#" type="button" class="text-primary " data-bs-toggle="modal" data-bs-target="#change_password_modal">
-                                    Change your password
-                                </a><br>
-                                <button type="submit" class="btn btn-primary mt-2" name="submit">UPDATE PROFILE</button>
+                            <div class="form-group pb-2">
+                                <small>
+                                    <a href="#" type="button" class="text-primary " data-bs-toggle="modal" data-bs-target="#change_password_modal">
+                                        Change your password
+                                    </a>
+                                </small>
+                            </div>
+                            <div class="pb-2 ">
+                                <small>
+                                    <a href="#" type="button" class="text-danger " data-bs-toggle="modal" data-bs-target="#deactivate_modal">
+                                        Deactivate account
+                                    </a>
+                                </small>
                             </div>
                         </div>
                     </div>
@@ -116,6 +144,28 @@
         </div>
     </div>
 </div>
+<!-- Deactivate account modal -->
+<div class="modal fade" id="deactivate_modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form method="post" id="deactivate_form">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Update password</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group py-2">
+                        <small>Enter Your Password</small>
+                        <input type="password" class="form-control" name="password" placeholder="Enter your old password" required>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" name="submit" class="btn btn-danger">Confirm Deactivate</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 <script>
     $(document).ready(function() {
 
@@ -123,14 +173,6 @@
             "usr": "0",
             "pwd": "0"
         };
-
-        $('#department_type').on('change', function() {
-            if ($('#department_type').val() == '1') {
-                $('#plat_num').show();
-            } else {
-                $('#plat_num').hide();
-            }
-        });
 
         // password comparison for setup
         $('#password, #confirm_password').on('keyup', function() {
@@ -170,6 +212,28 @@
             })
         })
 
+
+        // setup userdata ajax call function
+        $('#deactivate_form').on('submit', function(e) {
+            e.preventDefault();
+            var formData = new FormData(this);
+            $.ajax({
+                url: '<?php echo base_url() . 'profile/deactivate_account'; ?>',
+                type: 'POST',
+                data: formData,
+                contentType: false,
+                processData: false,
+                success: function(data) {
+                    if (data != 'false') {
+                        window.location.replace('<?php echo base_url(); ?>');
+                    } else {
+                        $('#deactivate_modal').modal('hide');
+                    }
+                }
+            });
+        });
+
+
         // setup userdata ajax call function
         $('#password_form').on('submit', function(e) {
             e.preventDefault();
@@ -188,23 +252,7 @@
                     contentType: false,
                     processData: false,
                     success: function(data) {
-                        if (data != 'false') {
-                            $('#change_password_modal').modal('hide');
-                            $('#alert').replaceWith(
-                                '<div class="alert alert-success alert-dismissible fade show" role="alert">' +
-                                '<i class="fas fa-check-circle fa-fw"></i> Password changed successfully.' +
-                                '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>' +
-                                '</div>'
-                            );
-                        } else {
-                            $('#change_password_modal').modal('hide');
-                            $('#alert').replaceWith(
-                                '<div class="alert alert-warning alert-dismissible fade show" role="alert">' +
-                                '<i class="fas fa-exclamation-circle fa-fw"></i> Unable to update password.' +
-                                '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>' +
-                                '</div>'
-                            );
-                        }
+                        $('#change_password_modal').modal('hide');
                     }
                 });
             }
@@ -215,10 +263,12 @@
             e.preventDefault();
             var formData = new FormData(this);
             if (errors['usr'] === '1') {
-                $('#alert').replaceWith('<div class="alert alert-warning alert-dismissible fade show" role="alert">' +
+                $('#alert').replaceWith(
+                    '<div class="alert alert-warning alert-dismissible fade show" role="alert">' +
                     '<i class="fas fa-exclamation-circle fa-fw"></i> Username not available, please choose another username.' +
                     '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>' +
-                    '</div>');
+                    '</div>'
+                );
             } else {
                 $.ajax({
                     url: '<?php echo base_url() . 'profile/set_profile_update'; ?>',
@@ -229,26 +279,9 @@
                     success: function(data) {
                         if (data == 'true') {
                             window.location.replace('<?php echo base_url() . 'profile'; ?>');
-                            $('#alert').replaceWith(
-                                '<div class="alert alert-success alert-dismissible fade show" role="alert">' +
-                                '<i class="fas fa-check-circle fa-fw"></i> Profile updated successfully.' +
-                                '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>' +
-                                '</div>'
-                            );
-                        } else if (data == 'false') {
-                            $('#alert').replaceWith(
-                                '<div class="alert alert-warning alert-dismissible fade show" role="alert">' +
-                                '<i class="fas fa-exclamation-circle fa-fw"></i> Unable to update profile.' +
-                                '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>' +
-                                '</div>'
-                            );
                         } else {
-                            $('#alert').replaceWith(
-                                '<div class="alert alert-warning alert-dismissible fade show" role="alert">' +
-                                '<i class="fas fa-exclamation-circle fa-fw"></i> ' + data +
-                                '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>' +
-                                '</div>'
-                            );
+                            window.location.replace('<?php echo base_url() . 'profile/update'; ?>');
+
                         }
                     }
                 });

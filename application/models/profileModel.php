@@ -13,11 +13,19 @@ class ProfileModel extends CI_Model
 
     public function set_profile_update_model($user_id, $username, $picture, $full_name, $contact_number, $street_1, $street_2, $postcode, $city, $state)
     {
-        $data = array(
-            'ud_usr' => $username,
-            'ud_pic' => $picture,
-            'ud_log' => date('H:m:s Y-m-d')
-        );
+
+        if ($picture !== NULL) {
+            $data = array(
+                'ud_usr' => $username,
+                'ud_pic' => $picture,
+                'ud_log' => date('H:m:s Y-m-d')
+            );
+        } else {
+            $data = array(
+                'ud_usr' => $username,
+                'ud_log' => date('H:m:s Y-m-d')
+            );
+        }
 
         $this->db->where('ud_id', decrypt_it($user_id));
         $this->db->update('user_data', $data);
@@ -52,6 +60,29 @@ class ProfileModel extends CI_Model
 
             $this->db->where('ud_id', decrypt_it($user_id));
             return $this->db->update('user_data', $data);
+        } else {
+            return false;
+        }
+    }
+
+    public function deactivate_account_model($user_id, $password)
+    {
+        $this->db->select('ud_pwd');
+        $this->db->from('user_data');
+        $this->db->where('ud_id', decrypt_it($user_id));
+        $result = $this->db->get()->row();
+
+        if (md5($password) == $result->ud_pwd) {
+
+            $data = array(
+                'ud_id' => decrypt_it($user_id)
+            );
+            
+            if ($result->ud_pic != NULL) {
+                unlink(base_url() . $result->ud_pic);
+            }
+
+            return $this->db->delete('user_data', $data);
         } else {
             return false;
         }
