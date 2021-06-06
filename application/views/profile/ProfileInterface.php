@@ -34,6 +34,10 @@
                 <div class="row mx-3 border-start border-2">
                     <div class="col-4">
                         <div class="pb-2">
+                            <small>Customer ID</small>
+                            <p class="text-capitalize">CD-<?php echo encrypt_it($row['cd_id']); ?></p>
+                        </div>
+                        <div class="pb-2">
                             <small>Full Name</small>
                             <p class="text-capitalize"><?php echo $row['cd_full_name']; ?></p>
                         </div>

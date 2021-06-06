@@ -34,6 +34,10 @@
                 <div class="row mx-3 border-start border-2">
                     <div class="col-4">
                         <div class="pb-2">
+                            <small>Runner ID</small>
+                            <p class="text-capitalize">RD-<?php echo encrypt_it($row['rd_id']); ?></p>
+                        </div>
+                        <div class="pb-2">
                             <small>Full Name</small>
                             <p class="text-capitalize"><?php echo $row['rd_full_name']; ?></p>
                         </div>
