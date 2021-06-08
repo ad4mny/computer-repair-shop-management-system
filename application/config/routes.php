@@ -48,6 +48,7 @@ $route['staff/dashboard/delete/(:any)'] = 'staff/DashboardController/delete_requ
 $route['staff/profile'] = 'staff/ProfileController/index';
 $route['staff/profile/update'] = 'staff/ProfileController/index/update';
 $route['staff/profile/set_profile_update'] = 'staff/ProfileController/set_profile_update';
+$route['staff/profile/set_password_change'] = 'staff/ProfileController/set_password_change';
 
 $route['staff/status'] = 'staff/StatusController/index';
 $route['staff/status/view/(:any)'] = 'staff/StatusController/index/view/$1';
@@ -68,3 +69,5 @@ $route['runner/delivery/complete_delivery_request/(:any)'] = 'runner/DeliveryCon
 $route['runner/profile'] = 'runner/ProfileController/index';
 $route['runner/profile/update'] = 'runner/ProfileController/index/update';
 $route['runner/profile/set_profile_update'] = 'runner/ProfileController/set_profile_update';
+$route['runner/profile/set_password_change'] = 'runner/ProfileController/set_password_change';
+$route['runner/profile/deactivate_account'] = 'runner/ProfileController/deactivate_account';

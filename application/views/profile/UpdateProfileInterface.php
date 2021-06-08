@@ -212,7 +212,6 @@
             })
         })
 
-
         // setup userdata ajax call function
         $('#deactivate_form').on('submit', function(e) {
             e.preventDefault();
@@ -224,15 +223,14 @@
                 contentType: false,
                 processData: false,
                 success: function(data) {
-                    if (data != 'false') {
-                        window.location.replace('<?php echo base_url(); ?>');
+                    if (data == 'true') {
+                        window.location.replace('<?php echo base_url();?>');
                     } else {
-                        $('#deactivate_modal').modal('hide');
+                        window.location.replace('<?php echo base_url() . 'profile/update'; ?>');
                     }
                 }
             });
         });
-
 
         // setup userdata ajax call function
         $('#password_form').on('submit', function(e) {
@@ -252,7 +250,7 @@
                     contentType: false,
                     processData: false,
                     success: function(data) {
-                        $('#change_password_modal').modal('hide');
+                        window.location.replace('<?php echo base_url() . 'profile/update'; ?>');
                     }
                 });
             }

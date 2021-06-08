@@ -179,7 +179,7 @@
                     contentType: false,
                     processData: false,
                     success: function(data) {
-                        $('#change_password_modal').modal('hide');
+                        window.location.replace('<?php echo base_url() . 'staff/profile/update'; ?>');
                     }
                 });
             }

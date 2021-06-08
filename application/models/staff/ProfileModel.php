@@ -40,7 +40,7 @@ class ProfileModel extends CI_Model
 
     public function set_password_change_model($user_id, $old_password, $password)
     {
-        $this->db->select('ud_pwd');
+        $this->db->select('ud_pwd, ud_pic');
         $this->db->from('user_data');
         $this->db->where('ud_id', decrypt_it($user_id));
         $result = $this->db->get()->row();

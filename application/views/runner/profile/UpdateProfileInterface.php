@@ -205,10 +205,10 @@
                 contentType: false,
                 processData: false,
                 success: function(data) {
-                    if (data != 'false') {
+                    if (data == 'true') {
                         window.location.replace('<?php echo base_url(); ?>');
                     } else {
-                        $('#deactivate_modal').modal('hide');
+                        window.location.replace('<?php echo base_url() . 'runner/profile/update'; ?>');
                     }
                 }
             });
@@ -232,7 +232,7 @@
                     contentType: false,
                     processData: false,
                     success: function(data) {
-                        $('#change_password_modal').modal('hide');
+                        window.location.replace('<?php echo base_url() . 'runner/profile/update'; ?>');
                     }
                 });
             }

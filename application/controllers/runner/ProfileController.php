@@ -86,15 +86,35 @@ class ProfileController extends CI_Controller
         $user_id = $this->session->userdata('userid');
         $old_password = $this->input->post('old_password');
         $password = $this->input->post('password');
-        $this->session->set_tempdata('notice', 'Your password has been changed successfully.', 3);
-        echo json_encode($this->ProfileModel->set_password_change_model($user_id, $old_password, $password));
+        $return = $this->ProfileModel->set_password_change_model($user_id, $old_password, $password);
+        if ($return !== false) {
+            $this->session->set_tempdata('notice', 'Your password has been changed successfully.', 3);
+            echo json_encode($return);
+        } else {
+            $this->session->set_tempdata('error', 'Your old password is incorrect.', 3);
+            echo json_encode($return);
+        }
     }
 
     public function deactivate_account()
     {
         $user_id = $this->session->userdata('userid');
         $password = $this->input->post('password');
-        $this->session->set_tempdata('notice', 'Your account has been deactivated.', 3);
-        echo json_encode($this->ProfileModel->deactivate_account_model($user_id, $password));
+        $return = $this->ProfileModel->deactivate_account_model($user_id, $password);
+        if ($return !== false) {
+            $session_data = array(
+                'userid',
+                'username',
+                'runnerid',
+                'picture',
+                'role'
+            );
+            $this->session->unset_userdata($session_data);
+            $this->session->set_tempdata('notice', 'Your account has been deactivated.', 3);
+            echo json_encode($return);
+        } else {
+            $this->session->set_tempdata('error', 'Your password is incorrect.', 3);
+            echo json_encode($return);
+        }
     }
 }
