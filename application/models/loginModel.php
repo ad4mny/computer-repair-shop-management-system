@@ -7,9 +7,11 @@ class LoginModel extends CI_Model
         $this->db->from('user_data');
         $this->db->where('ud_usr', $username);
         $this->db->where('ud_pwd', $password);
-        $result = $this->db->get()->row();
+        $query = $this->db->get();
 
-        if ($result->ud_id !== null) {
+        if ($query->num_rows() > 0) {
+            $result = $query->row();
+            
             $data = array(
                 'ud_log' => date('H:m:s Y-m-d')
             );

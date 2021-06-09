@@ -6,7 +6,7 @@ class DashboardController extends CI_Controller
         parent::__construct();
         $this->load->model('staff/DashboardModel');
     }
-    
+
     public function index($page = 'dashboard', $repair_id = null)
     {
         auth_session();
@@ -50,6 +50,10 @@ class DashboardController extends CI_Controller
         $information = $this->input->post('information');
         $status = $this->input->post('status');
         $price = $this->input->post('price');
+
+        if ($price == "") {
+            $price = 0;
+        }
 
         if ($status == 0) {
             $reason = $this->input->post('reason');
