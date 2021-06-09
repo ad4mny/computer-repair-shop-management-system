@@ -56,10 +56,10 @@
                                         echo '<div class="card-footer"><div class="card-text text-capitalize text-center">DCRS-' . encrypt_it($row['rsd_id']) . '</div></div>';
                                     } else {
                                     ?>
-                                        <a href="<?php echo base_url() . 'staff/status/update/' . encrypt_it($row['rsd_id']); ?>" class="position-absolute top-100 start-50 translate-middle" onclick="return confirm('Mark this repair as completed?');">
+                                        <a href="<?php echo base_url() . 'staff/status/view/' . encrypt_it($row['rsd_id']); ?>" class="position-absolute top-100 start-50 translate-middle" >
                                             <span class="fa-stack fa-2x ">
                                                 <i class="fa fa-circle fa-stack-2x text-primary"></i>
-                                                <i class="fa fa-check fa-stack-1x text-white"></i>
+                                                <i class="fa fa-tools fa-stack-1x text-white"></i>
                                             </span>
                                         </a>
                                     <?php

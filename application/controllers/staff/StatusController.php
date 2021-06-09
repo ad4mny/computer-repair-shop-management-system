@@ -36,6 +36,11 @@ class StatusController extends CI_Controller
         return $this->DashboardModel->get_booking_request_by_id_model($repair_id);
     }
 
+    public function get_technician_info($staff_id)
+    {
+        return $this->DashboardModel->get_technician_info_model($staff_id);
+    }
+
     public function update_repair_request($request_id)
     {
         if ($this->StatusModel->update_repair_request_model($request_id, 2) !== false) {
