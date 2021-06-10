@@ -29,9 +29,15 @@
                                 </div>
                                 <div class="card-text text-capitalize pb-4 px-4">
                                     <small>Delivery Address:</small>
-                                    <h5>
+                                    <div>
+                                        <?php echo $row['cd_full_name']; ?>
+                                    </div>
+                                    <div>
+                                        <?php echo $row['cd_phone']; ?>
+                                    </div>
+                                    <div>
                                         <?php echo $row['cd_street_1'] . ', ' . $row['cd_street_2'] . ', ' . $row['cd_postcode'] . ', ' . $row['cd_city'] . ', ' . $row['cd_state']; ?>
-                                    </h5>
+                                    </div>
                                 </div>
                             </div>
                             <a href="<?php echo  base_url() . 'runner/dashboard/take_delivery_request/' . encrypt_it($row['rsd_id']); ?>" class="position-absolute top-100 start-50 translate-middle" onclick="return confirm('Are you sure want to accept this delivery?');"><span class="fa-stack fa-2x "><i class="fa fa-circle fa-stack-2x text-primary"></i><i class="fa fa-plus fa-stack-1x text-white"></i></span></a>
@@ -60,10 +66,20 @@
                                     </h1>
                                 </div>
                                 <div class="card-text text-capitalize pb-4 px-4">
+                                    <small>Pickup Datetime:</small>
+                                    <div><?php echo $row['rsd_pickup_log']; ?></div>
+                                </div>
+                                <div class="card-text text-capitalize pb-4 px-4">
                                     <small>Pickup Address:</small>
-                                    <h5>
+                                    <div>
+                                        <?php echo $row['cd_full_name']; ?>
+                                    </div>
+                                    <div>
+                                        <?php echo $row['cd_phone']; ?>
+                                    </div>
+                                    <div>
                                         <?php echo $row['cd_street_1'] . ', ' . $row['cd_street_2'] . ', ' . $row['cd_postcode'] . ', ' . $row['cd_city'] . ', ' . $row['cd_state']; ?>
-                                    </h5>
+                                    </div>
                                 </div>
                             </div>
                             <a href="<?php echo base_url() . 'runner/dashboard/take_pickup_request/' . encrypt_it($row['rsd_id']); ?>" class="position-absolute top-100 start-50 translate-middle" onclick="return confirm('Are you sure want to accept this delivery?');">
