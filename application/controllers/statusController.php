@@ -20,7 +20,7 @@ class StatusController extends CI_Controller
 
         if ($repair_id !== null && $page !== null) {
             $data['request'] = $this->get_ongoing_request_by_id($repair_id);
-            $this->load->view('status/RequestUpdateInterface', $data);
+            $this->load->view('status/StatusUpdateInterface', $data);
         } else if ($repair_id !== null) {
             $data['request'] = $this->get_ongoing_request_by_id($repair_id);
             $this->load->view('status/StatusInterface', $data);

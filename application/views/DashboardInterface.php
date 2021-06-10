@@ -64,14 +64,16 @@
                                     </div>
                                     <div class="card-text text-uppercase text-warning text-center mt-5 ">
                                         <?php
-                                        if ($row['rsd_status'] == '' && $row['rsd_progress'] == '0') {
-                                            echo 'Inspection Pending';
-                                        }
-                                        if ($row['rsd_status'] == '0' && $row['rsd_progress'] == '0') {
-                                            echo 'Payment Pending';
-                                        }
-                                        if ($row['rsd_status'] == '1' && $row['rsd_progress'] == '0') {
-                                            echo 'Payment Pending';
+                                        if ($row['rsd_progress'] != null) {
+                                            if ($row['rsd_status'] == null) {
+                                                echo 'Inspection Pending';
+                                            }
+                                            if ($row['rsd_status'] == '0') {
+                                                echo 'Payment Pending';
+                                            }
+                                            if ($row['rsd_status'] == '1') {
+                                                echo 'Payment Pending';
+                                            }
                                         }
                                         ?>
                                     </div>
@@ -79,7 +81,7 @@
                             </div>
                             <div class="position-absolute top-100 start-50 translate-middle ">
                                 <div class="d-inline-flex">
-                                    <?php if ($row['rsd_status'] == '') { ?>
+                                    <?php if ($row['rsd_progress'] == null) { ?>
                                         <a href="<?php echo base_url() . 'dashboard/delete/' . encrypt_it($row['rsd_id']); ?>" onclick="return confirm('Are you sure you want to cancel your request?');">
                                             <span class="fa-stack fa-2x">
                                                 <i class="fa fa-circle fa-stack-2x text-danger"></i>
@@ -91,9 +93,13 @@
                                         <span class="fa-stack fa-2x">
                                             <i class="fa fa-circle fa-stack-2x text-primary"></i>
                                             <?php
-                                            if ($row['rsd_status'] == '' && $row['rsd_progress'] == '0') {
+                                            if ($row['rsd_status'] == null && $row['rsd_progress'] == null) {
+                                                echo '<i class="fas fa-eye fa-stack-1x text-white"></i>';
+                                            } else  if ($row['rsd_status'] == null && $row['rsd_progress'] == '0') {
                                                 echo '<i class="fas fa-eye fa-stack-1x text-white"></i>';
                                             } else  if ($row['rsd_status'] == '1' && $row['rsd_progress'] == '1') {
+                                                echo '<i class="fas fa-eye fa-stack-1x text-white"></i>';
+                                            } else  if ($row['rsd_status'] == '1' && $row['rsd_progress'] == '2') {
                                                 echo '<i class="fas fa-eye fa-stack-1x text-white"></i>';
                                             } else {
                                                 echo '<i class="fab fa-paypal fa-stack-1x text-white"></i>';

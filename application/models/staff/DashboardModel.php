@@ -6,7 +6,7 @@ class DashboardModel extends CI_Model
         $this->db->select('*');
         $this->db->from('repair_service_data');
         $this->db->where('rsd_status', NULL);
-        $this->db->where('rsd_progress', 0);
+        $this->db->order_by('rsd_id', 'DESC');
         $this->db->order_by('rsd_progress', 'ASC');
         $query = $this->db->get();
         return $query->result_array();
@@ -26,7 +26,6 @@ class DashboardModel extends CI_Model
         $data = array(
             'rsd_sd_id' =>  decrypt_it($staff_id),
             'rsd_status' => $status,
-            'rsd_progress' =>  0,
             'rsd_device_brand' => $brand,
             'rsd_device_model' => $model,
             'rsd_device_color' => $color,

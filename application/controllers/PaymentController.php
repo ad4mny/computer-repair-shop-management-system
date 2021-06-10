@@ -10,8 +10,6 @@ class PaymentController extends CI_Controller
     var $ipn_data = array();
     var $fields = array();
 
-    private $pickup_datetime;
-
     public function __construct()
     {
         parent::__construct();
@@ -20,6 +18,7 @@ class PaymentController extends CI_Controller
         $this->load->model('PaymentModel');
         $this->load->model('StatusModel');
         $this->load->model('ProfileModel');
+        $this->load->model('TrackingModel');
 
         $sandbox = TRUE;
         $this->paypal_url = ($sandbox == TRUE) ? 'https://www.sandbox.paypal.com/cgi-bin/webscr' : 'https://www.paypal.com/cgi-bin/webscr';
@@ -53,7 +52,6 @@ class PaymentController extends CI_Controller
     {
         // Get post detail
         $user_id = $this->session->userdata('userid');
-        $this->pickup_datetime = $this->input->post('pickup_date') . ' ' .  $this->input->post('pickup_time');
 
         // Get customer detail
         $customer = $this->ProfileModel->get_profile_info_model($user_id);
@@ -75,13 +73,13 @@ class PaymentController extends CI_Controller
         $this->paypal_field('custom', $customer_id);
 
         // Render paypal form 
-        if ($this->PaymentModel->get_existing_payment_model($service_id) === 0) {
+        if ($this->PaymentModel->get_existing_payment_model($service_id) !== 0) {
             $this->paypal_redirect();
         } else {
             $data['msg'] = 'Transaction has been made.';
-            $this->PaymentModel->add_tracking_model($service_id);
+            $this->TrackingModel->add_tracking_model($service_id, 'Paid');
             $this->PaymentModel->set_request_ongoing_model($service_id);
-            $this->PaymentModel->set_pickup_model($service_id, $this->pickup_datetime);
+            $this->TrackingModel->add_tracking_model($service_id, 'Repairing');
             $this->get_pay_cancel($data);
         }
     }
@@ -101,11 +99,11 @@ class PaymentController extends CI_Controller
             $ipn_check = $this->validate_ipn($paypal);
             // Check whether the transaction is valid 
             if ($ipn_check) {
+                // Add tracking status 
+                $this->TrackingModel->add_tracking_model($paypal["item_number"], 'Paid');
                 // Insert the transaction data in the database 
                 $this->PaymentModel->add_transaction_model($paypal);
-                $this->PaymentModel->add_tracking_model($paypal["item_number"]);
                 $this->PaymentModel->set_request_ongoing_model($paypal["item_number"]);
-                $this->PaymentModel->set_pickup_model($paypal["item_number"], $this->pickup_datetime);
                 $data['paypal'] = $paypal;
                 $this->index('success', $data);
             } else {

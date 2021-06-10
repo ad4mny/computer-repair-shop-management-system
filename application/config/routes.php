@@ -61,10 +61,13 @@ $route['staff/manage/search'] = 'staff/ManageController/search_user';
 // Runner routes
 $route['runner/dashboard'] = 'runner/DashboardController/index';
 $route['runner/dashboard/take_delivery_request/(:any)'] = 'runner/DashboardController/take_delivery_request/$1';
+$route['runner/dashboard/take_pickup_request/(:any)'] = 'runner/DashboardController/take_pickup_request/$1';
 
 $route['runner/delivery'] = 'runner/DeliveryController/index';
 $route['runner/delivery/cancel_delivery_request/(:any)'] = 'runner/DeliveryController/cancel_delivery_request/$1';
 $route['runner/delivery/complete_delivery_request/(:any)'] = 'runner/DeliveryController/complete_delivery_request/$1';
+$route['runner/delivery/cancel_pickup_request/(:any)'] = 'runner/DeliveryController/cancel_pickup_request/$1';
+$route['runner/delivery/complete_pickup_request/(:any)'] = 'runner/DeliveryController/complete_pickup_request/$1';
 
 $route['runner/profile'] = 'runner/ProfileController/index';
 $route['runner/profile/update'] = 'runner/ProfileController/index/update';

@@ -4,12 +4,13 @@ class DashboardController extends CI_Controller
     public function __construct()
     {
         parent::__construct();
+        auth_session();
         $this->load->model('staff/DashboardModel');
+        $this->load->model('TrackingModel');
     }
 
     public function index($page = 'dashboard', $repair_id = null)
     {
-        auth_session();
         $data['controller'] = $this;
         $this->load->view('templates/header');
         $this->load->view('templates/navigation_staff');
@@ -62,6 +63,7 @@ class DashboardController extends CI_Controller
         }
 
         if ($this->DashboardModel->take_repair_request_model($request_id, $staff_id, $brand, $model, $color, $severity, $information, $status, $reason, $price) !== false) {
+            $this->TrackingModel->add_tracking_model($request_id, 'Completed');
             redirect(base_url() . 'staff/dashboard');
         } else {
             $this->session->set_flashdata('error', 'unable to complete request');

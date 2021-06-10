@@ -11,6 +11,7 @@ class DeliveryController extends CI_Controller
     {
         auth_session();
         $data['delivery'] = $this->get_accepted_delivery();
+        $data['pickup'] = $this->get_accepted_pickup();
         $this->load->view('templates/header');
         $this->load->view('templates/navigation_runner');
         $this->load->view('runner/delivery/DeliveryInterface', $data);
@@ -21,6 +22,12 @@ class DeliveryController extends CI_Controller
     {
         $runner_id = $this->session->userdata('runnerid');
         return $this->DeliveryModel->get_accepted_delivery_model($runner_id);
+    } 
+    
+    public function get_accepted_pickup()
+    {
+        $runner_id = $this->session->userdata('runnerid');
+        return $this->DeliveryModel->get_accepted_pickup_model($runner_id);
     }
 
     public function cancel_delivery_request($request_id)
@@ -38,6 +45,28 @@ class DeliveryController extends CI_Controller
     {
         $runner_id = $this->session->userdata('runnerid');
         if ($this->DeliveryModel->complete_delivery_request_model($request_id, $runner_id) === true) {
+            redirect(base_url() . 'runner/delivery');
+        } else {
+            $this->session->set_flashdata('error', 'Unable to process request.');
+            redirect(base_url() . 'runner/delivery');
+        }
+    }
+
+    public function cancel_pickup_request($request_id)
+    {
+        $runner_id = $this->session->userdata('runnerid');
+        if ($this->DeliveryModel->cancel_pickup_request_model($request_id, $runner_id) === true) {
+            redirect(base_url() . 'runner/delivery');
+        } else {
+            $this->session->set_flashdata('error', 'Unable to process request.');
+            redirect(base_url() . 'runner/delivery');
+        }
+    }
+
+    public function complete_pickup_request($request_id)
+    {
+        $runner_id = $this->session->userdata('runnerid');
+        if ($this->DeliveryModel->complete_pickup_request_model($request_id, $runner_id) === true) {
             redirect(base_url() . 'runner/delivery');
         } else {
             $this->session->set_flashdata('error', 'Unable to process request.');

@@ -96,7 +96,6 @@
                                         <?php echo $request[0]['rsd_device_color']; ?>
                                     </p>
                                 </div>
-
                                 <div class="py-3 border-bottom">
                                     <small class="text-muted">Damage Information</small>
                                     <p class="text-capitalize mb-0"><i class="fas fa-circle-notch fa-xs fa-fw"></i>
@@ -113,7 +112,7 @@
                                             echo '<p class="text-capitalize mb-0"><i class="fas fa-circle-notch fa-xs fa-fw"></i> Completed</p>';
                                             break;
                                         case '1':
-                                            echo '<p class="text-capitalize mb-0"><i class="fas fa-circle-notch fa-xs fa-fw"></i> Ongoing</p>';
+                                            echo '<p class="text-capitalize mb-0"><i class="fas fa-circle-notch fa-xs fa-fw"></i> Repairing</p>';
                                             break;
                                         default:
                                             echo '<p class="text-capitalize mb-0"><i class="fas fa-circle-notch fa-xs fa-fw"></i> Pending</p>';

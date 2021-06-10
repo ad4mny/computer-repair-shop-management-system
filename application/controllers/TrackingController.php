@@ -49,4 +49,9 @@ class TrackingController extends CI_Controller
     {
         return $this->TrackingModel->get_runner_info_model($runner_id);
     }
+
+    public function get_technician_info($repair_id)
+    {
+        return $this->TrackingModel->get_technician_info_model($repair_id);
+    }
 }

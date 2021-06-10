@@ -25,28 +25,29 @@ class RequestController extends CI_Controller
         $color = $this->input->post('color');
         $severity = $this->input->post('severity');
         $information = $this->input->post('information');
+        $datetime = $this->input->post('pickup_date') . ' ' . $this->input->post('pickup_time');
 
-        if ($this->RequestModel->add_new_request_model($customer_id, $brand, $model, $color, $severity, $information) !== false) {
+        if ($this->RequestModel->add_new_request_model($customer_id, $brand, $model, $color, $severity, $information, $datetime) !== false) {
             redirect(base_url() . 'dashboard');
         } else {
-            $this->session->set_flashdata('error', 'unable to complete request');
+            $this->session->set_tempdata('error', 'Unable to complete request.', 3);
             redirect(base_url() . 'request');
         }
     }
 
     public function update_request_by_id($request_id)
     {
-        $customer_id = $this->session->userdata('customerid');
         $brand = $this->input->post('brand');
         $model = $this->input->post('model');
         $color = $this->input->post('color');
         $severity = $this->input->post('severity');
         $information = $this->input->post('information');
+        $datetime = $this->input->post('pickup_date') . ' ' . $this->input->post('pickup_time');
 
-        if ($this->RequestModel->update_request_by_id_model($request_id, $brand, $model, $color, $severity, $information) !== false) {
+        if ($this->RequestModel->update_request_by_id_model($request_id, $brand, $model, $color, $severity, $information, $datetime) !== false) {
             redirect(base_url() . 'status/' . $request_id);
         } else {
-            $this->session->set_flashdata('error', 'unable to complete request');
+            $this->session->set_tempdata('error', 'Unable to complete request.', 3);
             redirect(base_url() . 'status/' . $request_id . '/update');
         }
     }

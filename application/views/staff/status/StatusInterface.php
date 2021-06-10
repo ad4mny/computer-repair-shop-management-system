@@ -52,7 +52,7 @@
                                         </div>
                                     </div>
                                     <?php
-                                    if ($row['rsd_progress'] == '0') {
+                                    if ($row['rsd_progress'] != '1' && $row['rsd_progress'] != '2') {
                                         echo '<div class="card-footer"><div class="card-text text-capitalize text-center">DCRS-' . encrypt_it($row['rsd_id']) . '</div></div>';
                                     } else {
                                     ?>
@@ -79,7 +79,6 @@
                                     echo '<span class="position-absolute top-0 start-0 m-3"><i class="fas fa-times fa-lg fa-fw"></i> UNABLE TO REPAIR</span>';
                                 }
                                 ?>
-                                    
                                     <div class="card-body">
                                         <div class="card-text px-4 py-5 fw-light text-capitalize ">
                                             <h1> <?php echo $row['rsd_device_brand']; ?><br>
@@ -112,7 +111,6 @@
                                     </div>
                                 </div>
                             </div>
-
                 <?php
                         }
                     }
