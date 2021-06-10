@@ -40,7 +40,7 @@
                         <textarea class="form-control" name="information" row="4" max="100" placeholder="Max 100 characters." required></textarea>
                     </div>
                     <div class="form-group pb-2 text-end pt-5 mt-5">
-                        <a href="<?php echo base_url(); ?>/dashboard" class="btn btn-secondary">CANCEL</a>
+                        <a href="<?php echo base_url(); ?>dashboard" class="btn btn-secondary">CANCEL</a>
                         <button type="submit" class="btn btn-primary" name="submit" value="submit">SUBMIT REQUEST <i class="fas fa-chevron-right fa-fw"></i></button>
                     </div>
                 </div>

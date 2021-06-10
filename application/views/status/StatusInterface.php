@@ -158,7 +158,7 @@
                                     if ($request[0]['rsd_progress'] == '0') {
                                         switch ($request[0]['rsd_status']) {
                                             case '1':
-                                                echo '<a href="' . base_url() . '/dashboard" class="btn btn-danger me-2">CANCEL</a>';
+                                                echo '<a href="' . base_url() . 'dashboard" class="btn btn-danger me-2">CANCEL</a>';
                                                 echo '<button class="btn btn-primary" id="continue_btn">CONTINUE <i class="fas fa-chevron-down fa-fw"></i></button>';
                                                 break;
                                             case '0':
