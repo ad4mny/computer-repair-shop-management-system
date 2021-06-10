@@ -16,15 +16,15 @@
                     <div class="col">
                         <div class="form-group pb-2">
                             <small class="text-muted">Device Brand</small>
-                            <input type="text" class="form-control" name="brand" placeholder="Enter device brand" value="<?php echo $request[0]['rsd_device_brand']?>" required>
+                            <input type="text" class="form-control" name="brand" placeholder="Enter device brand" value="<?php echo $request[0]['rsd_device_brand'] ?>" required>
                         </div>
                         <div class="form-group pb-2">
                             <small class="text-muted">Device Model</small>
-                            <input type="text" class="form-control" name="model" placeholder="Enter device model" value="<?php echo $request[0]['rsd_device_model']?>" required>
+                            <input type="text" class="form-control" name="model" placeholder="Enter device model" value="<?php echo $request[0]['rsd_device_model'] ?>" required>
                         </div>
                         <div class="form-group pb-2">
                             <small class="text-muted">Device Color</small>
-                            <input type="text" class="form-control" name="color" placeholder="Enter device color" value="<?php echo $request[0]['rsd_device_color']?>" required>
+                            <input type="text" class="form-control" name="color" placeholder="Enter device color" value="<?php echo $request[0]['rsd_device_color'] ?>" required>
                         </div>
                     </div>
                     <div class="col">
@@ -38,10 +38,10 @@
                         </div>
                         <div class="form-group pb-2">
                             <small class="text-muted">Damage Information</small>
-                            <textarea class="form-control" name="information" row="4" max="100" placeholder="Max 100 characters." required><?php echo $request[0]['rsd_damage_info'];?></textarea>
+                            <textarea class="form-control" name="information" row="4" max="100" placeholder="Max 100 characters." required><?php echo $request[0]['rsd_damage_info']; ?></textarea>
                         </div>
                         <div class="form-group pb-2 text-end pt-5 mt-5">
-                            <a href="<?php echo base_url(); ?>dashboard" class="btn btn-secondary">CANCEL</a>
+                            <a href="<?php echo base_url() . 'dashboard/delete/' . encrypt_it($request[0]['rsd_id']); ?>" class="btn btn-danger me-2" onclick="return confirm('Are you sure you want to cancel your request?');">CANCEL</a>
                             <button type="submit" class="btn btn-primary" name="submit" value="submit">UPDATE REQUEST <i class="fas fa-chevron-right fa-fw"></i></button>
                         </div>
                     </div>

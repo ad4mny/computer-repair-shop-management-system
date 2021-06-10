@@ -158,7 +158,9 @@
                                     if ($request[0]['rsd_progress'] == '0') {
                                         switch ($request[0]['rsd_status']) {
                                             case '1':
-                                                echo '<a href="' . base_url() . 'dashboard" class="btn btn-danger me-2">CANCEL</a>';
+                                    ?>
+                                                <a href="<?php echo base_url() . 'dashboard/delete/' . encrypt_it($request[0]['rsd_id']); ?>" class="btn btn-danger me-2" onclick="return confirm('Are you sure you want to cancel your request?');">CANCEL</a>
+                                    <?php
                                                 echo '<button class="btn btn-primary" id="continue_btn">CONTINUE <i class="fas fa-chevron-down fa-fw"></i></button>';
                                                 break;
                                             case '0':
