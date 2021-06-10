@@ -162,20 +162,24 @@
                 <div class="row mx-3">
                     <div class="col text-end">
                         <?php
-                        if ($request[0]['rsd_progress'] !== '1') {
-                            switch ($request[0]['rsd_status']) {
-                                case '1':
-                                    echo '<button class="btn btn-primary" id="continue_btn">CONTINUE <i class="fas fa-chevron-right fa-fw fa-sm me-1"></i></button>';
-                                    break;
-                                case '0':
-                                    echo '<small class="text-muted">The technician is unable to repair your device but you need to pay the inspection fees.</small><br>';
-                                    echo '<a href="' . base_url() . 'payment/pay/' . encrypt_it($request[0]['rsd_id']) . '" type="submit" class="btn btn-primary mt-2" name="submit">PAY INSPECTION FEE <i class="fas fa-chevron-right fa-fw"></i></a>';
-                                    break;
-                                default:
-                                    echo '<small class="text-muted">Awaiting device pickup by runner.</small><br>';
-                                    echo '<a href="' . base_url() . 'status/' . encrypt_it($request[0]['rsd_id']) . '/update" class="btn btn-primary mt-2"><i class="fas fa-edit fa-fw fa-sm me-1"></i> UPDATE REQUEST</a>';
-                                    break;
-                            }
+                        if ($request[0]['rsd_status'] == null && $request[0]['rsd_progress'] == null) {
+
+                            echo '<small class="text-muted">Awaiting device pickup by runner.</small><br>';
+                            echo '<a href="' . base_url() . 'status/' . encrypt_it($request[0]['rsd_id']) . '/update" class="btn btn-primary mt-2"><i class="fas fa-edit fa-fw fa-sm me-1"></i> UPDATE REQUEST</a>';
+
+                        } else if ($request[0]['rsd_status'] == null && $request[0]['rsd_progress'] == '0') {
+
+                            echo '<small class="text-muted">Awaiting for staff to repair your device.</small><br>';
+
+                        } else if ($request[0]['rsd_status'] == '0' && $request[0]['rsd_progress'] == '0') {
+
+                            echo '<small class="text-muted">The technician is unable to repair your device but you need to pay the inspection fees.</small><br>';
+                            echo '<a href="' . base_url() . 'payment/pay/' . encrypt_it($request[0]['rsd_id']) . '" type="submit" class="btn btn-primary mt-2" name="submit">PAY INSPECTION FEE <i class="fas fa-chevron-right fa-fw"></i></a>';
+
+                        } else if ($request[0]['rsd_status'] == '1' && $request[0]['rsd_progress'] == '0') {
+
+                            echo '<button class="btn btn-primary" id="continue_btn">CONTINUE <i class="fas fa-chevron-right fa-fw fa-sm me-1"></i></button>';
+                            
                         } else {
                             echo '<small class="text-muted">Please wait while the technician repairing your device.</small>';
                         }

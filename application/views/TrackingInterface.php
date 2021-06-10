@@ -15,7 +15,20 @@
                 <?php
                 if (isset($tracking) && is_array($tracking) && !empty($tracking) && isset($track) && is_array($track) && !empty($track)) {
                     foreach ($tracking as $row) {
-                        if ($row['rsd_status'] != '0') {
+                        if ($row['rsd_status'] == '0' && $row['rsd_progress'] == '0') {
+                            echo '<div class="mt-5"> <p>Cancelled / Unable to repair</p></div>';
+                            if ($track[0]['td_rsd_id'] == $row['rsd_id']) {
+                                echo '<div class="py-2 bg-danger rounded-lg mb-2 border-start border-white border-5 shadow position-relative">';
+                            } else {
+                                echo '<div class="border py-2 bg-danger rounded-lg mb-2 position-relative">';
+                            }
+                            echo '<a href="' . base_url() . 'track/' . encrypt_it($row['rsd_id']) . '" class="text-capitalize">';
+                            echo '<h4 class="px-3 fw-light text-capitalize text-white">' . $row['rsd_device_brand'] . ' ' . $row['rsd_device_model'] . '</h4>';
+                            echo '<div class="px-3  text-white">Service ID: DCRS-' . encrypt_it($row['rsd_id']) . '</div>';
+                            echo '</a>';
+                            echo '<span class="position-absolute top-50 end-0 translate-middle me-1"><i class="fas fa-chevron-right fa-fw fa-lg text-white"></i></span>';
+                            echo '</div>';
+                        } else if ($row['rsd_status'] == '1' && $row['rsd_progress'] != '0'){
                             if ($track[0]['td_rsd_id'] == $row['rsd_id']) {
                                 echo '<div class="py-2 bg-white rounded-lg mb-2 border-start border-primary border-5 shadow position-relative">';
                             } else {
@@ -26,15 +39,6 @@
                             echo '<div class="px-3  text-muted">Service ID: DCRS-' . encrypt_it($row['rsd_id']) . '</div>';
                             echo '</a>';
                             echo '<span class="position-absolute top-50 end-0 translate-middle me-1"><i class="fas fa-chevron-right fa-fw fa-lg text-muted"></i></span>';
-                            echo '</div>';
-                        } else {
-                            echo '<div class="mt-5"> <p>Cancelled / Unable to repair</p></div>';
-                            echo '<div class="border py-2 bg-danger rounded-lg mb-2 position-relative">';
-                            echo '<a href="' . base_url() . 'track/' . encrypt_it($row['rsd_id']) . '" class="text-capitalize">';
-                            echo '<h4 class="px-3 fw-light text-capitalize text-white">' . $row['rsd_device_brand'] . ' ' . $row['rsd_device_model'] . '</h4>';
-                            echo '<div class="px-3  text-white">Service ID: DCRS-' . encrypt_it($row['rsd_id']) . '</div>';
-                            echo '</a>';
-                            echo '<span class="position-absolute top-50 end-0 translate-middle me-1"><i class="fas fa-chevron-right fa-fw fa-lg text-white"></i></span>';
                             echo '</div>';
                         }
                     }

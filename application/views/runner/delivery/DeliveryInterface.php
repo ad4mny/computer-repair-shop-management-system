@@ -22,7 +22,7 @@
                         <div class="col mb-3">
                             <div class="card text-white bg-info shadow rounded-lg border position-relative h-100">
                                 <div class="card-body">
-                                    <span><i class="fas fa-box fa-lg fa-fw"></i> NEW DELIVERY</span>
+                                    <span><i class="fas fa-angle-double-right fa-lg fa-fw"></i> CURRENTLY DELIVERING</span>
                                     <div class="card-title p-4 fw-light text-capitalize">
                                         <h1>
                                             <?php echo $row['rsd_device_brand'] . '<br><small>' . $row['rsd_device_model'] . '</small>'; ?>
@@ -30,9 +30,15 @@
                                     </div>
                                     <div class="card-text text-capitalize pb-4 px-4">
                                         <small>Delivery Address:</small>
-                                        <h5>
+                                        <div>
+                                            <?php echo $row['cd_full_name']; ?>
+                                        </div>
+                                        <div>
+                                            <?php echo $row['cd_phone']; ?>
+                                        </div>
+                                        <div>
                                             <?php echo $row['cd_street_1'] . ', ' . $row['cd_street_2'] . ', ' . $row['cd_postcode'] . ', ' . $row['cd_city'] . ', ' . $row['cd_state']; ?>
-                                        </h5>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="position-absolute top-100 start-50 translate-middle ">
@@ -57,9 +63,15 @@
                                     </div>
                                     <div class="card-text text-capitalize pb-4 px-4">
                                         <small>Delivery Address:</small>
-                                        <h5>
+                                        <div>
+                                            <?php echo $row['cd_full_name']; ?>
+                                        </div>
+                                        <div>
+                                            <?php echo $row['cd_phone']; ?>
+                                        </div>
+                                        <div>
                                             <?php echo $row['cd_street_1'] . ', ' . $row['cd_street_2'] . ', ' . $row['cd_postcode'] . ', ' . $row['cd_city'] . ', ' . $row['cd_state']; ?>
-                                        </h5>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="card-footer text-center text-capitalize">
@@ -83,17 +95,27 @@
                     <div class="col mb-3">
                         <div class="card text-white bg-secondary shadow rounded-lg border position-relative h-100">
                             <div class="card-body">
-                                <span><i class="fas fa-box fa-lg fa-fw"></i> NEW PICKUP</span>
+                                <span><i class="fas fa-angle-double-right fa-lg fa-fw"></i> CURRENTLY PICKUP</span>
                                 <div class="card-title p-4 fw-light text-capitalize">
                                     <h1>
                                         <?php echo $row['rsd_device_brand'] . '<br><small>' . $row['rsd_device_model'] . '</small>'; ?>
                                     </h1>
                                 </div>
                                 <div class="card-text text-capitalize pb-4 px-4">
+                                    <small>Pickup Datetime:</small>
+                                    <div><?php echo $row['rsd_pickup_log']; ?></div>
+                                </div>
+                                <div class="card-text text-capitalize pb-4 px-4">
                                     <small>Pickup Address:</small>
-                                    <h5>
+                                    <div>
+                                        <?php echo $row['cd_full_name']; ?>
+                                    </div>
+                                    <div>
+                                        <?php echo $row['cd_phone']; ?>
+                                    </div>
+                                    <div>
                                         <?php echo $row['cd_street_1'] . ', ' . $row['cd_street_2'] . ', ' . $row['cd_postcode'] . ', ' . $row['cd_city'] . ', ' . $row['cd_state']; ?>
-                                    </h5>
+                                    </div>
                                 </div>
                             </div>
                             <div class="position-absolute top-100 start-50 translate-middle ">

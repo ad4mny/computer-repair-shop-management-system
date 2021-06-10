@@ -17,14 +17,6 @@ class StatusModel extends CI_Model
     public function update_repair_request_model($request_id, $progress)
     {
         $data = array(
-            'td_rsd_id' => decrypt_it($request_id),
-            'td_status' => 'Completed',
-            'td_log' => date('Y-m-d H:i:s ')
-        );
-
-        $this->db->insert('track_data', $data);
-
-        $data = array(
             'rsd_progress' => $progress,
             'rsd_comment' => 'Repair is complete',
         );
