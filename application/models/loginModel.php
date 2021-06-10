@@ -13,7 +13,7 @@ class LoginModel extends CI_Model
             $result = $query->row();
             
             $data = array(
-                'ud_log' => date('H:m:s Y-m-d')
+                'ud_log' => date('Y-m-d H:i:s ')
             );
 
             $this->db->where('ud_id', $result->ud_id);
@@ -61,8 +61,8 @@ class LoginModel extends CI_Model
             'ud_usr' =>  $username,
             'ud_pwd' =>  $password,
             'ud_role' => 0,
-            'ud_log' => date('H:m:s Y-m-d'),
-            'ud_created' => date('H:m:s Y-m-d')
+            'ud_log' => date('Y-m-d H:i:s '),
+            'ud_created' => date('Y-m-d H:i:s ')
         );
 
         // insert user data
@@ -102,8 +102,8 @@ class LoginModel extends CI_Model
             'ud_usr' => $username,
             'ud_pwd' => $password,
             'ud_role' => $type,
-            'ud_log' => date('H:m:s Y-m-d'),
-            'ud_created' => date('H:m:s Y-m-d')
+            'ud_log' => date('Y-m-d H:i:s '),
+            'ud_created' => date('Y-m-d H:i:s ')
         );
 
         // insert user data

@@ -11,7 +11,7 @@ class RequestModel extends CI_Model
             'rsd_device_color' => $color,
             'rsd_damage_severity' => $severity,
             'rsd_damage_info' => $information,
-            'rsd_log' => date('H:m:s Y-m-d')
+            'rsd_log' => date('Y-m-d H:i:s ')
         );
 
         return $this->db->insert('repair_service_data', $data);
@@ -26,7 +26,7 @@ class RequestModel extends CI_Model
             'rsd_device_color' => $color,
             'rsd_damage_severity' => $severity,
             'rsd_damage_info' => $information,
-            'rsd_log' => date('H:m:s Y-m-d')
+            'rsd_log' => date('Y-m-d H:i:s ')
         );
         $this->db->where('rsd_id', decrypt_it($request_id));
         return $this->db->update('repair_service_data', $data);

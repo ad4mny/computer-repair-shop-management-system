@@ -18,12 +18,12 @@ class ProfileModel extends CI_Model
             $data = array(
                 'ud_usr' => $username,
                 'ud_pic' => $picture,
-                'ud_log' => date('H:m:s Y-m-d')
+                'ud_log' => date('Y-m-d H:i:s ')
             );
         } else {
             $data = array(
                 'ud_usr' => $username,
-                'ud_log' => date('H:m:s Y-m-d')
+                'ud_log' => date('Y-m-d H:i:s ')
             );
         }
 
@@ -38,7 +38,7 @@ class ProfileModel extends CI_Model
             'cd_postcode' => $postcode,
             'cd_city' => $city,
             'cd_state' => $state,
-            'cd_log' => date('H:m:s Y-m-d')
+            'cd_log' => date('Y-m-d H:i:s ')
         );
 
         $this->db->where('cd_ud_id', decrypt_it($user_id));
@@ -55,7 +55,7 @@ class ProfileModel extends CI_Model
         if (md5($old_password) == $result->ud_pwd) {
             $data = array(
                 'ud_pwd' => md5($password),
-                'ud_log' => date('H:m:s Y-m-d')
+                'ud_log' => date('Y-m-d H:i:s ')
             );
 
             $this->db->where('ud_id', decrypt_it($user_id));

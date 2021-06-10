@@ -169,7 +169,7 @@ class PaymentController extends CI_Controller
         $text .= "\nIPN Response from Paypal Server:\n " . $this->ipn_response;
 
         // Write to log 
-        $fp = fopen($this->ipn_log_file, date('H:m:s d/m/y'));
+        $fp = fopen($this->ipn_log_file, date('Y-m-d H:i:s '));
         fwrite($fp, $text . "\n\n");
         fclose($fp);
     }

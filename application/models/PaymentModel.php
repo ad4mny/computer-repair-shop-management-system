@@ -18,7 +18,7 @@ class PaymentModel extends CI_Model
             'pd_rsd_id' => decrypt_it($paypal_return["item_number"]),
             'pd_payment_gross' => $paypal_return["mc_gross"],
             'pd_status' => $paypal_return["payment_status"],
-            'pd_log' => date('H:m:s Y-m-d')
+            'pd_log' => date('Y-m-d H:i:s ')
         );
 
         return $this->db->insert('payment_data', $data);
@@ -30,12 +30,12 @@ class PaymentModel extends CI_Model
             array(
                 'td_rsd_id' =>  decrypt_it($request_id),
                 'td_status' => 'Paid',
-                'td_log' => date('H:m:s Y-m-d')
+                'td_log' => date('Y-m-d H:i:s ')
             ),
             array(
                 'td_rsd_id' =>  decrypt_it($request_id),
                 'td_status' => 'Repairing',
-                'td_log' => date('H:m:s Y-m-d')
+                'td_log' => date('Y-m-d H:i:s ')
             )
         );
 
@@ -47,7 +47,7 @@ class PaymentModel extends CI_Model
         $data = array(
             'rsd_progress' => 1,
             'rsd_comment' => 'Repairing',
-            'rsd_log' => date('H:m:s Y-m-d')
+            'rsd_log' => date('Y-m-d H:i:s ')
         );
 
         $this->db->where('rsd_id', decrypt_it($request_id));

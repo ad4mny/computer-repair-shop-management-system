@@ -32,7 +32,7 @@ class DeliveryModel extends CI_Model
             'td_rsd_id' => decrypt_it($repair_id),
             'td_rd_id' => decrypt_it($runner_id),
             'td_status' => 'Delivered',
-            'td_log' => date('H:m:s Y-m-d'),
+            'td_log' => date('Y-m-d H:i:s '),
         );
         return $this->db->insert('track_data', $data);
     }
