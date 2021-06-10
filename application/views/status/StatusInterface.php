@@ -192,7 +192,7 @@
                 <div class="my-5" id="delivery_info" style="display:none;">
                     <div class="row pt-5">
                         <div class="col">
-                            <h3 class="display-4 mb-0 text-secondary ">Delivery & Pickup Information</h3>
+                            <h3 class="display-4 mb-0 text-secondary ">Delivery Information</h3>
                         </div>
                     </div>
                     <div class="row  p-3">
