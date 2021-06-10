@@ -64,17 +64,15 @@
                                     </div>
                                     <div class="card-text text-uppercase text-warning text-center mt-5 ">
                                         <?php
-                                        if ($row['rsd_progress'] != null) {
                                             if ($row['rsd_status'] == null) {
                                                 echo 'Inspection Pending';
                                             }
                                             if ($row['rsd_status'] == '0') {
                                                 echo 'Payment Pending';
                                             }
-                                            if ($row['rsd_status'] == '1') {
+                                            if ($row['rsd_status'] == '1' && $row['rsd_progress'] != '1') {
                                                 echo 'Payment Pending';
                                             }
-                                        }
                                         ?>
                                     </div>
                                 </div>
