@@ -264,10 +264,10 @@
                                 </div>
                                 <div class="col-auto">
                                     <select class="form-select" name="pickup_time" required>
-                                        <option value="10">10.00 AM</option>
-                                        <option value="2">2.00 PM</option>
-                                        <option value="6">6.00 PM</option>
-                                        <option value="8">8.00 PM</option>
+                                        <option value="10:00:00">10.00 AM</option>
+                                        <option value="14:00:00">2.00 PM</option>
+                                        <option value="18:00:00">6.00 PM</option>
+                                        <option value="20:00:00">8.00 PM</option>
                                     </select>
                                 </div>
                                 <div class="col-auto">

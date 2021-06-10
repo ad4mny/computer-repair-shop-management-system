@@ -53,4 +53,14 @@ class PaymentModel extends CI_Model
         $this->db->where('rsd_id', decrypt_it($request_id));
         return $this->db->update('repair_service_data', $data);
     }
+    
+    public function set_pickup_model($request_id, $datetime)
+    {
+        $data = array(
+            'rsd_pickup_log' => $datetime
+        );
+
+        $this->db->where('rsd_id', decrypt_it($request_id));
+        return $this->db->update('repair_service_data', $data);
+    }
 }

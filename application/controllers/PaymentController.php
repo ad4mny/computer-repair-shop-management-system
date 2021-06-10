@@ -10,6 +10,8 @@ class PaymentController extends CI_Controller
     var $ipn_data = array();
     var $fields = array();
 
+    private $pickup_datetime;
+
     public function __construct()
     {
         parent::__construct();
@@ -51,16 +53,11 @@ class PaymentController extends CI_Controller
     {
         // Get post detail
         $user_id = $this->session->userdata('userid');
-        $this->session->set_userdata('pickup_date', $this->input->post('pickup_date'));
-        $this->session->set_userdata('pickup_time', $this->input->post('pickup_time'));
+        $this->pickup_datetime = $this->input->post('pickup_date') . ' ' .  $this->input->post('pickup_time');
 
         // Get customer detail
         $customer = $this->ProfileModel->get_profile_info_model($user_id);
         $customer_id = encrypt_it($customer[0]['cd_id']);
-        $customer_full_name = explode(' ',  $customer[0]['cd_full_name']);
-        $name_length = sizeof($customer_full_name);
-        $customer_first_name = $customer_full_name[0];
-        $customer_last_name = $customer_full_name[$name_length - 1];
 
         // Get service detail
         $service = $this->StatusModel->get_ongoing_request_by_id_model($request_id);
@@ -76,45 +73,48 @@ class PaymentController extends CI_Controller
         $this->paypal_field('item_number', $service_id);
         $this->paypal_field('amount', $service_price);
         $this->paypal_field('custom', $customer_id);
-        $this->paypal_field('first_name', $customer_first_name);
-        $this->paypal_field('last_name', $customer_last_name);
-        $this->paypal_field('no_shipping', 1);
 
         // Render paypal form 
-        $this->paypal_redirect();
+        if ($this->PaymentModel->get_existing_payment_model($service_id) === 0) {
+            $this->paypal_redirect();
+        } else {
+            $data['msg'] = 'Transaction has been made.';
+            $this->PaymentModel->add_tracking_model($service_id);
+            $this->PaymentModel->set_request_ongoing_model($service_id);
+            $this->PaymentModel->set_pickup_model($service_id, $this->pickup_datetime);
+            $this->get_pay_cancel($data);
+        }
     }
 
-    public function get_pay_cancel()
+    public function get_pay_cancel($data = array())
     {
-        $this->index('cancel');
+        $this->index('cancel', $data);
     }
 
     public function get_pay_ipn()
     {
         // Retrieve transaction data from PayPal IPN POST 
         $paypal = $this->input->post();
-        
+
         if (!empty($paypal)) {
             // Validate and get the ipn response 
             $ipn_check = $this->validate_ipn($paypal);
             // Check whether the transaction is valid 
             if ($ipn_check) {
-                // Check whether the transaction data is exists 
-                if ($this->PaymentModel->get_existing_payment_model($paypal["item_number"]) === 0) {
-                    // Insert the transaction data in the database 
-                    $this->PaymentModel->add_transaction_model($paypal);
-                    $this->PaymentModel->add_tracking_model($paypal["item_number"]);
-                    $this->PaymentModel->set_request_ongoing_model($paypal["item_number"]);
-                    $data['paypal'] = $paypal;
-                    $this->index('success', $data);
-                } else {
-                    $this->get_pay_cancel();
-                }
+                // Insert the transaction data in the database 
+                $this->PaymentModel->add_transaction_model($paypal);
+                $this->PaymentModel->add_tracking_model($paypal["item_number"]);
+                $this->PaymentModel->set_request_ongoing_model($paypal["item_number"]);
+                $this->PaymentModel->set_pickup_model($paypal["item_number"], $this->pickup_datetime);
+                $data['paypal'] = $paypal;
+                $this->index('success', $data);
             } else {
-                $this->get_pay_cancel();
+                $data['msg'] = 'Paypal IPN checks failed.';
+                $this->get_pay_cancel($data);
             }
         } else {
-            $this->get_pay_cancel();
+            $data['msg'] = 'Paypal payment failed.';
+            $this->get_pay_cancel($data);
         }
     }
 
