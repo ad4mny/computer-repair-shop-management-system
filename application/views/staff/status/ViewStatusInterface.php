@@ -96,10 +96,17 @@
                                         <?php echo $request[0]['rsd_device_color']; ?>
                                     </p>
                                 </div>
+
+                                <div class="py-3 border-bottom">
+                                    <small class="text-muted">Damage Information</small>
+                                    <p class="text-capitalize mb-0"><i class="fas fa-circle-notch fa-xs fa-fw"></i>
+                                        <?php echo $request[0]['rsd_damage_info']; ?>
+                                    </p>
+                                </div>
                             </div>
                             <div class="col">
                                 <div class="py-3 border-bottom">
-                                    <small class="">Repair Progress</small>
+                                    <small class="text-muted">Repair Progress</small>
                                     <?php
                                     switch ($request[0]['rsd_progress']) {
                                         case '2':
@@ -114,34 +121,13 @@
                                     }
                                     ?>
                                 </div>
-                                <div class="py-3 border-bottom">
-                                    <small class="text-muted">Damage Information</small>
-                                    <p class="text-capitalize mb-0"><i class="fas fa-circle-notch fa-xs fa-fw"></i>
-                                        <?php
-                                        if (!empty($request[0]['rsd_comment'])) {
-                                            echo $request[0]['rsd_comment'];
-                                        } else {
-                                            echo 'None';
-                                        }
-                                        ?>
-                                    </p>
-                                </div>
-                                <div class="py-3 border-bottom">
+                                <div class="py-3 ">
                                     <small class="text-muted">Repair Status</small>
                                     <select class="form-select" name="status" id="status_select" required>
                                         <option value="0" disabled>Pending</option>
                                         <option value="1">Repairing</option>
-                                        <option value="1">Completed</option>
+                                        <option value="2">Completed</option>
                                     </select>
-                                </div>
-                                <div class="form-group pb-2" id="price_input" style="display: none;">
-                                    <small class="text-muted">Repair Estimation Cost</small>
-                                    <div class="input-group mb-2">
-                                        <div class="input-group-prepend">
-                                            <div class="input-group-text">RM</div>
-                                        </div>
-                                        <input type="number" class="form-control" name="price" placeholder="Enter quotation price" value="<?php echo $request[0]['rsd_repair_cost']; ?>">
-                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -156,16 +142,3 @@
         </div>
     </div>
 </div>
-<script>
-    $(document).ready(function() {
-        $('#status_select').on('change', function() {
-            if ($('#status_select').val() == '0') {
-                $('#reason_select').show();
-                $('#price_input').hide();
-            } else {
-                $('#reason_select').hide();
-                $('#price_input').show();
-            }
-        });
-    });
-</script>
