@@ -126,7 +126,7 @@
                                     <small>Payment Status</small>
                                     <h4 class="text-capitalize mb-0 ">
                                         <?php
-                                        if ($request[0]['rsd_progress'] === NULL) {
+                                        if ($request[0]['rsd_progress'] == NULL || $request[0]['rsd_progress'] == '0') {
                                             echo '<span class="text-warning">Pending</span>';
                                         } else {
                                             echo '<span class="text-success">Paid</span>';
@@ -162,7 +162,7 @@
                 <div class="row mx-3">
                     <div class="col text-end">
                         <?php
-                        if ($request[0]['rsd_progress'] !== null) {
+                        if ($request[0]['rsd_progress'] !== '1') {
                             switch ($request[0]['rsd_status']) {
                                 case '1':
                                     echo '<button class="btn btn-primary" id="continue_btn">CONTINUE <i class="fas fa-chevron-right fa-fw fa-sm me-1"></i></button>';
@@ -172,7 +172,7 @@
                                     echo '<a href="' . base_url() . 'payment/pay/' . encrypt_it($request[0]['rsd_id']) . '" type="submit" class="btn btn-primary mt-2" name="submit">PAY INSPECTION FEE <i class="fas fa-chevron-right fa-fw"></i></a>';
                                     break;
                                 default:
-                                    echo '<small class="text-muted">Please wait while the technician inspecting your repair request.</small><br>';
+                                    echo '<small class="text-muted">Awaiting device pickup by runner.</small><br>';
                                     echo '<a href="' . base_url() . 'status/' . encrypt_it($request[0]['rsd_id']) . '/update" class="btn btn-primary mt-2"><i class="fas fa-edit fa-fw fa-sm me-1"></i> UPDATE REQUEST</a>';
                                     break;
                             }

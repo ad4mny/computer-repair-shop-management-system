@@ -73,7 +73,7 @@ class PaymentController extends CI_Controller
         $this->paypal_field('custom', $customer_id);
 
         // Render paypal form 
-        if ($this->PaymentModel->get_existing_payment_model($service_id) !== 0) {
+        if ($this->PaymentModel->get_existing_payment_model($service_id) === 0) {
             $this->paypal_redirect();
         } else {
             $data['msg'] = 'Transaction has been made.';
