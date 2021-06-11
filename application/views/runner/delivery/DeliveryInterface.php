@@ -19,8 +19,8 @@
                 foreach ($delivery as $row) {
                     if ($row['td_status'] == 'Delivering') {
             ?>
-                        <div class="col mb-3">
-                            <div class="card text-white bg-info shadow rounded-lg border position-relative h-100">
+                        <div class="col mb-5">
+                            <div class="card text-white bg-primary shadow-sm rounded-3 position-relative h-100">
                                 <div class="card-body">
                                     <span><i class="fas fa-angle-double-right fa-lg fa-fw"></i> CURRENTLY DELIVERING</span>
                                     <div class="card-title p-4 fw-light text-capitalize">
@@ -29,7 +29,7 @@
                                         </h1>
                                     </div>
                                     <div class="card-text text-capitalize pb-4 px-4">
-                                        <small>Delivery Address:</small>
+                                        <small class="text-white border-bottom">Delivery Address</small>
                                         <div>
                                             <?php echo $row['cd_full_name']; ?>
                                         </div>
@@ -53,7 +53,7 @@
                     } else {
                     ?>
                         <div class="col mb-3">
-                            <div class="card bg-white  rounded-lg  position-relative h-100">
+                            <div class="card bg-white  rounded-3  position-relative h-100">
                                 <div class="card-body">
                                     <span><i class="fas fa-check fa-lg fa-fw"></i> COMPLETED</span>
                                     <div class="card-title p-4 fw-light text-capitalize">
@@ -62,7 +62,7 @@
                                         </h1>
                                     </div>
                                     <div class="card-text text-capitalize pb-4 px-4">
-                                        <small>Delivery Address:</small>
+                                        <small class="border-bottom text-secondary">Delivery Address</small>
                                         <div>
                                             <?php echo $row['cd_full_name']; ?>
                                         </div>
@@ -93,20 +93,20 @@
                 foreach ($pickup as $row) {
             ?>
                     <div class="col mb-3">
-                        <div class="card text-white bg-secondary shadow rounded-lg border position-relative h-100">
+                        <div class="card text-white bg-secondary shadow rounded-3 position-relative h-100">
                             <div class="card-body">
-                                <span><i class="fas fa-angle-double-right fa-lg fa-fw"></i> CURRENTLY PICKUP</span>
+                                <span><i class="fas fa-angle-double-right fa-lg fa-fw"></i> CURRENTLY PICKING UP</span>
                                 <div class="card-title p-4 fw-light text-capitalize">
                                     <h1>
                                         <?php echo $row['rsd_device_brand'] . '<br><small>' . $row['rsd_device_model'] . '</small>'; ?>
                                     </h1>
                                 </div>
-                                <div class="card-text text-capitalize pb-4 px-4">
-                                    <small>Pickup Datetime:</small>
+                                <div class="card-text text-capitalize pb-1 px-4">
+                                    <small class="text-white border-bottom">Pickup Datetime</small>
                                     <div><?php echo $row['rsd_pickup_log']; ?></div>
                                 </div>
-                                <div class="card-text text-capitalize pb-4 px-4">
-                                    <small>Pickup Address:</small>
+                                <div class="card-text text-capitalize pb-5 px-4">
+                                    <small class="text-white border-bottom">Pickup Address</small>
                                     <div>
                                         <?php echo $row['cd_full_name']; ?>
                                     </div>

@@ -19,7 +19,7 @@
                 foreach ($delivery as $row) {
             ?>
                     <div class="col mb-5">
-                        <div class="card text-white bg-info shadow rounded-lg border position-relative h-100">
+                        <div class="card text-white bg-primary shadow rounded-3 border position-relative h-100">
                             <div class="card-body">
                                 <span><i class="fas fa-box fa-lg fa-fw"></i> NEW DELIVERY</span>
                                 <div class="card-title p-4 fw-light text-capitalize">
@@ -27,8 +27,8 @@
                                         <?php echo $row['rsd_device_brand'] . '<br><small>' . $row['rsd_device_model'] . '</small>'; ?>
                                     </h1>
                                 </div>
-                                <div class="card-text text-capitalize pb-4 px-4">
-                                    <small>Delivery Address:</small>
+                                <div class="card-text text-capitalize pb-5 px-4">
+                                    <small class="text-white border-bottom">Delivery Address</small>
                                     <div>
                                         <?php echo $row['cd_full_name']; ?>
                                     </div>
@@ -40,7 +40,12 @@
                                     </div>
                                 </div>
                             </div>
-                            <a href="<?php echo  base_url() . 'runner/dashboard/take_delivery_request/' . encrypt_it($row['rsd_id']); ?>" class="position-absolute top-100 start-50 translate-middle" onclick="return confirm('Are you sure want to accept this delivery?');"><span class="fa-stack fa-2x "><i class="fa fa-circle fa-stack-2x text-primary"></i><i class="fa fa-plus fa-stack-1x text-white"></i></span></a>
+                            <a href="<?php echo  base_url() . 'runner/dashboard/take_delivery_request/' . encrypt_it($row['rsd_id']); ?>" class="position-absolute top-100 start-50 translate-middle" onclick="return confirm('Are you sure want to accept this delivery?');">
+                                <span class="fa-stack fa-2x ">
+                                    <i class="fa fa-circle fa-stack-2x text-info"></i>
+                                    <i class="fa fa-plus fa-stack-1x text-white"></i>
+                                </span>
+                            </a>
                         </div>
                     </div>
             <?php
@@ -57,7 +62,7 @@
                 foreach ($pickup as $row) {
             ?>
                     <div class="col mb-3">
-                        <div class="card text-white bg-secondary shadow rounded-lg border position-relative h-100">
+                        <div class="card text-white bg-secondary shadow rounded-3 border position-relative h-100">
                             <div class="card-body">
                                 <span><i class="fas fa-box fa-lg fa-fw"></i> NEW PICKUP</span>
                                 <div class="card-title p-4 fw-light text-capitalize">
@@ -65,12 +70,12 @@
                                         <?php echo $row['rsd_device_brand'] . '<br><small>' . $row['rsd_device_model'] . '</small>'; ?>
                                     </h1>
                                 </div>
-                                <div class="card-text text-capitalize pb-4 px-4">
-                                    <small>Pickup Datetime:</small>
+                                <div class="card-text text-capitalize pb-1 px-4">
+                                    <small class="text-white border-bottom">Pickup Datetime</small>
                                     <div><?php echo $row['rsd_pickup_log']; ?></div>
                                 </div>
-                                <div class="card-text text-capitalize pb-4 px-4">
-                                    <small>Pickup Address:</small>
+                                <div class="card-text text-capitalize pb-5 px-4">
+                                    <small class="text-white border-bottom">Pickup Address</small>
                                     <div>
                                         <?php echo $row['cd_full_name']; ?>
                                     </div>

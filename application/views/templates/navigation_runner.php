@@ -1,5 +1,5 @@
   <!-- sidebar -->
-  <nav id="sidebar">
+  <nav id="sidebar" class="shadow">
       <div class="sidebar-header my-3 p-3">
           <a href="<?php echo base_url(); ?>runner/profile">
               <div class=" d-inline-flex align-middle ">
@@ -12,10 +12,10 @@
                     ?>
               </div>
               <div class="d-inline-flex flex-column align-middle">
-                  <h5 class="mb-0  fw-bold">
+                  <h5 class="mb-0">
                       <?php echo decrypt_it($this->session->userdata('username')); ?>
                   </h5><br>
-                  <small class=" mb-0 fw-light ">Runner</small>
+                  <small class=" mb-0 fw-light text-white">Runner</small>
               </div>
           </a>
       </div>

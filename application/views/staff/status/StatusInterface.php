@@ -8,7 +8,7 @@
             </div>
             <div class="row">
                 <div class="col mt-3 mx-3">
-                    <p>Accepted repair request</p>
+                    <p>All accepted repair request by you</p>
                 </div>
             </div>
             <div class="row row-cols-1 row-cols-md-3 mx-3 border-start border-2">
@@ -16,7 +16,7 @@
                     foreach ($request as $row) {
                         if ($row['rsd_status'] == '1' && $row['rsd_progress'] != '2') { ?>
                             <div class="col mb-5">
-                                <div class="card text-white bg-info shadow rounded-lg border position-relative h-100">
+                                <div class="card text-white bg-primary shadow-sm rounded-3 position-relative h-100">
                                     <?php if ($row['rsd_progress'] == '0') {
                                         echo '<span class="position-absolute top-0 start-0 m-3"><i class="fas fa-clock fa-lg fa-fw"></i> PENDING CONFIRMATION</span>';
                                     } else {
@@ -33,7 +33,7 @@
                                         <div class="px-4 pb-5">
                                             <div class="card-text text-capitalize"> <?php echo $row['rsd_damage_info']; ?></div>
                                             <div class="card-text text-capitalize">You has been assigned</div>
-                                            <div class="card-text text-capitalize pb-1">
+                                            <div class="card-text text-capitalize pb-2">
                                                 <?php
                                                 switch ($row['rsd_damage_severity']) {
                                                     case 2:
@@ -48,7 +48,7 @@
                                                 }
                                                 ?>
                                             </div>
-                                            <div class="card-text border-top pt-1"><?php echo $row['rsd_comment']; ?> </div>
+                                            <div class="card-text text-center border-top pt-2"><?php echo $row['rsd_comment']; ?> </div>
                                         </div>
                                     </div>
                                     <?php
@@ -58,7 +58,7 @@
                                     ?>
                                         <a href="<?php echo base_url() . 'staff/status/view/' . encrypt_it($row['rsd_id']); ?>" class="position-absolute top-100 start-50 translate-middle" >
                                             <span class="fa-stack fa-2x ">
-                                                <i class="fa fa-circle fa-stack-2x text-primary"></i>
+                                                <i class="fa fa-circle fa-stack-2x text-info"></i>
                                                 <i class="fa fa-tools fa-stack-1x text-white"></i>
                                             </span>
                                         </a>
@@ -72,10 +72,10 @@
                         ?>
                             <div class="col mb-5">
                                 <?php if ($row['rsd_progress'] == '2') {
-                                    echo '<div class="card text-dark bg-white rounded position-relative h-100">';
+                                    echo '<div class="card text-dark bg-white rounded-3 position-relative h-100">';
                                     echo '<span class="position-absolute top-0 start-0 m-3"><i class="fas fa-check fa-lg fa-fw"></i> COMPLETED</span>';
                                 } else {
-                                    echo '<div class="card text-white bg-danger rounded position-relative h-100">';
+                                    echo '<div class="card text-white bg-danger rounded-3 position-relative h-100">';
                                     echo '<span class="position-absolute top-0 start-0 m-3"><i class="fas fa-times fa-lg fa-fw"></i> UNABLE TO REPAIR</span>';
                                 }
                                 ?>
@@ -88,7 +88,7 @@
                                         <div class="px-4 pb-5">
                                             <div class="card-text text-capitalize"> <?php echo $row['rsd_damage_info']; ?></div>
                                             <div class="card-text text-capitalize">You has been assigned</div>
-                                            <div class="card-text text-capitalize pb-1">
+                                            <div class="card-text text-capitalize pb-2">
                                                 <?php
                                                 switch ($row['rsd_damage_severity']) {
                                                     case 2:
@@ -103,7 +103,7 @@
                                                 }
                                                 ?>
                                             </div>
-                                            <div class="card-text pt-1 border-top"><?php echo $row['rsd_comment']; ?> </div>
+                                            <div class="card-text text-center border-top pt-2"><?php echo $row['rsd_comment']; ?> </div>
                                         </div>
                                     </div>
                                     <div class="card-footer">

@@ -12,7 +12,7 @@
         </div>
         <form method="post" action="<?php echo base_url(); ?>request/add">
             <div class="row mx-3 mb-3 border-start border-2 ">
-                <div class="col-5">
+                <div class="col">
                     <div class="form-group pb-2">
                         <small class="text-muted">Device Brand</small>
                         <input type="text" class="form-control" name="brand" placeholder="Enter device brand" required>
@@ -38,7 +38,7 @@
                         <textarea class="form-control" name="information" row="4" max="100" placeholder="Max 100 characters." required></textarea>
                     </div>
                 </div>
-                <div class="col-5">
+                <div class="col">
                     <div class="form-group pb-2">
                         <small class="text-muted">Device Pickup Date</small>
                         <input type="date" class="form-control" name="pickup_date" min="<?php echo date('Y-m-d'); ?>" required>
@@ -55,8 +55,8 @@
                     </div>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-10 text-end">
+            <div class="row mx-3 mb-3 ">
+                <div class="col text-end">
                     <div class="form-group">
                         <a href="<?php echo base_url(); ?>dashboard" class="btn btn-secondary">CANCEL</a>
                         <button type="submit" class="btn btn-primary" name="submit" value="submit">SUBMIT REQUEST <i class="fas fa-chevron-right fa-fw"></i></button>

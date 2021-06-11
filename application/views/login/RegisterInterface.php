@@ -1,11 +1,11 @@
 <div class="container-fluid d-flex h-100 flex-column ">
-    <!-- alert  -->
+    <!-- Alert Section  -->
     <div id="alert" class="w-50 position-absolute" style="z-index: 1; top:10%; left: 25%;">
     </div>
-    <!-- content  -->
+    <!-- Register Section  -->
     <div class="row m-auto">
         <div class="col col-xs-12">
-            <h4 class="fw-bold mb-0 text-center">Derc's Computer Repair Shop Registration</h4>
+            <h4 class="mb-0 text-center">Join us and be part of our team!</h4>
             <div class="p-4 ">
                 <form method="post" action="" id="create_form">
                     <div class="row pt-1 pb-4 boder-bottom">
@@ -56,15 +56,25 @@
                     <div class="form-group mb-3 input-group-lg">
                         <span class="text-danger"><?php echo $this->session->flashdata("error") ?></span>
                     </div>
-                    <div class="border-top pt-3 d-flex justify-content-between align-middle">
-                        <a href="<?php echo base_url(); ?>login" class="text-primary"><i class="fas fa-chevron-left fa-fw"></i> Back to login</a>
-                        <button type="submit" class="btn btn-primary btn-block" name="submit"><i class="fas fa-sign-in-alt"></i> Create Account</button>
+                    <div class="border-top pt-3 d-flex justify-content-between align-items-center">
+                        <a href="<?php echo base_url(); ?>login" class="text-primary">
+                            <i class="fas fa-chevron-left fa-fw fa-sm"></i> Back to login
+                        </a>
+                        <button type="submit" class="btn btn-primary btn-block" name="submit">
+                            <i class="fas fa-sign-in-alt fa-fw fa-sm"></i> Join Now
+                        </button>
                     </div>
                 </form>
             </div>
         </div>
     </div>
 </div>
+<!-- Footer Section -->
+<footer>
+    <div class="text-center py-2">
+        <small>&copy; DCRS 2021 </small>
+    </div>
+</footer>
 <script>
     $(document).ready(function() {
 

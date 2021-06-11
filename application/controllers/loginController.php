@@ -9,12 +9,15 @@ class LoginController extends CI_Controller
 
     public function index($page = 'login')
     {
-        $this->load->view('templates/header');
+        $data['css'] = '<link rel="stylesheet" href="' . base_url() . 'assets/css/login.css">';
         if ($page === 'create') {
+            $this->load->view('templates/header');
             $this->load->view('login/CreateInterface');
         } else  if ($page === 'create_staff') {
+            $this->load->view('templates/header');
             $this->load->view('login/RegisterInterface');
         } else {
+            $this->load->view('templates/header', $data);
             $this->load->view('login/LoginInterface');
         }
         $this->load->view('templates/footer');

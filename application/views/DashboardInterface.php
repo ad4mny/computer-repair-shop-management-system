@@ -19,14 +19,16 @@
                         <div class="col mb-5">
                             <?php
                             if ($row['rsd_status'] == '0') {
-                                echo '<div class="card text-white bg-danger shadow-lg rounded position-relative h-100">';
+                                echo '<div class="card text-white bg-danger shadow-lg rounded-3 position-relative h-100">';
                                 echo '<span class="position-absolute top-0 start-0 m-3"><i class="fas fa-times fa-lg fa-fw"></i></span>';
                             } else {
-                                echo '<div class="card text-white bg-secondary shadow-lg rounded position-relative h-100">';
+                                echo '<div class="card text-white bg-secondary shadow-lg rounded-3 position-relative h-100">';
                                 echo '<span class="position-absolute top-0 start-0 m-3"><i class="fas fa-clock fa-lg fa-fw"></i></span>';
                             }
                             ?>
-                            <span class="position-absolute top-0 end-0 m-3"><?php echo 'DCRS-' . encrypt_it($row['rsd_id']); ?></span>
+                            <span class="position-absolute top-0 end-0 m-3">
+                                <?php echo 'DCRS-' . encrypt_it($row['rsd_id']); ?>
+                            </span>
                             <div class="card-body">
                                 <div class="card-title  px-4 py-5 fw-light text-capitalize">
                                     <h1>
@@ -47,7 +49,7 @@
                                         }
                                         ?>
                                     </div>
-                                    <div class="card-text text-capitalize">
+                                    <div class="card-text text-capitalize pb-2">
                                         <?php
                                         switch ($row['rsd_damage_severity']) {
                                             case '2':
@@ -62,7 +64,7 @@
                                         }
                                         ?>
                                     </div>
-                                    <div class="card-text text-uppercase text-warning text-center mt-5 ">
+                                    <div class="card-text text-center pt-2 border-top">
                                         <?php
                                         if ($row['rsd_status'] == null && $row['rsd_progress'] == null) {
                                             echo 'Awaiting Runner';
@@ -70,11 +72,11 @@
                                         if ($row['rsd_status'] == null && $row['rsd_progress'] == '0') {
                                             echo 'Inspection Pending';
                                         }
-                                        if ($row['rsd_status'] == '0') {
-                                            echo 'Payment Pending';
-                                        }
                                         if ($row['rsd_status'] == '1' && $row['rsd_progress'] != '1') {
                                             echo 'Payment Pending';
+                                        }
+                                        if ($row['rsd_status'] == '1' && $row['rsd_progress'] != '0') {
+                                            echo 'Ongoing Repair';
                                         }
                                         ?>
                                     </div>
@@ -118,14 +120,13 @@
                         <div class="col mb-5">
                             <?php
                             if ($row['rsd_status'] == '0') {
-                                echo '<div class="card text-white bg-danger rounded-lg position-relative h-100">';
+                                echo '<div class="card text-white bg-danger rounded-3 position-relative h-100">';
                                 echo '<span class="position-absolute top-0 start-0 m-3"><i class="fas fa-times fa-lg fa-fw"></i> UNABLE TO REPAIR</span>';
                             } else {
-                                echo '<div class="card bg-white rounded-lg position-relative h-100">';
+                                echo '<div class="card bg-white rounded-3 position-relative h-100">';
                                 echo '<span class="position-absolute top-0 start-0 m-3"><i class="fas fa-check fa-lg fa-fw"></i> COMPLETED</span>';
                             }
                             ?>
-
                             <div class="card-body">
                                 <div class="card-title  px-4 py-5 fw-light text-capitalize">
                                     <h1>
@@ -146,7 +147,7 @@
                                         }
                                         ?>
                                     </div>
-                                    <div class="card-text text-capitalize">
+                                    <div class="card-text text-capitalize pb-2">
                                         <?php
                                         switch ($row['rsd_damage_severity']) {
                                             case 2:
@@ -161,18 +162,21 @@
                                         }
                                         ?>
                                     </div>
+                                    <div class="card-text text-center text-capitalize border-top pt-2">
+                                        <?php echo $row['rsd_comment']; ?>
+                                    </div>
                                 </div>
                             </div>
                             <div class="card-footer text-center"><?php echo 'DCRS-' . encrypt_it($row['rsd_id']); ?></div>
                         </div>
-        </div>
-<?php
+            <?php
+                        echo '</div>';
                     }
                 }
             } else {
                 echo '<div class="col"><p>No upcoming and past request.</p></div>';
             }
-?>
+            ?>
+        </div>
     </div>
-</div>
 </div>

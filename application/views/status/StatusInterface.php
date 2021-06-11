@@ -14,7 +14,7 @@
             <?php if (is_array($request) && !empty($request)) { ?>
                 <div class="row mx-3 mb-3 border-start border-2 ">
                     <div class="col">
-                        <div class="card text-white bg-primary shadow rounded-lg border position-relative h-100">
+                        <div class="card text-white bg-primary shadow-sm rounded-3 position-relative h-100">
                             <?php if ($request[0]['rsd_progress'] == 0) {
                                 echo '<span class="position-absolute top-0 start-0 m-3"><i class="fas fa-clock fa-lg fa-fw"></i> PENDING</span>';
                             } else {
@@ -66,16 +66,11 @@
                         <div class="row p-3">
                             <div class="col border-end">
                                 <div class="py-3 border-bottom">
-                                    <small>Device Detail</small>
-                                    <p class="text-capitalize mb-0"><i class="fas fa-circle-notch fa-xs fa-fw"></i> <?php echo $request[0]['rsd_device_brand'] . ' ' . $request[0]['rsd_device_model']; ?></p>
-                                    <p class="text-capitalize mb-0"><i class="fas fa-circle-notch fa-xs fa-fw"></i> <?php echo $request[0]['rsd_device_color']; ?></p>
-                                </div>
-                                <div class="py-3 border-bottom">
                                     <small>Repair Status</small>
                                     <?php
                                     switch ($request[0]['rsd_status']) {
                                         case '1':
-                                            echo '<p class="text-capitalize mb-0 text-info"><i class="fas fa-circle-notch fa-xs fa-fw"></i> Can be repair</p>';
+                                            echo '<p class="text-capitalize mb-0 text-primary fw-normal"><i class="fas fa-circle-notch fa-xs fa-fw"></i> Can be repair</p>';
                                             break;
                                         case '0':
                                             echo '<p class="text-capitalize mb-0 text-danger"><i class="fas fa-circle-notch fa-xs fa-fw"></i> Cannot be repair</p>';
@@ -85,6 +80,11 @@
                                             break;
                                     }
                                     ?>
+                                </div>
+                                <div class="py-3 border-bottom">
+                                    <small>Device Detail</small>
+                                    <p class="text-capitalize mb-0"><i class="fas fa-circle-notch fa-xs fa-fw"></i> <?php echo $request[0]['rsd_device_brand'] . ' ' . $request[0]['rsd_device_model']; ?></p>
+                                    <p class="text-capitalize mb-0"><i class="fas fa-circle-notch fa-xs fa-fw"></i> <?php echo $request[0]['rsd_device_color']; ?></p>
                                 </div>
                                 <div class="py-3 border-bottom">
                                     <small>Damage Info</small>
@@ -127,9 +127,9 @@
                                     <h4 class="text-capitalize mb-0 ">
                                         <?php
                                         if ($request[0]['rsd_progress'] == NULL || $request[0]['rsd_progress'] == '0') {
-                                            echo '<span class="text-warning">Pending</span>';
+                                            echo '<span class="text-danger">Payment Pending</span>';
                                         } else {
-                                            echo '<span class="text-success">Paid</span>';
+                                            echo '<span class="text-success">Payment Paid</span>';
                                         } ?>
                                     </h4>
                                     <small>Inspection Charge </small>
@@ -166,20 +166,16 @@
 
                             echo '<small class="text-muted">Awaiting device pickup by runner.</small><br>';
                             echo '<a href="' . base_url() . 'status/' . encrypt_it($request[0]['rsd_id']) . '/update" class="btn btn-primary mt-2"><i class="fas fa-edit fa-fw fa-sm me-1"></i> UPDATE REQUEST</a>';
-
                         } else if ($request[0]['rsd_status'] == null && $request[0]['rsd_progress'] == '0') {
 
                             echo '<small class="text-muted">Awaiting for staff to repair your device.</small><br>';
-
                         } else if ($request[0]['rsd_status'] == '0' && $request[0]['rsd_progress'] == '0') {
 
                             echo '<small class="text-muted">The technician is unable to repair your device but you need to pay the inspection fees.</small><br>';
                             echo '<a href="' . base_url() . 'payment/pay/' . encrypt_it($request[0]['rsd_id']) . '" type="submit" class="btn btn-primary mt-2" name="submit">PAY INSPECTION FEE <i class="fas fa-chevron-right fa-fw"></i></a>';
-
                         } else if ($request[0]['rsd_status'] == '1' && $request[0]['rsd_progress'] == '0') {
 
                             echo '<button class="btn btn-primary" id="continue_btn">CONTINUE <i class="fas fa-chevron-right fa-fw fa-sm me-1"></i></button>';
-                            
                         } else {
                             echo '<small class="text-muted">Please wait while the technician repairing your device.</small>';
                         }

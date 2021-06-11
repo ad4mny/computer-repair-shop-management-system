@@ -7,17 +7,19 @@
         </div>
         <div class="row">
             <div class="col mt-3 mx-3">
-                <p>Repair request</p>
+                <p>Update information and accept repair request</p>
             </div>
         </div>
-        <div class="row mx-3 border-start border-2 mx-3">
-            <div class="col-4">
-                <?php
-                if (is_array($request) && !empty($request)) {
-                ?>
-                    <div class="col mb-5">
-                        <div class="card text-white bg-info shadow border rounded position-relative h-100">
-                            <span class="position-absolute top-0 start-0 m-3"><i class="fas fa-clock fa-lg fa-fw"></i></span>
+        <?php
+        if (is_array($request) && !empty($request)) {
+        ?>
+            <form method="post" action="<?php echo base_url(); ?>staff/dashboard/take_repair_request/<?php echo encrypt_it($request[0]['rsd_id']); ?>">
+                <div class="row mx-3 border-start border-2">
+                    <div class="col-4">
+                        <div class="card text-white bg-primary shadow-sm rounded-3 position-relative h-100">
+                            <span class="position-absolute top-0 start-0 m-3">
+                                <i class="fas fa-clock fa-lg fa-fw"></i>
+                            </span>
                             <span class="position-absolute top-0 end-0 m-3"><?php echo 'DCRS-' . encrypt_it($request[0]['rsd_id']); ?></span>
                             <div class="card-body">
                                 <div class="card-title  px-4 py-5 fw-light text-capitalize">
@@ -58,22 +60,14 @@
                             </div>
                             <a href="<?php echo base_url() . 'staff/dashboard/'; ?>" class="position-absolute top-100 start-50 translate-middle">
                                 <span class="fa-stack fa-2x">
-                                    <i class="fa fa-circle fa-stack-2x text-primary"></i>
+                                    <i class="fa fa-circle fa-stack-2x text-info"></i>
                                     <i class="fa fa-eye-slash fa-stack-1x text-white"></i>
                                 </span>
                             </a>
 
                         </div>
                     </div>
-                <?php
-                } else {
-                    redirect(base_url() . 'staff/dashboard');
-                }
-                ?>
-            </div>
-            <div class="col">
-                <?php if (is_array($request) && !empty($request)) { ?>
-                    <form method="post" action="<?php echo base_url(); ?>staff/dashboard/take_repair_request/<?php echo encrypt_it($request[0]['rsd_id']); ?>">
+                    <div class="col">
                         <div class="row p-3">
                             <div class="col">
                                 <div class="form-group pb-2">
@@ -122,21 +116,25 @@
                                         <div class="input-group-prepend">
                                             <div class="input-group-text">RM</div>
                                         </div>
-                                        <input type="number" class="form-control" name="price" placeholder="Enter quotation price" value="<?php echo $request[0]['rsd_repair_cost']; ?>" >
+                                        <input type="number" class="form-control" name="price" placeholder="Enter quotation price" value="<?php echo $request[0]['rsd_repair_cost']; ?>">
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="row p-3">
-                            <div class="col text-end">
-                                <a href="<?php echo base_url(); ?>staff/dashboard/delete/<?php echo encrypt_it($request[0]['rsd_id']); ?>" class="btn btn-danger" onclick="return confirm('Are sure you want to delete this repair request?');">DELETE REQUEST</a>
-                                <button type="submit" class="btn btn-primary" name="submit" value="submit" onclick="return confirm('Are sure you want to update this repair request as it will be assigned to you?');">UPDATE REQUEST</button>
-                            </div>
-                        </div>
-                    </form>
-                <?php } ?>
-            </div>
-        </div>
+                    </div>
+                </div>
+                <div class="row m-3">
+                    <div class="col text-end">
+                        <a href="<?php echo base_url(); ?>staff/dashboard/delete/<?php echo encrypt_it($request[0]['rsd_id']); ?>" class="btn btn-danger" onclick="return confirm('Are sure you want to delete this repair request?');">DELETE REQUEST</a>
+                        <button type="submit" class="btn btn-primary" name="submit" value="submit" onclick="return confirm('Are sure you want to update this repair request as it will be assigned to you?');">UPDATE AND ACCEPT REPAIR</button>
+                    </div>
+                </div>
+            </form>
+        <?php
+        } else {
+            redirect(base_url() . 'staff/dashboard');
+        }
+        ?>
     </div>
 </div>
 <script>

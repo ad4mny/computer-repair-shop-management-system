@@ -11,13 +11,12 @@
             </div>
         </div>
         <div class="row row-cols-1 row-cols-md-3 mx-3 border-start border-2">
-
             <?php
             if (is_array($request) && !empty($request)) {
                 foreach ($request as $row) {
             ?>
                     <div class="col mb-5">
-                        <div class="card text-white bg-info shadow border rounded position-relative h-100">
+                        <div class="card text-white bg-primary shadow-sm rounded-3 position-relative h-100">
                             <?php
                             if ($row['rsd_progress'] === NULL) {
                                 echo '<span class="position-absolute top-0 start-0 m-3"><i class="fas fa-route fa-lg fa-fw"></i> INCOMING REQUEST </span>';
@@ -26,13 +25,13 @@
                             }
                             ?>
                             <div class="card-body">
-                                <div class="card-title  px-4 py-5 fw-light text-capitalize">
+                                <div class="card-title px-4 py-5 fw-light text-capitalize">
                                     <h1>
                                         <?php echo $row['rsd_device_brand']; ?><br>
                                         <small><?php echo $row['rsd_device_model']; ?></small>
                                     </h1>
                                 </div>
-                                <div class="px-4 pb-5 mb-5">
+                                <div class="px-4 pb-4 mb-5">
                                     <div class="card-text text-capitalize"><?php echo $row['rsd_damage_info']; ?></div>
                                     <div class="card-text text-capitalize">
                                         <?php
@@ -45,7 +44,7 @@
                                         }
                                         ?>
                                     </div>
-                                    <div class="card-text text-capitalize">
+                                    <div class="card-text text-capitalize pb-2">
                                         <?php
                                         switch ($row['rsd_damage_severity']) {
                                             case 2:
@@ -60,7 +59,7 @@
                                         }
                                         ?>
                                     </div>
-                                    <div class="card-text border-top pt-1"><?php echo $row['rsd_comment']; ?> </div>
+                                    <div class="card-text border-top pt-2 text-center"><?php echo $row['rsd_comment']; ?> </div>
                                 </div>
                             </div>
                             <?php
@@ -70,7 +69,7 @@
                             ?>
                                 <a href="<?php echo base_url() . 'staff/dashboard/view/' . encrypt_it($row['rsd_id']) ?>" class="position-absolute top-100 start-50 translate-middle">
                                     <span class="fa-stack fa-2x">
-                                        <i class="fa fa-circle fa-stack-2x text-primary"></i>
+                                        <i class="fa fa-circle fa-stack-2x text-info"></i>
                                         <i class="fa fa-tools fa-stack-1x text-white"></i>
                                     </span>
                                 </a>

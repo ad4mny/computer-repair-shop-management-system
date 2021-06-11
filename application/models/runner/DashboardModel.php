@@ -12,13 +12,21 @@ class DashboardModel extends CI_Model
         $data = array();
 
         if ($query->num_rows() > 0) {
-            $result = $query->result_array();
-            foreach ($result as $row) {
-                $sql = 'SELECT * FROM track_data JOIN repair_service_data ON repair_service_data.rsd_id = track_data.td_rsd_id JOIN customer_data ON repair_service_data.rsd_cd_id = customer_data.cd_id WHERE td_id = (SELECT MAX(td_id) as td_id FROM track_data WHERE td_rsd_id =' . $row['rsd_id'] . ') AND td_status = "Completed"';
-                $query = $this->db->query($sql);
 
-                if ($query->num_rows() > 0)
+            $result = $query->result_array();
+
+            foreach ($result as $row) {
+                $this->db->select('*');
+                $this->db->from('track_data');
+                $this->db->join('repair_service_data', 'rsd_id = td_rsd_id');
+                $this->db->join('customer_data', 'cd_id = rsd_cd_id');
+                $this->db->where('td_id = (SELECT MAX(td_id) as td_id FROM track_data WHERE td_rsd_id =' . $row['rsd_id'] . ')');
+                $this->db->where('td_status','Completed');
+                $query = $this->db->get();
+
+                if ($query->num_rows() > 0) {
                     array_push($data, $query->row_array());
+                }
             }
         }
 
