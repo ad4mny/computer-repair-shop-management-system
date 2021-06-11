@@ -18,7 +18,7 @@
             if (is_array($delivery) && !empty($delivery)) {
                 foreach ($delivery as $row) {
             ?>
-                    <div class="col mb-3">
+                    <div class="col mb-5">
                         <div class="card text-white bg-info shadow rounded-lg border position-relative h-100">
                             <div class="card-body">
                                 <span><i class="fas fa-box fa-lg fa-fw"></i> NEW DELIVERY</span>
