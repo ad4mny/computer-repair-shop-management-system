@@ -58,6 +58,10 @@ $route['staff/manage'] = 'staff/ManageController/index';
 $route['staff/manage/view/(:any)'] = 'staff/ManageController/index/view/$1';
 $route['staff/manage/search'] = 'staff/ManageController/search_user';
 
+$route['staff/approve'] = 'staff/ApproveController/index';
+$route['staff/approve/accept/(:any)/(:any)'] = 'staff/ApproveController/set_accept_user/$1/$2';
+$route['staff/approve/reject/(:any)/(:any)'] = 'staff/ApproveController/set_reject_user/$1/$2';
+
 // Runner routes
 $route['runner/dashboard'] = 'runner/DashboardController/index';
 $route['runner/dashboard/take_delivery_request/(:any)'] = 'runner/DashboardController/take_delivery_request/$1';

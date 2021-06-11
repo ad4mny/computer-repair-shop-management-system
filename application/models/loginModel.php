@@ -11,7 +11,7 @@ class LoginModel extends CI_Model
 
         if ($query->num_rows() > 0) {
             $result = $query->row();
-            
+
             $data = array(
                 'ud_log' => date('Y-m-d H:i:s ')
             );
@@ -124,7 +124,7 @@ class LoginModel extends CI_Model
                 'sd_full_name' => $full_name,
                 'sd_phone' => $contact_number
             );
-            $this->db->insert('staff_data', $data);
+            return $this->db->insert('staff_data', $data);
         } else {
             $data = array(
                 'rd_ud_id' => $result->ud_id,
@@ -132,9 +132,7 @@ class LoginModel extends CI_Model
                 'rd_phone' => $contact_number,
                 'rd_plat_num' => $plat_num
             );
-            $this->db->insert('runner_data', $data);
+            return $this->db->insert('runner_data', $data);
         }
-
-        return $this->login_auth_model($username, $password);
     }
 }

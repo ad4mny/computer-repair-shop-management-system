@@ -20,9 +20,30 @@
           </a>
       </div>
       <ul class="list-unstyled components">
-          <li class="<?php if ($this->uri->segment(2) == 'dashboard') echo 'active'; ?>"><a href="<?php echo base_url(); ?>staff/dashboard"><i class="fas fa-columns fa-sm fa-fw me-2"></i> Dashboard</a></li>
-          <li class="<?php if ($this->uri->segment(2) == 'status') echo 'active'; ?>"><a href="<?php echo base_url(); ?>staff/status"><i class="fas fa-tasks fa-sm fa-fw me-2"></i> Status</a></li>
-          <li class="<?php if ($this->uri->segment(2) == 'manage') echo 'active'; ?>"><a href="<?php echo base_url(); ?>staff/manage"><i class="fas fa-cog fa-sm fa-fw me-2"></i> Manage</a></li>
-          <li class="pb-3" style="position: absolute;bottom: 0px;"><a href="<?php echo base_url(); ?>logout"><i class="fas fa-sign-out-alt fa-sm fa-fw me-2"></i> Logout</a></li>
+          <li class="<?php if ($this->uri->segment(2) == 'dashboard') echo 'active'; ?>">
+              <a href="<?php echo base_url(); ?>staff/dashboard">
+                  <i class="fas fa-laptop-medical fa-sm fa-fw me-2"></i> Dashboard
+              </a>
+          </li>
+          <li class="<?php if ($this->uri->segment(2) == 'status') echo 'active'; ?>">
+              <a href="<?php echo base_url(); ?>staff/status">
+                  <i class="fas fa-tasks fa-sm fa-fw me-2"></i> Status
+              </a>
+          </li>
+          <li class="<?php if ($this->uri->segment(2) == 'manage') echo 'active'; ?>">
+              <a href="<?php echo base_url(); ?>staff/manage">
+                  <i class="fas fa-users-cog fa-sm fa-fw me-2"></i> Manage
+              </a>
+          </li>
+          <li class="<?php if ($this->uri->segment(2) == 'approve') echo 'active'; ?>">
+              <a href="<?php echo base_url(); ?>staff/approve">
+                  <i class="fas fa-user-check fa-sm fa-fw me-2"></i> Approve
+              </a>
+          </li>
+          <li class="pb-3" style="position: absolute;bottom: 0px;">
+              <a href="<?php echo base_url(); ?>logout">
+                  <i class="fas fa-sign-out-alt fa-sm fa-fw me-2"></i> Logout
+              </a>
+          </li>
       </ul>
   </nav>

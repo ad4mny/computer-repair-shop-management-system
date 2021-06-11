@@ -91,7 +91,7 @@
             }
         });
 
-        // password comparison for setup
+        // Compare password function
         $('#password, #confirm_password').on('keyup', function() {
             if ($('#password').val() != $('#confirm_password').val()) {
 
@@ -106,17 +106,17 @@
             }
         });
 
-        // check username availability ajax call function
+        // Validate existing username ajax call
         $('#username').on('keyup', function() {
             var username = this.value;
 
             $.ajax({
                 url: '<?php echo base_url(); ?>login/check_username',
-                method: 'post',
+                method: 'POST',
                 data: {
                     username: username
                 },
-                dataType: 'json',
+                dataType: 'JSON',
                 success: function(output) {
                     if (output != 0 || username.length <= 4) {
                         $('#username').addClass("border border-danger");
@@ -132,7 +132,7 @@
 
         })
 
-        // setup userdata ajax call function
+        // Register staff account ajax call
         $('#create_form').on('submit', function(e) {
             e.preventDefault();
             var formData = new FormData(this);
@@ -147,26 +147,14 @@
                     url: '<?php echo base_url() . 'login/create_staff'; ?>',
                     type: 'POST',
                     data: formData,
+                    dataType: 'JSON',
                     contentType: false,
                     processData: false,
                     success: function(data) {
-                        if (data != '') {
-                            switch (data) {
-                                case '2':
-                                    window.location.replace('<?php base_url(); ?>staff/dashboard');
-                                    break;
-                                case '1':
-                                    window.location.replace('<?php base_url(); ?>runner/dashboard');
-                                    break;
-                                default:
-                                    window.location.replace('<?php base_url(); ?>dashboard');
-                                    break;
-                            }
+                        if (data == true) {
+                            window.location.replace('<?php echo base_url(); ?>');
                         } else {
-                            $('#alert').replaceWith('<div class="alert alert-warning alert-dismissible fade show" role="alert">' +
-                                '<i class="fas fa-exclamation-circle fa-fw"></i> Error creating your account.' +
-                                '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>' +
-                                '</div>');
+                            window.location.replace('<?php echo base_url() . 'register'; ?>');
                         }
                     }
                 });

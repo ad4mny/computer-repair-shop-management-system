@@ -42,12 +42,22 @@ class LoginController extends CI_Controller
             if ($return !== false) {
                 switch (decrypt_it($this->session->userdata('role'))) {
                     case 2:
-                        $this->session->set_userdata('staffid', encrypt_it($return->sd_id));
-                        redirect(base_url() . 'staff/dashboard');
+                        if ($return->sd_status === NULL) {
+                            $this->session->set_tempdata('error', 'Your account is still under approval.', 3);
+                            redirect(base_url() . 'logout');
+                        } else {
+                            $this->session->set_userdata('staffid', encrypt_it($return->sd_id));
+                            redirect(base_url() . 'staff/dashboard');
+                        }
                         break;
                     case 1:
-                        $this->session->set_userdata('runnerid', encrypt_it($return->rd_id));
-                        redirect(base_url() . 'runner/dashboard');
+                        if ($return->rd_status === NULL) {
+                            $this->session->set_tempdata('error', 'Your account is still under approval.', 3);
+                            redirect(base_url() . 'logout');
+                        } else {
+                            $this->session->set_userdata('runnerid', encrypt_it($return->rd_id));
+                            redirect(base_url() . 'runner/dashboard');
+                        }
                         break;
                     default:
                         $this->session->set_userdata('customerid', encrypt_it($return->cd_id));
@@ -60,7 +70,6 @@ class LoginController extends CI_Controller
             }
         } else {
             $this->session->set_tempdata('error', 'Wrong username or password entered.', 3);
-
             redirect(base_url());
         }
     }
@@ -89,8 +98,11 @@ class LoginController extends CI_Controller
 
             $this->session->set_userdata('customerid', encrypt_it($return->cd_id));
 
-            echo decrypt_it($this->session->userdata('role'));
+            $this->session->set_tempdata('notice', 'Welcome ' . decrypt_it($this->session->userdata('userid')) . '! Start adding a computer repair request now.', 3);
+
+            echo json_encode(true);
         } else {
+            $this->session->set_tempdata('error', 'Error creating user account, try again later.', 3);
             echo json_encode(false);
         }
     }
@@ -103,27 +115,8 @@ class LoginController extends CI_Controller
         $plat_num = $this->input->post('plat_num');
         $full_name = $this->input->post('full_name');
         $contact_number = $this->input->post('contact_number');
-
-        $return = $this->LoginModel->create_staff_account_model($username, $password, $type, $plat_num, $full_name, $contact_number);
-
-        if ($return !== false) {
-
-            $this->session->set_userdata('userid', encrypt_it($return->ud_id));
-            $this->session->set_userdata('username', encrypt_it($return->ud_usr));
-            $this->session->set_userdata('role', encrypt_it($return->ud_role));
-
-            $return = $this->LoginModel->login_role_model($this->session->userdata('userid'), $this->session->userdata('role'));
-
-            if (decrypt_it($this->session->userdata('role')) == 2) {
-                $this->session->set_userdata('staffid', encrypt_it($return->sd_id));
-            } else {
-                $this->session->set_userdata('runnerid', encrypt_it($return->rd_id));
-            }
-
-            echo decrypt_it($this->session->userdata('role'));
-        } else {
-            echo json_encode(false);
-        }
+        $this->session->set_tempdata('notice', 'Thank you for joining us! Please wait, your account is under approval.', 3);
+        echo json_encode($this->LoginModel->create_staff_account_model($username, $password, $type, $plat_num, $full_name, $contact_number));
     }
 
     public function check_username()
