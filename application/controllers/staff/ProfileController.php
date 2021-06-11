@@ -35,11 +35,6 @@ class ProfileController extends CI_Controller
         $username = $this->input->post('username');
         $full_name = $this->input->post('full_name');
         $contact_number = $this->input->post('contact_number');
-        $street_1 = $this->input->post('street_1');
-        $street_2 = $this->input->post('street_2');
-        $postcode = $this->input->post('postcode');
-        $city = $this->input->post('city');
-        $state = $this->input->post('state');
 
         $config['upload_path'] = './assets/img/profile';
         $config['allowed_types'] = 'jpeg|jpg|png';
@@ -52,7 +47,7 @@ class ProfileController extends CI_Controller
                 echo json_encode(false);
                 exit;
             } else {
-                $return = $this->ProfileModel->set_profile_update_model($user_id, $username, NULL, $full_name, $contact_number, $street_1, $street_2, $postcode, $city, $state);
+                $return = $this->ProfileModel->set_profile_update_model($user_id, $username, NULL, $full_name, $contact_number);
 
                 if ($return != false) {
                     $this->session->set_tempdata('notice', 'Your profile has been updated successfully.', 3);
@@ -68,7 +63,7 @@ class ProfileController extends CI_Controller
             $picture = $this->upload->data('file_name');
             create_square_image($_SERVER['DOCUMENT_ROOT'] . '/devdcrs/assets/img/profile/' . $this->upload->data('file_name'), $_SERVER['DOCUMENT_ROOT'] . '/devdcrs/assets/img/profile/thumbnail/' . $this->upload->data('file_name'), 300);
 
-            $return = $this->ProfileModel->set_profile_update_model($user_id, $username, $picture, $full_name, $contact_number, $street_1, $street_2, $postcode, $city, $state);
+            $return = $this->ProfileModel->set_profile_update_model($user_id, $username, $picture, $full_name, $contact_number);
 
             if ($return != false) {
                 $this->session->set_tempdata('notice', 'Your profile has been updated successfully.', 3);

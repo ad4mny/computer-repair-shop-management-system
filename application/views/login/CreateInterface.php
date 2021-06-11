@@ -146,12 +146,12 @@
                     contentType: false,
                     processData: false,
                     success: function(data) {
-                        if (data.userid != '') {
-                            switch (data.role) {
-                                case 2:
+                        if (data != '') {
+                            switch (data) {
+                                case '2':
                                     window.location.replace('<?php base_url(); ?>staff/dashboard');
                                     break;
-                                case 1:
+                                case '1':
                                     window.location.replace('<?php base_url(); ?>runner/dashboard');
                                     break;
                                 default:

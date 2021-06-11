@@ -11,7 +11,7 @@ class ProfileModel extends CI_Model
         return $query->result_array();
     }
 
-    public function set_profile_update_model($user_id, $username, $picture, $full_name, $contact_number)
+    public function set_profile_update_model($user_id, $username, $picture, $full_name, $contact_number, $plat_num)
     {
         if ($picture !== NULL) {
             $data = array(
@@ -31,7 +31,8 @@ class ProfileModel extends CI_Model
 
         $data = array(
             'rd_full_name' => $full_name,
-            'rd_phone' => $contact_number
+            'rd_phone' => $contact_number,
+            'rd_plat_num' => $plat_num
         );
 
         $this->db->where('rd_ud_id', decrypt_it($user_id));
