@@ -115,8 +115,9 @@ class LoginController extends CI_Controller
         $plat_num = $this->input->post('plat_num');
         $full_name = $this->input->post('full_name');
         $contact_number = $this->input->post('contact_number');
-        $this->session->set_tempdata('notice', 'Thank you for joining us! Please wait, your account is under approval.', 3);
-        echo json_encode($this->LoginModel->create_staff_account_model($username, $password, $type, $plat_num, $full_name, $contact_number));
+        $email = $this->input->post('email');
+        $this->session->set_tempdata('notice', 'Thank you for joining us! Please wait, your account is under approval.', 30);
+        echo json_encode($this->LoginModel->create_staff_account_model($username, $password, $type, $plat_num, $full_name, $contact_number, $email));
     }
 
     public function check_username()

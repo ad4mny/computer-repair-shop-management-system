@@ -95,13 +95,14 @@ class LoginModel extends CI_Model
         return $this->login_auth_model($username, $password);
     }
 
-    public function create_staff_account_model($username, $password, $type, $plat_num, $full_name, $contact_number)
+    public function create_staff_account_model($username, $password, $type, $plat_num, $full_name, $contact_number, $email)
     {
         // create new user data
         $data = array(
             'ud_usr' => $username,
             'ud_pwd' => $password,
             'ud_role' => $type,
+            'ud_email' => $email,
             'ud_log' => date('Y-m-d H:i:s '),
             'ud_created' => date('Y-m-d H:i:s ')
         );
@@ -110,29 +111,69 @@ class LoginModel extends CI_Model
         $this->db->insert('user_data', $data);
 
         // get new inserted user data
-        $this->db->select('ud_id');
+        $this->db->select('*');
         $this->db->from('user_data');
         $this->db->where('ud_usr', $username);
         $this->db->where('ud_pwd', $password);
+        $query = $this->db->get();
 
-        // get user id 
-        $result = $this->db->get()->row();
+        if ($query->num_rows() > 0) {
 
-        if ($type == 2) {
-            $data = array(
-                'sd_ud_id' => $result->ud_id,
-                'sd_full_name' => $full_name,
-                'sd_phone' => $contact_number
-            );
-            return $this->db->insert('staff_data', $data);
+            $result = $query->row();
+            $email = $result->ud_email;
+            $this->send_notice_email($email, $username);
+
+            if ($type == 2) {
+                $data = array(
+                    'sd_ud_id' => $result->ud_id,
+                    'sd_full_name' => $full_name,
+                    'sd_phone' => $contact_number
+                );
+
+                return $this->db->insert('staff_data', $data);
+            } else {
+                $data = array(
+                    'rd_ud_id' => $result->ud_id,
+                    'rd_full_name' => $full_name,
+                    'rd_phone' => $contact_number,
+                    'rd_plat_num' => $plat_num
+                );
+
+                return $this->db->insert('runner_data', $data);
+            }
         } else {
-            $data = array(
-                'rd_ud_id' => $result->ud_id,
-                'rd_full_name' => $full_name,
-                'rd_phone' => $contact_number,
-                'rd_plat_num' => $plat_num
-            );
-            return $this->db->insert('runner_data', $data);
+            return false;
         }
+    }
+
+    public function send_notice_email($email, $username)
+    {
+        $this->load->library('email');
+
+        $subject = 'Dercs Computer Repair Shop';
+        $body = '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+        <html xmlns="http://www.w3.org/1999/xhtml">
+        <head>
+            <meta http-equiv="Content-Type" content="text/html; charset=' . strtolower(config_item('charset')) . '" />
+            <title>' . html_escape($subject) . '</title>
+            <style type="text/css">
+                body {
+                    font-family: Arial, Verdana, Helvetica, sans-serif;
+                    font-size: 16px;
+                }
+            </style>
+        </head>
+        <h1>Hi, ' . $username . '.</h1> 
+                <h2><b>Your Account is under approval.</b></h2>
+                    <p>Please wait while our staff get to approve your joining request,</p><br>
+                    <p>from DCRS Team.</p>';
+
+        $this->email
+            ->from('no-reply@dcrs.com', 'Dercs Computer Repair Shop')
+            ->to($email, $username)
+            ->subject($subject)
+            ->message($body)
+            ->send();
+
     }
 }

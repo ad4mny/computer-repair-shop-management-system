@@ -21,10 +21,16 @@
                             <input type="text" class="form-control" name="plat_num" placeholder="Enter your plate number">
                         </div>
                     </div>
-                    <div class="row py-4 border-top">
+                    <div class="row pt-4 pb-2 border-top">
                         <div class="col">
                             <small>Full Name</small>
                             <input type="text" class="form-control" name="full_name" placeholder="Enter your full name" required>
+                        </div>
+                    </div>
+                    <div class="row pb-4">
+                        <div class="col">
+                            <small>Email Address</small>
+                            <input type="text" class="form-control" name="email" placeholder="Enter your email address" required>
                         </div>
                         <div class="col">
                             <small>Contact Number</small>
@@ -44,7 +50,7 @@
                             <input type="password" class="form-control" name="password" id="password" placeholder="Create a password" pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$" title="Minimum 8 characters, at least one letter and one number." required>
                         </div>
                     </div>
-                    <div class="row pt-1">
+                    <div class="row ">
                         <div class="col offset-6">
                             <small>Confirm Password</small>
                             <input type="password" class="form-control input-lg" name="confirm_password" id="confirm_password" placeholder="Confirm your password" required>
@@ -60,7 +66,11 @@
                         <a href="<?php echo base_url(); ?>login" class="text-primary">
                             <i class="fas fa-chevron-left fa-fw fa-sm"></i> Back to login
                         </a>
-                        <button type="submit" class="btn btn-primary btn-block" name="submit">
+                        <div class="position-absolute text-center top-50 start-50 translate-middle bg-white p-3 rounded-3 shadow" id="load_info" style="display: none;">
+                            <img src='<?php echo base_url(); ?>assets/img/load.gif' width='100px' height='100px' alt="No image">
+                            <p>Creating your account..</p>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-block" name="submit" id="join_btn">
                             <i class="fas fa-sign-in-alt fa-fw fa-sm"></i> Join Now
                         </button>
                     </div>
@@ -150,6 +160,12 @@
                     dataType: 'JSON',
                     contentType: false,
                     processData: false,
+                    beforeSend: function() {
+                        $("#load_info").addClass("d-inline-block");
+                        $("#load_info").show();
+                        $("#join_btn").attr("disabled", true);
+                        $("body").attr("style", 'background: rgb(0,0,0,0.7);');
+                    },
                     success: function(data) {
                         if (data == true) {
                             window.location.replace('<?php echo base_url(); ?>');
