@@ -20,8 +20,8 @@
     <div class="row m-auto">
         <div class="col col-xs-12 m-auto ">
             <div><img src="<?php echo base_url() ?>assets/img/logo.png" width="120"></div>
-            <h1 class="display-2 fw-bold" style="color: #056AC8;">Derc's Computer Repair Shop</h1>
-            <h4 class="ms-1 text-muted">One stop center for your device checkup and repair quotation.</h4>
+            <h1 class="display-2 fw-bold" style="color: #056AC8;">RushRepairPC</h1>
+            <h4 class="ms-1 text-muted">Get your device checkup and computer repair quotation.</h4>
         </div>
         <div class="col-4 col-xs-12">
             <div class=" p-4 shadow rounded-3 bg-white">
@@ -52,5 +52,5 @@
 </div>
 <!-- Footer Section -->
 <div class="text-center py-2 fixed-bottom">
-    <small>&copy; DCRS 2021 </small>
+    <small>&copy; RushRepairPC 2022 </small>
 </div>

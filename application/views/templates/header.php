@@ -3,9 +3,10 @@
 
 <head>
     <meta charset="utf-8" />
-    <title>Dercs Computer Repair Shop</title>
+    <title>RushRepairPC | Computer Repair Shop</title>
     <link rel="shortcut icon" href="<?php echo base_url() ?>assets/img/favicon.ico" type="image/x-icon" />
     <link rel="stylesheet" href="<?php echo base_url() ?>assets/css/bootstrap.css">
+    <link rel="stylesheet" href="<?php echo base_url() ?>assets/css/custom-bootstrap.min.css">
     <link rel="stylesheet" href="<?php echo base_url() ?>assets/css/all.min.css">
     <link rel="stylesheet" href="<?php echo base_url() ?>assets/css/style.css">
     <?php if (!empty($css)) echo $css; ?>

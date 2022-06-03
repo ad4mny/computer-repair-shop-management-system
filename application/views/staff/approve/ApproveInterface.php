@@ -1,5 +1,5 @@
 <div class="wrapper">
-    <div class="container p-5 " id="content">
+    <div class="container-fluid " id="content">
         <!-- Alert Section  -->
         <div id="alert" class="w-50 position-absolute top-0 start-50 translate-middle mt-5" style="z-index: 1;">
             <?php

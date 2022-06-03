@@ -16,7 +16,7 @@
         }
         ?>
     </div>
-    <div class="container p-5" id="content">
+    <div class="container-fluid" id="content">
         <div class="row">
             <div class="col">
                 <h3 class="display-4 mb-0 text-secondary ">Manage Profile</h3>

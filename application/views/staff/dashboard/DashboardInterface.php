@@ -1,5 +1,5 @@
 <div class="wrapper">
-    <div class="container p-5" id="content">
+    <div class="container-fluid" id="content">
         <div class="row">
             <div class="col">
                 <h3 class="display-4 mb-0 text-secondary ">Dashboard</h3>

@@ -1,5 +1,5 @@
 <div class="wrapper">
-    <div class="container p-5" id="content">
+    <div class="container-fluid" id="content">
         <div id="repair_info">
             <div class="row">
                 <div class="col">

@@ -85,7 +85,7 @@
 </div>
 <footer>
     <div class="text-center py-2">
-        <small>&copy; DCRS 2021 </small>
+        <small>&copy; RushRepairPC 2022 </small>
     </div>
 </footer>
 <script>

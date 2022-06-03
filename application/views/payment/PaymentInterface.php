@@ -1,5 +1,5 @@
 <div class="wrapper">
-    <div class="container p-5  d-flex h-100 flex-column" id="content">
+    <div class="container-fluid  d-flex h-100 flex-column" id="content">
         <?php if (!empty($flag) && $flag == true) {
             if (isset($paypal) && is_array($paypal) && !empty($paypal)) { ?>
                 <div class="row m-auto">
