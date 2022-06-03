@@ -23,7 +23,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | a PHP script and you can easily do that on your own.
 |
 */
-$config['base_url'] = 'http://localhost/computer-repair-shop-management-system/';
+$config['base_url'] = 'https://rushrepairpc.000webhostapp.com/';
 
 /*
 |--------------------------------------------------------------------------

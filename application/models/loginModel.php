@@ -121,7 +121,6 @@ class LoginModel extends CI_Model
 
             $result = $query->row();
             $email = $result->ud_email;
-            $this->send_notice_email($email, $username);
 
             if ($type == 2) {
                 $data = array(
@@ -144,36 +143,5 @@ class LoginModel extends CI_Model
         } else {
             return false;
         }
-    }
-
-    public function send_notice_email($email, $username)
-    {
-        $this->load->library('email');
-
-        $subject = 'Dercs Computer Repair Shop';
-        $body = '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-        <html xmlns="http://www.w3.org/1999/xhtml">
-        <head>
-            <meta http-equiv="Content-Type" content="text/html; charset=' . strtolower(config_item('charset')) . '" />
-            <title>' . html_escape($subject) . '</title>
-            <style type="text/css">
-                body {
-                    font-family: Arial, Verdana, Helvetica, sans-serif;
-                    font-size: 16px;
-                }
-            </style>
-        </head>
-        <h1>Hi, ' . $username . '.</h1> 
-                <h2><b>Your Account is under approval.</b></h2>
-                    <p>Please wait while our staff get to approve your joining request,</p><br>
-                    <p>from DCRS Team.</p>';
-
-        $this->email
-            ->from('no-reply@dcrs.com', 'Dercs Computer Repair Shop')
-            ->to($email, $username)
-            ->subject($subject)
-            ->message($body)
-            ->send();
-
     }
 }
